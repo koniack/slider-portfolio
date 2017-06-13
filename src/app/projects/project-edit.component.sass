@@ -1,0 +1,73 @@
+@import './src/assets/sass/base'
+
+.glyphicon-exclamation-sign
+  color: $red
+
+.wizard
+  a
+    background: $grey
+    display: inline-block
+    margin-right: 5px
+    min-width: 150px
+    outline: none
+    padding: 10px 40px
+    position: relative
+    text-decoration: none
+
+    &:hover
+      cursor: pointer
+      text-decoration: underline
+
+    &::before
+      width: 0
+      height: 0
+      border-top: 20px inset transparent
+      border-bottom: 20px inset transparent
+      border-left: 20px solid $white
+      position: absolute
+      content: ''
+      top: 0
+      left: 0
+
+    &::after
+      width: 0
+      height: 0
+      border-top: 20px inset transparent
+      border-bottom: 20px inset transparent
+      border-left: 21px solid $grey
+      position: absolute
+      content: ''
+      top: 0
+      right: -20px
+      z-index: 2
+
+    &:first-child
+      border-radius: 8px 0 0
+
+      &::before,
+      &::after
+        border: 0
+
+    &:last-child
+      border-radius: 0 8px 0 0
+
+      &::before,
+      &::after
+        border: 0
+
+  .active
+    background: $blue
+    color: $white
+
+    &::after
+      border-left-color: $blue
+
+// Adds the cut out on the left side of the tab
+
+// Adds the arrow on the right side of the tab
+
+// Squares the start and end of the tab bar
+
+// Rounds the corners
+
+// Adds the right arrow after the tab

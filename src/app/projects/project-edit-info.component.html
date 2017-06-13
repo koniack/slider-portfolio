@@ -1,0 +1,78 @@
+<div class="panel-body">
+    <form class="form-horizontal"
+          novalidate
+          #projectForm="ngForm">
+        <fieldset>
+            <legend>Basic Project Information</legend>
+            <div class="form-group" 
+                    [ngClass]="{'has-error': (projectNameVar.touched || 
+                                              projectNameVar.dirty || project.id !== 0) && 
+                                              !projectNameVar.valid }">
+                <label class="col-md-2 control-label" 
+                        for="projectNameId">Project Name</label>
+
+                <div class="col-md-8">
+                    <input class="form-control" 
+                            id="projectNameId" 
+                            type="text" 
+                            placeholder="Name (required)"
+                            required
+                            minlength="3"
+                            [(ngModel)] = project.name
+                            name="projectName"
+                            #projectNameVar="ngModel" />
+                    <span class="help-block" *ngIf="(projectNameVar.touched ||
+                                                     projectNameVar.dirty || project.id !== 0) &&
+                                                     projectNameVar.errors">
+                        <span *ngIf="projectNameVar.errors.required">
+                            Project name is required.
+                        </span>
+                        <span *ngIf="projectNameVar.errors.minlength">
+                            Project name must be at least three characters.
+                        </span>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="form-group" 
+                    [ngClass]="{'has-error': (projectIdVar.touched || 
+                                              projectIdVar.dirty || project.id !== 0) && 
+                                              !projectIdVar.valid }">
+                <label class="col-md-2 control-label" for="projectIdId">Project Id</label>
+
+                <div class="col-md-8">
+                    <input class="form-control" 
+                            id="projectIdId" 
+                            type="text" 
+                            placeholder="Id (required)"
+                            required
+                            [(ngModel)] = project.id
+                            name="projectId"
+                            #projectIdVar="ngModel" />
+                    <span class="help-block" *ngIf="(projectIdVar.touched ||
+                                                     projectIdVar.dirty || project.id !== 0) &&
+                                                     projectIdVar.errors">
+                        <span *ngIf="projectIdVar.errors.required">
+                            Project Id is required.
+                        </span>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="descriptionId">Description</label>
+
+                <div class="col-md-8">
+                    <textarea class="form-control" 
+                            id="descriptionId" 
+                            placeholder="Description"
+                            rows=3
+                            [(ngModel)] = project.description
+                            name="description"></textarea>
+                </div>
+            </div>
+
+            <div class="has-error" *ngIf="errorMessage">{{errorMessage}}</div>
+        </fieldset>
+    </form>
+</div>

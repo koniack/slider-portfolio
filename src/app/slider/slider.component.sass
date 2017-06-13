@@ -1,0 +1,152 @@
+@import './src/assets/sass/base'
+
+#slider-area
+  background-color: $grey
+  border: 20px solid $white
+  overflow: hidden
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  position: fixed
+
+.slide-container
+  position: absolute
+  float: none
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  overflow: hidden
+
+  .project-hero
+    visibility: hidden
+    position: absolute
+    width: 100%
+    top: 0
+    left: 0
+
+  .active
+    h5,
+    h1
+      visibility: visible
+      position: relative
+      top: 350px
+      left: 50px
+      color: $black
+
+    img
+      position: absolute
+      visibility: visible
+      background-repeat: no-repeat
+      background-size: contain
+      background-position: center
+      top: 0
+      left: 0
+      opacity: 1
+
+.next-button,
+.prev-button
+  width: 30px
+  height: 30px
+  position: absolute
+  right: 24px
+  z-index: 100
+  cursor: pointer
+  border: 1px solid $black
+  opacity: 1
+  -webkit-transition: all 300ms cubic-bezier(.77, 0, .175, 1)
+  transition: all 300ms cubic-bezier(.77, 0, .175, 1)
+
+.next-button:hover,
+.prev-button:hover
+  background-color: $black
+
+.next-button:hover::after,
+.prev-button:hover::after
+  border-top: 1px solid $white
+  border-right: 1px solid $white
+
+.next-button::after,
+.prev-button::after
+  content: ''
+  height: 12px
+  width: 12px
+  border-top: 1px solid $black
+  border-right: 1px solid $black
+  display: block
+  position: absolute
+
+.next-button
+  bottom: 20px
+
+  &::after
+    bottom: 12px
+    left: 8px
+    transform: rotate(135deg)
+
+.prev-button
+  bottom: 60px
+
+  &::after
+    top: 12px
+    left: 8px
+    transform: rotate(-45deg)
+
+// Carousel Styles
+.indicators
+  position: relative
+  top: 100px
+  left: 24px
+
+  .dots
+    margin: 0
+    padding: 0
+    margin-top: -9px
+    list-style: none
+    z-index: 99
+    position: absolute
+    top: 0
+    white-space: nowrap
+    text-align: center
+    width: 100%
+
+    li
+      margin-bottom: 0px
+
+    a
+      width: 30px
+      height: 1px
+      padding: 8px 0
+      cursor: pointer
+      display: block
+
+      &:hover
+
+        &::before
+          background: $dark-grey
+
+        .current-dot
+          background: $black
+
+      &::before
+        content: ''
+        width: 30px
+        height: 1px
+        background-color: $white
+        display: block
+        margin-top: -3px
+
+    span
+      display: block
+      width: 0
+      height: 1px
+      z-index: 900
+      margin-top: -1px
+      background-color: $black
+      -webkit-transition: width 500ms cubic-bezier(.23, 1, .32, 1)
+      transition: width 500ms cubic-bezier(.23, 1, .32, 1)
+
+      &.current-dot
+        background-color: $black
+        width: 30px

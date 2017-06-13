@@ -1,0 +1,29 @@
+<div class="menu"[class.active]="isActive" (click)="active(name)">
+    <h6>{{name}}</h6>
+</div>
+<div class="overlay" [class.open]="isActive" >
+    <nav class="overlay-menu">   
+    <ul>
+        <li routerLinkActive="active">
+            <a [routerLink]="['/slider']" (click)="active('slider')">Slider</a>
+            <span></span>
+        </li>
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" >
+            <a [routerLink]="['/projects']" (click)="active('projects')">Portfolio</a>
+            <span></span>
+        </li>
+         <li routerLinkActive="active">
+            <a [routerLink]="['/projects', 0, 'edit']" (click)="active('add project')">Add Project</a>
+            <span></span>
+        </li>
+        <li *ngIf="!_authService.isLoggedIn()">
+            <a [routerLink]="['/login']" (click)="active('login')">Log In</a>
+            <span></span>
+        </li>
+        <li *ngIf="_authService.isLoggedIn()">
+            <a (click)="logOut()" (click)="active('logout')">Log Out</a>
+            <span></span>
+        </li>
+    </ul>
+    </nav>
+</div>

@@ -19,9 +19,13 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "assets/css/normalize.css",
+        "assets/css/skeleton.css",
         "styles.sass"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/hammerjs/hammer.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

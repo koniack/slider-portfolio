@@ -1,0 +1,45 @@
+<div id="slider-area"
+    (swipeup)="navigate(1, $event)"
+    (swipeleft)="navigate(1, $event)"
+    (swipedown)="navigate(-1, $event)"
+    (swiperight)="navigate(-1, $event)"
+    (window:resize)="onResize($event)"
+    mouseWheel
+    (mouseWheelUp) = "mouseWheelUpFunc($event)" 
+    (mouseWheelDown) = "mouseWheelDownFunc($event)"
+>
+    <div id="indicators" class="indicators">
+        <ul class="dots">
+            <li *ngFor="let slide of slides; let indicatorIndex = index">
+                <a  (click)='navigateToProj(indicatorIndex)'>
+                    <span [class.current-dot]="slide['active']" ></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div id="next-button" class="next-button" (click)='navigate(1)' ></div>
+    <div id="prev-button" class="prev-button" (click)='navigate(-1)' ></div>
+    <div class="slide-container" >
+        <div  
+            *ngFor="let slide of slides; let projectIndex = index" 
+            [attr.data-index]="projectIndex" class="project-hero" 
+            [class.active]="slide['active']" 
+            [@slideTrigger]="slide['transition']"
+            (@slideTrigger.start)="animStart($event)"
+            (@slideTrigger.done)="animDone($event)"
+        >
+            <a [routerLink]= "['/projects',slide?.id]" >
+                <img  
+                    [src]='slide?.thumbUrl.url' 
+                    [style.width.px]="imgWidth" 
+                    [style.height]="imgHeight" 
+                    [style.top.px]="imgPosTop" 
+                    [style.left.px]="imgPosLeft" 
+                />
+                <h1 [innerText]='slide?.name' ></h1>
+                <h5>{{slide?.category}}</h5>
+            </a>
+        </div>
+    </div>
+    
+</div>
