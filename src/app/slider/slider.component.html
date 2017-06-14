@@ -1,4 +1,5 @@
 <div id="slider-area"
+    [@pageTransitionTrigger]="[clicked]"
     (swipeup)="navigate(1, $event)"
     (swipeleft)="navigate(1, $event)"
     (swipedown)="navigate(-1, $event)"
@@ -28,16 +29,16 @@
             (@slideTrigger.start)="animStart($event)"
             (@slideTrigger.done)="animDone($event)"
         >
-            <a [routerLink]= "['/projects',slide?.id]" >
+            <a  (click)='pageTransition($event)'>
                 <img  
-                    [src]='slide?.thumbUrl.url' 
+                    [src]='slide.thumbUrl.url' 
                     [style.width.px]="imgWidth" 
                     [style.height]="imgHeight" 
                     [style.top.px]="imgPosTop" 
                     [style.left.px]="imgPosLeft" 
                 />
-                <h1 [innerText]='slide?.name' ></h1>
-                <h5>{{slide?.category}}</h5>
+                <h1 [innerText]='slide.name' ></h1>
+                <h5>{{slide.category}}</h5>
             </a>
         </div>
     </div>

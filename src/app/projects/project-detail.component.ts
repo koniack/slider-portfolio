@@ -7,7 +7,8 @@ import { IProject } from './project';
 @Component({
   moduleId: module.id,
   selector: 'project-detail',
-  templateUrl: './project-detail.component.html'
+  templateUrl: './project-detail.component.html',
+  styleUrls: ['./project-detail.component.sass']
 })
 export class ProjectDetailComponent implements OnInit {
   project: IProject;

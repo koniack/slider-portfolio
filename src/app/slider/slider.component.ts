@@ -8,7 +8,7 @@ import {
 	animate, 
 	keyframes,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
 import { ProjectService } from '../projects/project.service';
@@ -24,6 +24,25 @@ import { IProject } from '../projects/project';
         '(document:keydown)': 'onKeydown($event)',
     },
 	animations: [
+		trigger('pageTransitionTrigger', [
+			state('false', style({
+				borderWidth: '20px',
+				//opacity: 1
+
+			})),
+			state('true', style({
+				borderWidth: 0,
+				top: 0,
+				left: 0
+				//opacity: 0
+			})),
+			transition('false => true', [
+				style({
+					borderWidth: '20px',
+					//opacity: 1
+				}), animate('500ms ease-in')
+			])
+		]),
 		trigger('slideTrigger', [
 			state('slideUpIn', style({
 				transform: 'translate(0px, 0px)',
@@ -88,10 +107,11 @@ export class SliderComponent implements OnInit {
 	imgPosTop: number;
 	imgPosLeft: number;
 	isMoving: boolean = false;
-
+	clicked: boolean = false;
 
 	constructor(private _projectService: ProjectService,
-				private _route: ActivatedRoute){}
+				private _route: ActivatedRoute,
+				private _router: Router){}
 	ngOnInit(): void {
 		/*this._projectService.getProjects()
 							.subscribe(
@@ -102,6 +122,19 @@ export class SliderComponent implements OnInit {
       					data => this.slides = data['slides']);
 		this.updateImage();
 	}
+
+	pageTransition(event:any){
+		event.preventDefault;
+		this.clicked = true;
+		console.log('clicked='+this.clicked);
+		this.imgPosLeft = 0;
+		this.imgPosTop = 0;
+		setTimeout(() =>{
+			this._router.navigate(['/projects', this.activeProject + 1]);
+		}, 500)
+
+	}
+
 	mouseWheelUpFunc(){
 		if (!this.isMoving){
 			this.navigate(1, false);

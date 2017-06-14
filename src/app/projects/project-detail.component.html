@@ -1,7 +1,8 @@
 <article>
-    <div *ngIf="project">
-        <h1>{{project.name}} Details</h1>
+    <div class="project-detail" *ngIf="project">
+        
         <img src="{{project.thumbUrl.url}}" alt="">
+        <h1>{{project.name}} Details</h1>
         <h1>{{project.category}}</h1>
         <button [routerLink]="['/projects']" [preserveQueryParams]="true">Back</button>
         <button (click)="onNext()">Next</button>

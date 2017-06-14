@@ -10,7 +10,7 @@ import { MessageService } from './messages/message.service';
 	moduleId: module.id,
 	selector: 'app-root',
 	templateUrl: 'app.component.html',
-	styleUrls: ['app.component.css'],
+	styleUrls: ['app.component.sass']
 })
 export class AppComponent  { 
 	name = 'Kone Lathipanya';
