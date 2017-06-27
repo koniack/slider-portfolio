@@ -1,26 +1,25 @@
-<article>
-    <div class="project-detail" *ngIf="project">
-        
-        <img src="{{project.thumbUrl.url}}" alt="">
-        <h1>{{project.name}} Details</h1>
-        <h1>{{project.category}}</h1>
-        <button [routerLink]="['/projects']" [preserveQueryParams]="true">Back</button>
-        <button (click)="onNext()">Next</button>
+<section>
+    <div class="project-detail columns" *ngIf="project">
+        <div class="column is-8 is-offset-2">
+            <figure>
+                <img src="{{project.thumbUrl.url}}" alt="">
+            </figure>
+        </div>
     </div>
+            <h1>{{project.name}} Details</h1>
+            <h1>{{project.category}}</h1>
+            <button [routerLink]="['/projects']" queryParamsHandling="preserve">Back</button>
+            <button (click)="onNext()">Next</button>
+        
     <div class="panel-footer">
-        <!--<a class="btn btn-default"
-           [routerLink]="['/projects']"
-           [preserveQueryParams]="true">
-            <i class="glyphicon glyphicon-chevron-left"></i> Back
-        </a>-->
         <a class="btn btn-default"
            [routerLink]="['/projects']"
            queryParamsHandling="preserve">
             <i class="glyphicon glyphicon-chevron-left"></i> Back
         </a>
         <a class="btn btn-primary" style="width:80px;margin-left:10px" 
-           [routerLink]="['edit']" [preserveQueryParams]="true">
+           [routerLink]="['edit']" queryParamsHandling="preserve">
             Edit
         </a>
     </div>
-</article>
+</section>

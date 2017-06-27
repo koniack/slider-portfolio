@@ -1,15 +1,15 @@
-<div class="menu"[class.active]="isActive" (click)="active(name)">
-    <h6>{{name}}</h6>
+<div class="menu" [class.active]="isActive" (click)="active(name)">
+    <h6>menu</h6>
 </div>
 <div class="overlay" [class.open]="isActive" >
     <nav class="overlay-menu">   
     <ul>
         <li routerLinkActive="active">
-            <a [routerLink]="['/slider']" (click)="active('slider')">Slider</a>
+            <a [routerLink]="['/slider']" (click)="active('slider')">Home</a>
             <span></span>
         </li>
         <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" >
-            <a [routerLink]="['/projects']" (click)="active('projects')">Portfolio</a>
+            <a [routerLink]="['/projects']" (click)="active('projects')">Work</a>
             <span></span>
         </li>
          <li routerLinkActive="active">

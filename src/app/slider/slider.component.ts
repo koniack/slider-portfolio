@@ -24,9 +24,21 @@ import { IProject } from '../projects/project';
         '(document:keydown)': 'onKeydown($event)',
     },
 	animations: [
+		trigger('projTitleTrigger', [
+			state('active', style({
+				trasform: 'scaleY(1)'
+			})),
+			state('notActive', style({
+				transform: 'scaleY(0)'
+			})),
+			transition('notActive <=> active', [
+				style({
+				}), animate('200ms 700ms ease-out')
+			])
+		]),
 		trigger('pageTransitionTrigger', [
 			state('false', style({
-				borderWidth: '20px',
+				borderWidth: '15px',
 				//opacity: 1
 
 			})),
@@ -38,52 +50,52 @@ import { IProject } from '../projects/project';
 			})),
 			transition('false => true', [
 				style({
-					borderWidth: '20px',
+					borderWidth: '15px',
 					//opacity: 1
 				}), animate('500ms ease-in')
 			])
 		]),
 		trigger('slideTrigger', [
 			state('slideUpIn', style({
-				transform: 'translate(0px, 0px)',
+				transform: 'translateY(0)',
 				opacity: 1,
 			})),
 			state('slideUpOut', style({
-				transform: 'translate(0px,-300%)',
+				transform: 'translateY(-600px)',
 				opacity: 0
 			})),
 			state('slideDownIn', style({
-				transform: 'translate(0px, 0px)',
+				transform: 'translateY(0)',
 				opacity: 1,
 			})),
 			state('slideDownOut', style({
-				transform: 'translate(0px,300%)',
+				transform: 'translateY(600px)',
 				opacity: 0
 			})),
 			transition('* => slideUpOut', [
 				style({
 					opacity: 1,
-					transform: 'translate(0px, 0px)'
+					transform: 'translateY(0)'
 				}), 
-				animate('500ms ease-out')
+				animate('700ms ease-out')
 			]),
 			transition('* => slideUpIn', [
 				style({
 					opacity: 0,
-					transform: 'translate(0px, 300%)'
+					transform: 'translateY(600px)'
 				}), animate('500ms 250ms ease-out')
 			]),
 			transition('* => slideDownOut', [
 				style({
 					opacity: 1,
-					transform: 'translate(0px, 0px)'
+					transform: 'translateY(0)'
 				}), 
-				animate('500ms ease-out')
+				animate('700ms ease-out')
 			]),
 			transition('* => slideDownIn', [
 				style({
 					opacity: 0,
-					transform: 'translate(0px, -300%)'
+					transform: 'translateY(-600px)'
 				}), animate('500ms 250ms ease-out')
 			])
 		])
@@ -189,11 +201,15 @@ export class SliderComponent implements OnInit {
 			(direction === -1 && this.activeProject >0)) {
 				if (direction == -1) {
 					this.slides[this.activeProject]['transition'] = 'slideDownOut';
+					this.slides[this.activeProject]['projTitleState'] = 'notActive'
 					this.slides[this.activeProject -1 ]['transition'] = 'slideDownIn';
+					this.slides[this.activeProject -1 ]['projTitleState'] = 'active';
 				}
 				else {
 					this.slides[this.activeProject]['transition'] = 'slideUpOut';
+					this.slides[this.activeProject]['projTitleState'] = 'notActive'
 					this.slides[this.activeProject + 1]['transition'] = 'slideUpIn';
+					this.slides[this.activeProject +1 ]['projTitleState'] = 'active';
 				}
 				this.activeProject += direction;
 				this.updateImage();
@@ -201,13 +217,18 @@ export class SliderComponent implements OnInit {
 			else {
 				if (this.activeProject > this.slides.length - 2) {
 					this.slides[this.activeProject]['transition'] = 'slideUpOut';
+					this.slides[this.activeProject]['projTitleState'] = 'notActive'
+
 					this.activeProject = 0;
 					this.slides[this.activeProject]['transition'] = 'slideUpIn';
+					this.slides[this.activeProject]['projTitleState'] = 'active'
 				}
 				else {
 					this.slides[this.activeProject]['transition'] = 'slideDownOut';
+					this.slides[this.activeProject]['projTitleState'] = 'notActive'
 					this.activeProject = this.slides.length - 1;
 					this.slides[this.activeProject]['transition'] = 'slideDownIn';
+					this.slides[this.activeProject]['projTitleState'] = 'active'
 				}
 				this.updateImage();
 			}

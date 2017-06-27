@@ -1,20 +1,26 @@
 <span class="glyphicon glyphicon-refresh glyphicon-spin spinner" *ngIf="loading" ><img src="assets/img/k-logo-white.svg" alt="Kone Lathipanya Logo"></span>
 <header>
-	<div class="kone-logo"> 
-        <img src="assets/img/k-logo-white.svg" alt="Kone Lathipanya Logo">
-        <div class="main-title">
-            <h5 [style.color]='color'>{{name}}</h5>
-            <p>{{title}}</p>
+    <div class="nav">
+        <div class="nav-left kone-logo">
+            <a class="nav-item"> 
+                <img src="assets/img/k-logo-white.svg" alt="Kone Lathipanya Logo">
+                <div class="main-title nav-item">
+                    <h1 class="title is-4 " [style.color]='color'>{{name}}</h1>
+                    <p class="subtitle is-6" >{{title}}</p>
+                </div>
+            </a>
+        </div>
+        <div class="nav-right">
+            <nav-app></nav-app>
         </div>
     </div>
-      <nav-app></nav-app>
 </header>
     
 <section id="main-area">
     <router-outlet></router-outlet>
 </section>
-<section id="popup-container">
+<!--<section id="popup-container">
     <a *ngIf="!_messageService.isDisplayed" (click)="displayMessages()"> Show Messages</a>
     <a *ngIf="_messageService.isDisplayed" (click)="hideMessages()"> Hide Messages</a>
     <router-outlet id="popup" name="popup"></router-outlet>
-</section>
+</section>-->

@@ -12,7 +12,6 @@ import { AuthService } from '../user/auth.service';
 })
 
 export class NavComponent implements OnInit{
-	name = 'Menu';
 	isActive: boolean = false;
 	isLoggedIn: boolean;
 

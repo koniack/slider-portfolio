@@ -1,30 +1,27 @@
 @import './src/assets/sass/base'
 
+.filter
+  margin-bottom: 30px
+
+.project-list-container
+  padding: 125px 35px
+
+
 .project
-  list-style-type: none
-  display: block
-  width: 30%
-  min-width: 220px
-  margin: 10% 1%
-  float: left
-  text-align: center
-  overflow: hidden
+  .box
+    cursor: pointer
+    border-radius: 0
+    padding: 15px
 
-.projects
-  margin-before: 0
-  margin-after: 0
-  padding-start: 0
-  height: 80%
+    &:hover
+      box-shadow: 0 2px 3px rgba(255, 165, 0, .1), 0 0 0 1px rgba(255, 165, 0, .1)
 
-img
-  background-color: $black
-  width: 100%
+    &:hover h5
+      color: $orange
 
-a
-  &:hover ~ h5
-    color: $orange
+    img
+      background-color: $black
+      width: 100%
 
-h5
-  position: relative
-  bottom: 200px
-  transition: color 300ms ease-in-out
+    h5
+      transition: color 300ms ease-in-out

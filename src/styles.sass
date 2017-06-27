@@ -3,8 +3,8 @@
 
 
 body
-  margin: 0
   font-family: $primary-font
+  background-color: $grey
 
 h1
   font-family: $primary-font
@@ -33,15 +33,13 @@ h1
 
 // Fade Up Transition
 
-.projects
-  .project
-    animation-duration: .5s
-    opacity: 0
-    animation-name: fadeUp
-    animation-fill-mode: forwards
-    transition: all .5s ease
-
 .project
+  animation-duration: .5s
+  opacity: 0
+  animation-name: fadeUp
+  animation-fill-mode: forwards
+  transition: all .5s ease
+
   &:nth-child(2)
     animation-delay: .1s
 

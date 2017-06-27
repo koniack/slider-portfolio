@@ -7,8 +7,8 @@
   text-align: center
   text-transform: uppercase
   position: absolute
-  right: 44px
-  top: 34px
+  right: 36px
+  top: 30px
   cursor: pointer
 
   h6
@@ -80,14 +80,14 @@
   left: 0
   width: 100%
   height: 0%
-  opacity: 0
+  opacity: .85
   visibility: hidden
-  transition: opacity .3s, visibility .3s, height .3s ease
+  transition: visibility .3s, height .3s cubic-bezier(0.23, 1, 0.32, 1)
   overflow: hidden
   z-index: 998
 
   &.open
-    opacity: .9
+    //opacity: .9
     visibility: visible
     height: 100%
 
@@ -108,7 +108,7 @@
       &:nth-of-type(5)
         animation-delay: 0.55s
 
-  nav
+  .overlay-menu
     position: relative
     height: 70%
     top: 50%

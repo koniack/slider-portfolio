@@ -2,7 +2,7 @@
 
 #slider-area
   background-color: $grey
-  border: 20px solid $white
+  border: 15px solid $white
   overflow: hidden
   top: 0
   bottom: 0
@@ -25,15 +25,11 @@
     width: 100%
     top: 0
     left: 0
+    transition: all 500ms ease
 
   .active
-    h5,
-    h1
-      visibility: visible
-      position: relative
-      top: 350px
-      left: 50px
-      color: $black
+    
+        
 
     img
       position: absolute
@@ -45,6 +41,28 @@
       left: 0
       opacity: 1
       transition: top 500ms, left 500ms ease
+
+.proj-title
+  visibility: visible
+  position: relative
+  top: 195px
+  left: 25px
+  height: 100px
+  overflow: hidden
+  width: 75%
+
+  h1
+      font-weight: bold
+
+  h5,
+  h1
+    color: $black
+    &::after
+      content: ''
+      height: 30px
+      display: block
+      margin-top: -36px
+
 
 .next-button,
 .prev-button

@@ -1,33 +1,24 @@
-<input type="text" [(ngModel)]="listFilter"><br/><br/>
+<div class="project-list-container">
+    <select [(ngModel)]="listFilter" class="filter" >
+        <option [selected]="all == 'two'" [ngValue]="null" >All</option>
+        <option *ngFor="let f of filterCategory" [ngValue]="f">{{f}}</option>
+    </select> 
 
-<h4>View</h4>
-<select [(ngModel)]="listFilter">
-	<option [selected]="all == 'two'" [ngValue]="null" >All</option>
-	<option *ngFor="let f of filterCategory" [ngValue]="f">{{f}}</option>
-</select> 
-
-<ul class="projects">
-	<li class="project" *ngFor="let project of projects | projectFilter: listFilter">
-		<a [routerLink]= "[project.id]" [queryParams]= "{filterBy: listFilter}" >
-			<img [src]='project.thumbUrl.url' />
-		</a>
-		<h5 [innerText]='project.name' ></h5>
-		<h5>{{project.category}}</h5>
-		 <div class="panel-footer">
-        <!--<a class="btn btn-default"
-           [routerLink]="['/projects']"
-           [preserveQueryParams]="true">
-            <i class="glyphicon glyphicon-chevron-left"></i> Back
-        </a>-->
-        <a class="btn btn-default"
-           [routerLink]="['/projects']"
-           queryParamsHandling="preserve">
-            <i class="glyphicon glyphicon-chevron-left"></i> Back
-        </a>
-        <a class="btn btn-primary" style="width:80px;margin-left:10px" 
-           [routerLink]="[project.id, 'edit']" [queryParams]= "{filterBy: listFilter}">
-            Edit
-        </a>
-    </div>
-	</li>
-</ul>
+    <ul class="projects columns is-multiline">
+        <li class="column is-one-third project " 
+            *ngFor="let project of projects | projectFilter: listFilter"
+        >
+            <div class="box"
+                [routerLink]= "[project.id]" 
+                [queryParams]= "{filterBy: listFilter}" 
+                [queryParamsHandling]="preserve" 
+            >
+                <figure class="image">
+                    <img [src]='project.thumbUrl.url' />
+                </figure>
+                <h5 [innerText]='project.name' ></h5>
+                <h5>{{project.category}}</h5>
+            </div>
+        </li>
+    </ul>
+</div>
