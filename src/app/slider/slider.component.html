@@ -33,12 +33,12 @@
                 <img  
                     [src]='slide.thumbUrl.url' 
                     [style.width.px]="imgWidth" 
-                    [style.height]="imgHeight" 
+                    [style.height.px]="imgHeight" 
                     [style.top.px]="imgPosTop" 
                     [style.left.px]="imgPosLeft" 
                 />
                 <div class="proj-title" [@projTitleTrigger]="slide['projTitleState']">
-                    <h1 class="title is-2" [innerText]='slide.name' ></h1>
+                    <h1 class="title is-1" [innerText]='slide.name' ></h1>
                     <h5 class="subtitle" >{{slide.category}}</h5>
                 </div>
             </a>

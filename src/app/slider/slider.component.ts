@@ -31,9 +31,9 @@ import { IProject } from '../projects/project';
 			state('notActive', style({
 				transform: 'scaleY(0)'
 			})),
-			transition('notActive <=> active', [
+			transition('* <=> active', [
 				style({
-				}), animate('200ms 700ms ease-out')
+				}), animate('200ms 750ms ease-out')
 			])
 		]),
 		trigger('pageTransitionTrigger', [
@@ -77,7 +77,7 @@ import { IProject } from '../projects/project';
 					opacity: 1,
 					transform: 'translateY(0)'
 				}), 
-				animate('700ms ease-out')
+				animate('500ms ease-out')
 			]),
 			transition('* => slideUpIn', [
 				style({
@@ -90,7 +90,7 @@ import { IProject } from '../projects/project';
 					opacity: 1,
 					transform: 'translateY(0)'
 				}), 
-				animate('700ms ease-out')
+				animate('500ms ease-out')
 			]),
 			transition('* => slideDownIn', [
 				style({
@@ -274,20 +274,27 @@ export class SliderComponent implements OnInit {
 
 			this.screenWidth = window.innerWidth;
 			this.screenHeight = window.innerHeight;
-			this.imgHeight = this.slides[this.activeProject].thumbUrl.width;
-			this.imgWidth = this.slides[this.activeProject].thumbUrl.height;
+			this.imgHeight = this.slides[this.activeProject].thumbUrl.height;
+			this.imgWidth = this.slides[this.activeProject].thumbUrl.width;
 			this.screenRatio = this.screenHeight / this.screenWidth;
 			this.imgRatio = this.imgHeight / this.imgWidth;
+			/*if (this.imgWidth > this.imgHeight) {
+				this.imgWidth = this.screenHeight * this.imgRatio;
+				this.imgHeight = this.screenHeight;
+			}else {
+				this.imgHeight = this.screenWidth * this.imgRatio;
+				this.imgWidth = this.screenWidth;
+			}*/
 			if (this.screenRatio > this.imgRatio) {
 				this.imgHeight = this.screenHeight;
-				this.imgWidth = this.screenHeight * this.imgRatio; 
+				this.imgWidth = this.screenHeight / this.imgRatio; 
 			} else {
-				this.imgHeight = this.screenWidth / this.imgRatio;
+				this.imgHeight = this.screenWidth * this.imgRatio;
 				this.imgWidth = this.screenWidth;
 			}
 			this.imgPosLeft = (this.screenWidth - this.imgWidth) / 2;
 			this.imgPosTop = (this.screenHeight - this.imgHeight) / 2;
-			//console.log(this.imgRatio, this.imgWidth, this.imgHeight, this.screenHeight, this.screenWidth, this.imgPosTop, this.imgPosLeft);
+			console.log('img ratio: ' +this.imgRatio+' img width: '+this.imgWidth+' img height: '+this.imgHeight+' screen ratio: '+this.screenRatio+' screen height: '+this.screenHeight+ ' screen width: ' +this.screenWidth+  ' image top: '+this.imgPosTop+' img left: '+this.imgPosLeft);
 			
 
 	} 
