@@ -1,13 +1,15 @@
 <section>
     <div class="project-detail columns" *ngIf="project">
-        <div class="column is-8 is-offset-2">
+        <div class="column is-2 is-offset-1">
+            <h1>{{project.name}} Details</h1>
+            <h1>{{project.category}}</h1>
+        </div>
+        <div class="column is-8">
             <figure>
                 <img src="{{project.thumbUrl.url}}" alt="">
             </figure>
         </div>
     </div>
-            <h1>{{project.name}} Details</h1>
-            <h1>{{project.category}}</h1>
             <button [routerLink]="['/projects']" queryParamsHandling="preserve">Back</button>
             <button (click)="onNext()">Next</button>
         

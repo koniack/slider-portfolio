@@ -8,7 +8,7 @@
         <li class="column is-one-third project " 
             *ngFor="let project of projects | projectFilter: listFilter"
         >
-            <div class="box"
+            <div
                 [routerLink]= "[project.id]" 
                 [queryParams]= "{filterBy: listFilter}" 
                 [queryParamsHandling]="preserve" 
@@ -16,8 +16,10 @@
                 <figure class="image">
                     <img [src]='project.thumbUrl.url' />
                 </figure>
-                <h5 [innerText]='project.name' ></h5>
-                <h5>{{project.category}}</h5>
+                <div class="caption">
+                    <h5 [innerText]='project.name' ></h5>
+                    <h5>{{project.category}}</h5>
+                </div>
             </div>
         </li>
     </ul>
