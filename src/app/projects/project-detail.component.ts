@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { IProject } from './project';
+import { IProjectPicture } from './project-picture';
 //import { ProjectService } from './project.service';
 
 @Component({
@@ -23,7 +24,9 @@ export class ProjectDetailComponent implements OnInit {
   }
   ngOnInit(): void {
     this._route.data.subscribe (
-      data => this.project = data['project']);
+      data => this.project = data['project']
+    );
+
     // Snapshot Method for ProjectResolver
     //this.project = this._route.snapshot.data['project'];
     // Snapshot Method
@@ -49,9 +52,9 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   onNext(): void {
+
     let nextPage = (+this._route.snapshot.params['id']) + 1; 
-    this._router.navigate([`/projects/${nextPage}`], { preserveQueryParams: true } );
-    
+    this._router.navigate([`/projects/${nextPage}`], { queryParamsHandling: "preserve" } );    
 
   }
 }

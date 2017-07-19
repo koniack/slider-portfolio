@@ -5,27 +5,62 @@
 
 .project-list-container
   padding: 125px 35px
+  background-color: $grey
+  border: 15px solid $white
 
 
 .project
+  position: relative
 
-  &:hover img
-    box-shadow: 0 2px 3px rgba(255, 165, 0, .1), 0 0 0 1px rgba(255, 165, 0, .1)
+  figure
+    overflow: hidden
 
-  &:hover h5
-    color: $orange
+    &::before
+      content: ''
+      width: 100%
+      height: 100%
+      display: block
+      position: absolute
+      background-color: rgba(0,0,0,.5)
+      z-index: 998
+      opacity: 0
+      transition: opacity 300ms ease
+      
+
+  h2
+    font-size: 2rem
+    font-weight: 500
+    text-transform: uppercase
+    line-height: 2rem
 
   img
     background-color: $black
     width: 100%
     border: 1px solid $grey
-
+    transition: transform 5000ms ease
 
   .caption
-    text-align: center
-    position: relative
-    height: 100%
-    left: 50%
+    position: absolute
     top: 50%
-    transform: translate(-50%, -175%)
-    transition: color 300ms ease-in-out
+    left: 50%
+    transform: translate(-50%, -50%)
+    text-align: center
+    transition: color 300ms, opacity 300ms ease-in-out
+    z-index: 999
+    opacity: 0
+  
+.project:hover
+  img
+      box-shadow: 0 2px 3px rgba(255, 165, 0, .1), 0 0 0 1px rgba(255, 165, 0, .1)
+      transform: scale(1.2)
+
+
+  h2
+    color: $orange
+
+  .caption
+    opacity: 1
+
+  figure
+    &::before
+      opacity: 1

@@ -17,7 +17,7 @@ import { IProject } from '../projects/project';
 
 @Component({
 	moduleId: module.id,
-	selector: 'slider',
+	selector: 'slider-component',
 	templateUrl: 'slider.component.html',
 	styleUrls: ['slider.component.sass'],
 	host: {
@@ -93,7 +93,7 @@ import { IProject } from '../projects/project';
 				opacity: 1
 			})),
 			state('slideUpOut', style({
-				transform: 'translateY(-600px)',
+				transform: 'translateY(-100%)',
 				opacity: 0
 			})),
 			state('slideDownIn', style({
@@ -101,7 +101,7 @@ import { IProject } from '../projects/project';
 				opacity: 1
 			})),
 			state('slideDownOut', style({
-				transform: 'translateY(600px)',
+				transform: 'translateY(100%)',
 				opacity: 0
 			})),
 			transition('* => slideUpOut', [

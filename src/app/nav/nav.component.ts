@@ -6,7 +6,7 @@ import { AuthService } from '../user/auth.service';
 
 @Component({
 	moduleId: module.id,
-	selector: 'nav-app',
+	selector: 'nav-component',
 	templateUrl: 'nav.component.html',
 	styleUrls: ['nav.component.sass']
 })

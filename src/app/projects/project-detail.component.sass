@@ -1,5 +1,26 @@
 @import './src/assets/sass/base'
 
-.project-detail
+.project-detail-container
+  +media ('<=tablet')
+    padding-top: 100px
   padding-top: 130px
+  background-color: $grey
+  border: 15px solid $white
 
+.column
+  +media ('<=tablet')
+    margin: 25px
+
+  h1
+    color: $orange
+    font-weight: $weight-bold
+
+h1, h2, p
+  +media ('<=tablet')
+    margin-left: 0
+  margin-left: 25px
+
+.caption
+  +media ('<tablet')
+    order: 2
+  order: -1

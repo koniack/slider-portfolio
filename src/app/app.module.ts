@@ -19,6 +19,10 @@ import { MessageModule } from './messages/message.module';
 import { ProjectService } from './projects/project.service';
 import { ProjectListResolver } from './projects/project-list-resolver.service'
 import { ProjectResolver } from './projects/project-resolver.service'
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+
+
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -41,6 +45,8 @@ export class MyHammerConfig extends HammerGestureConfig {
   ],
   declarations: [ 
     AppComponent, 
+    AboutComponent,
+    ContactComponent,
     routableComponents, 
     NavComponent, 
     MouseWheelDirective

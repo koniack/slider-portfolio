@@ -8,14 +8,14 @@ header
     background-color: $transparent
 
   h1
-    +media('>phone', '<=tablet')
+    +media('<400px')
       display: none
     letter-spacing: 1px
     color: $white
     font-weight: 400
 
   p
-    +media('>phone', '<=tablet')
+    +media('<400px')
       display: none
     margin-left: -1px
     letter-spacing: 2px

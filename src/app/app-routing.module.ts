@@ -5,6 +5,8 @@ import { AuthGuard } from './user/auth-guard.service';
 import { SelectiveStrategy } from './selective-strategy.service';
 import { SliderComponent }  from './slider/slider.component';
 import { ProjectListResolver } from './projects/project-list-resolver.service'
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 const routes: Routes = [
@@ -18,6 +20,14 @@ const routes: Routes = [
         path: 'projects', 
         data: { preload: true },
         loadChildren: 'app/projects/project.module#ProjectModule'
+    },
+     { 
+        path: 'about', 
+        component: AboutComponent,
+    },
+     { 
+        path: 'contact', 
+        component: ContactComponent,
     },
     { path: '', pathMatch: 'full', redirectTo: 'slider'},
     { path: '**', pathMatch: 'full', redirectTo: 'slider'}

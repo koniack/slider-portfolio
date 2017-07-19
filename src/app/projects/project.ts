@@ -1,4 +1,5 @@
 /* Defines the project entity */
+import {IProjectPicture} from './project-picture';
 
 export interface IProject {
 	id: number;
@@ -7,9 +8,11 @@ export interface IProject {
 		{
 			url: string,
 			width: number,
-			height: number
+			height: number,
+			caption: string
 		}
 	;
+	projectPics: IProjectPicture[];
 	category: string;
 	description: string;
 	tags?: string[];
