@@ -9,6 +9,10 @@
   left: 0
   right: 0
   position: fixed
+  animation-duration: .5s
+  opacity: 0
+  animation-name: fadeIn
+  animation-fill-mode: forwards
 
 .slide-container
   position: absolute
@@ -29,9 +33,12 @@
     left: 0
     transition: all 500ms ease
 
+    img
+      visibility: hidden
+
     h1
-      font-weight: $weight-bold
-      color: $orange
+      font-weight: $weight-normal
+      color: $black
 
 
   .active
@@ -39,7 +46,6 @@
 
     .proj-title
       visibility: visible
-      position: absolute
       overflow: hidden
       width: 80%
 
@@ -53,14 +59,15 @@
       top: 0
       left: 0
       opacity: 1
-      transition: top 500ms, left 500ms ease
+      //transition: top 500ms, left 500ms ease
 
 .proj-title
   display: flex
+  position: absolute
   align-items: center
-  height: 35%
+  height: 30%
   overflow: hidden
-  top: 200px
+  top: 30%
   left: 25px
 
 .next-button,
@@ -166,7 +173,6 @@
       z-index: 900
       margin-top: -1px
       background-color: $black
-      -webkit-transition: width 500ms cubic-bezier(.23, 1, .32, 1)
       transition: width 500ms cubic-bezier(.23, 1, .32, 1)
 
       &.current-dot

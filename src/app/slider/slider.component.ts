@@ -30,7 +30,7 @@ import { IProject } from '../projects/project';
 				opacity: 1
 			})),
 			state('slideUpOut', style({
-				transform: 'translateY(-300px)',
+				transform: 'translateY(-200%)',
 				opacity: 0
 			})),
 			state('slideDownIn', style({
@@ -38,7 +38,7 @@ import { IProject } from '../projects/project';
 				opacity: 1
 			})),
 			state('slideDownOut', style({
-				transform: 'translateY(300px)',
+				transform: 'translateY(200%)',
 				opacity: 0
 			})),
 			transition('* => slideUpOut', [
@@ -46,26 +46,26 @@ import { IProject } from '../projects/project';
 					opacity: 1,
 					transform: 'translateY(0)'
 				}), 
-				animate('500ms ease-out')
+				animate('1000ms cubic-bezier(0.23, 1, 0.32, 1)')
 			]),
 			transition('* => slideUpIn', [
 				style({
 					opacity: 0,
-					transform: 'translateY(600px)'
-				}), animate('500ms 750ms ease-out')
+					transform: 'translateY(200%)'
+				}), animate('1000ms 800ms cubic-bezier(0.23, 1, 0.32, 1)')
 			]),
 			transition('* => slideDownOut', [
 				style({
 					opacity: 1,
 					transform: 'translateY(0)'
 				}), 
-				animate('500ms ease-out')
+				animate('1000ms cubic-bezier(0.23, 1, 0.32, 1)')
 			]),
 			transition('* => slideDownIn', [
 				style({
 					opacity: 0,
-					transform: 'translateY(-600px)'
-				}), animate('500ms 750ms ease-out')
+					transform: 'translateY(-200%)'
+				}), animate('1000ms 800ms cubic-bezier(0.23, 1, 0.32, 1)')
 			])
 		]),
 		trigger('pageTransitionTrigger', [
@@ -93,7 +93,7 @@ import { IProject } from '../projects/project';
 				opacity: 1
 			})),
 			state('slideUpOut', style({
-				transform: 'translateY(-100%)',
+				transform: 'translateY(-700px)',
 				opacity: 0
 			})),
 			state('slideDownIn', style({
@@ -101,7 +101,7 @@ import { IProject } from '../projects/project';
 				opacity: 1
 			})),
 			state('slideDownOut', style({
-				transform: 'translateY(100%)',
+				transform: 'translateY(700px)',
 				opacity: 0
 			})),
 			transition('* => slideUpOut', [
@@ -109,26 +109,26 @@ import { IProject } from '../projects/project';
 					opacity: 1,
 					transform: 'translateY(0)'
 				}), 
-				animate('300ms 200ms ease-out')
+				animate('650ms 200ms cubic-bezier(0.23, 1, 0.32, 1)')
 			]),
 			transition('* => slideUpIn', [
 				style({
 					opacity: 0,
-					transform: 'translateY(600px)'
-				}), animate('300ms 700ms ease-out')
+					transform: 'translateY(700px)'
+				}), animate('650ms 450ms cubic-bezier(0.23, 1, 0.32, 1)')
 			]),
 			transition('* => slideDownOut', [
 				style({
 					opacity: 1,
 					transform: 'translateY(0)'
 				}), 
-				animate('300ms 200ms ease-out')
+				animate('650ms 200ms cubic-bezier(0.23, 1, 0.32, 1)')
 			]),
 			transition('* => slideDownIn', [
 				style({
 					opacity: 0,
-					transform: 'translateY(-600px)'
-				}), animate('300ms 700ms ease-out')
+					transform: 'translateY(-700px)'
+				}), animate('650ms 450ms cubic-bezier(0.23, 1, 0.32, 1)')
 			])
 		])
 	]
@@ -136,14 +136,11 @@ import { IProject } from '../projects/project';
 })
 export class SliderComponent implements OnInit { 
 
-
-
-
 	slides: IProject[];
 	errorMessage: string;
 	activeProject: number = 0;
-	imgWidth: number = 600;
-	imgHeight: number = 600;
+	imgWidth: number;
+	imgHeight: number;
 	screenWidth: number;
 	screenHeight: number;
 	imgRatio: number;

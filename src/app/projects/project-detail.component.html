@@ -1,30 +1,33 @@
 <section class="project-detail-container">
     <div class="project-detail" *ngIf="project">
         <div class="thumbnail columns">
-            <div class="thumbnail-text column is-3">
+            <div class="thumbnail-text column is-4">
                 <h1 class="title is-2" >{{project.name}}</h1>
                 <h2 class="subtitle is-5">{{project.category}}</h2>
             </div>
-            <div class="column is-8">
+            <div class="column is-7">
                 <figure>
                     <img src="{{project.thumbUrl.url}}" alt="">
                 </figure>
             </div>
         </div>
-        <div class="picture columns" *ngFor="let p of project.projectPics">
-            <div class="column is-8">
+        <div class="picture columns" 
+            *ngFor="let p of project.projectPics"
+            [class.is-showing]="isShowing"
+        >
+            <div class="column is-7">
                 <figure>
                     <img src="{{p.url}}" alt="">
                 </figure>
             </div>
-            <div class="caption column is-3">
+            <div class="caption column is-4">
                 <h2>{{p.caption}}</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, quisquam!</p>
             </div>        </div>
     </div>
-    <div class="footer">
-        <button class="button is-outlined is-primary" [routerLink]="['/projects']" queryParamsHandling="preserve">Back</button>
-        <button *ngIf="logged-in" class="button is-outlined is-primary" [routerLink]="['edit']" queryParamsHandling="preserve">Edit</button>
-        <button class="button is-outlined is-primary" (click)="onNext()">Next</button>
+    <div class="detail-footer level is-mobile">
+        <button class="level-item button is-outlined is-primary" [routerLink]="['/projects']" queryParamsHandling="preserve">Back</button>
+        <button *ngIf="_authService.isLoggedIn()" class="level-item  button is-outlined is-primary" [routerLink]="['edit']" queryParamsHandling="preserve">Edit</button>
+        <button class="level-item button is-outlined is-primary" (click)="onNext()">Next</button>
     </div>
 </section>

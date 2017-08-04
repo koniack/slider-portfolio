@@ -1,7 +1,8 @@
 @import '~bulma/sass/utilities/initial-variables'
-//overide img max-width of 100%
+//override img max-width of 100%
 img
-    max-width: none
+  max-width: none
+//override primary color
 $primary: #ff8f00
 
 @import '~bulma/bulma'
@@ -22,6 +23,31 @@ $red: #ff0
 $blue: #007acc
 $transparent: transparent
 
+//Spin Animation
+@keyframes spin
+    0%
+      transform: rotate(0deg)
+
+    100%
+      transform: rotate(359deg)
+
+// Fade Up Animation
+@keyframes fadeUp
+    from
+      margin-top: 50px
+      opacity: 0
+
+    to
+      margin-top: 0px
+      opacity: 1
+
+// Fade In Animation
+@keyframes fadeIn
+    from
+      opacity: 0
+
+    to
+      opacity: 1
 
 
 

@@ -12,15 +12,42 @@
     margin: 25px
 
   h1
-    color: $orange
-    font-weight: $weight-bold
+    color: $black
+    font-weight: $weight-normal
 
-h1, h2, p
+h1,
+h2,
+p
   +media ('<=tablet')
     margin-left: 0
   margin-left: 25px
+
+.thumbnail-text
+  overflow: hidden
+
+  &::after
+    content: ' '
+    height: 1px
+    width: 100%
+    background-color: $orange
+    margin-top: 15px
+    margin-left: 25px
+    display: block
 
 .caption
   +media ('<tablet')
     order: 2
   order: -1
+
+.detail-footer
+  .button
+    height: 100px
+
+.picture
+  opacity: 0
+
+  &.is-showing
+    animation-duration: .5s
+    animation-fill-mode: forwards
+    animation-name: fadeUp
+    opacity: 0

@@ -20,7 +20,7 @@
     </div>
     <div id="next-button" class="next-button"  (click)='navigate(1)' ></div>
     <div id="prev-button" class="prev-button"  (click)='navigate(-1)' ></div>
-    <div class="slide-container" >
+    <div class="slide-container">
         <div  
             *ngFor="let slide of slides; let projectIndex = index" 
             [attr.data-index]="projectIndex" class="project-hero" 
