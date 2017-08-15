@@ -6,7 +6,7 @@ import {
 	style, 
 	transition, 
 	animate, 
-	keyframes,
+	keyframes
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
@@ -52,7 +52,7 @@ import { IProject } from '../projects/project';
 				style({
 					opacity: 0,
 					transform: 'translateY(200%)'
-				}), animate('1000ms 800ms cubic-bezier(0.23, 1, 0.32, 1)')
+				}), animate('1000ms 600ms cubic-bezier(0.23, 1, 0.32, 1)')
 			]),
 			transition('* => slideDownOut', [
 				style({
@@ -65,26 +65,7 @@ import { IProject } from '../projects/project';
 				style({
 					opacity: 0,
 					transform: 'translateY(-200%)'
-				}), animate('1000ms 800ms cubic-bezier(0.23, 1, 0.32, 1)')
-			])
-		]),
-		trigger('pageTransitionTrigger', [
-			state('false', style({
-				borderWidth: '15px',
-				//opacity: 1
-
-			})),
-			state('true', style({
-				borderWidth: 0,
-				top: 0,
-				left: 0
-				//opacity: 0
-			})),
-			transition('false => true', [
-				style({
-					borderWidth: '15px',
-					//opacity: 1
-				}), animate('500ms ease-in')
+				}), animate('1000ms 600ms cubic-bezier(0.23, 1, 0.32, 1)')
 			])
 		]),
 		trigger('slideTrigger', [
@@ -93,7 +74,7 @@ import { IProject } from '../projects/project';
 				opacity: 1
 			})),
 			state('slideUpOut', style({
-				transform: 'translateY(-700px)',
+				transform: 'translateY(-'+ window.innerHeight+'px)',
 				opacity: 0
 			})),
 			state('slideDownIn', style({
@@ -101,7 +82,7 @@ import { IProject } from '../projects/project';
 				opacity: 1
 			})),
 			state('slideDownOut', style({
-				transform: 'translateY(700px)',
+				transform: 'translateY('+ window.innerHeight+'px)',
 				opacity: 0
 			})),
 			transition('* => slideUpOut', [
@@ -114,8 +95,8 @@ import { IProject } from '../projects/project';
 			transition('* => slideUpIn', [
 				style({
 					opacity: 0,
-					transform: 'translateY(700px)'
-				}), animate('650ms 450ms cubic-bezier(0.23, 1, 0.32, 1)')
+					transform: 'translateY('+ window.innerHeight+'px)'
+				}), animate('650ms 300ms cubic-bezier(0.23, 1, 0.32, 1)')
 			]),
 			transition('* => slideDownOut', [
 				style({
@@ -127,8 +108,8 @@ import { IProject } from '../projects/project';
 			transition('* => slideDownIn', [
 				style({
 					opacity: 0,
-					transform: 'translateY(-700px)'
-				}), animate('650ms 450ms cubic-bezier(0.23, 1, 0.32, 1)')
+					transform: 'translateY(-'+ window.innerHeight +'px)'
+				}), animate('650ms 300ms cubic-bezier(0.23, 1, 0.32, 1)')
 			])
 		])
 	]
@@ -139,16 +120,10 @@ export class SliderComponent implements OnInit {
 	slides: IProject[];
 	errorMessage: string;
 	activeProject: number = 0;
-	imgWidth: number;
-	imgHeight: number;
-	screenWidth: number;
-	screenHeight: number;
-	imgRatio: number;
 	screenRatio: number;
-	imgPosTop: number;
-	imgPosLeft: number;
 	isMoving: boolean = false;
 	clicked: boolean = false;
+	windowHeight: string = 'translateY('+window.innerHeight+'px)';
 
 	constructor(private _projectService: ProjectService,
 				private _route: ActivatedRoute,
@@ -161,18 +136,9 @@ export class SliderComponent implements OnInit {
 							);*/
 		this._route.data.subscribe (
       					data => this.slides = data['slides']);
-		this.updateImage();
-	}
-
-	pageTransition(event:any){
-		event.preventDefault;
-		this.clicked = true;
-		console.log('clicked='+this.clicked);
-		this.imgPosLeft = 0;
-		this.imgPosTop = 0;
-		setTimeout(() =>{
-			this._router.navigate(['/projects', this.activeProject + 1]);
-		}, 500)
+		this.slides[this.activeProject]['active'] = true;
+		this.slides[this.slides.length - 1]['transition'] = 'slideUpOut';
+		this.slides[this.activeProject+1]['transition'] = 'slideDownOut';
 
 	}
 
@@ -202,7 +168,6 @@ export class SliderComponent implements OnInit {
 		setTimeout(()=>{
 			this.isMoving = false;
 		}, 300)
-		
 	}
 
 	 private onKeydown(event: KeyboardEvent) {
@@ -224,13 +189,13 @@ export class SliderComponent implements OnInit {
         }
     }
 
-
 	private navigate(direction: number, swipe: any) {
+		event.preventDefault();
 		if ((direction === 1 && this.activeProject < this.slides.length - 1) ||
 			(direction === -1 && this.activeProject >0)) {
 				if (direction == -1) {
 					this.slides[this.activeProject]['transition'] = 'slideDownOut';
-					this.slides[this.activeProject]['projTitleState'] = 'slideDownOut'
+					this.slides[this.activeProject]['projTitleState'] = 'slideDownOut';
 					this.slides[this.activeProject -1 ]['transition'] = 'slideDownIn';
 					this.slides[this.activeProject -1 ]['projTitleState'] = 'slideDownIn';
 				}
@@ -285,51 +250,42 @@ export class SliderComponent implements OnInit {
 
 	public onResize() {
 			this.slides.forEach((slide) => {
-				slide['active'] = false
+				slide['active'] = false;
 			})
-			this.updateImage()
-		}
-
+			this.updateImage();
+	}
+	
 	private updateImage() {
 		//wait for animation to end
 		setTimeout(() => {
 			this.slides[this.activeProject]['active'] = true
 			this.slides.forEach((slide) => {
 				if (slide != this.slides[this.activeProject]) {
-					slide['active'] = false
+					slide['active'] = false;
 				}
 			})
-			this.setDimensions();
-		}, 500)
+			
+		}, 300)
 	}
 
-	private setDimensions(): any {
-
-			this.screenWidth = window.innerWidth;
-			this.screenHeight = window.innerHeight;
-			this.imgHeight = this.slides[this.activeProject].thumbUrl.height;
-			this.imgWidth = this.slides[this.activeProject].thumbUrl.width;
-			this.screenRatio = this.screenHeight / this.screenWidth;
-			this.imgRatio = this.imgHeight / this.imgWidth;
-			/*if (this.imgWidth > this.imgHeight) {
-				this.imgWidth = this.screenHeight * this.imgRatio;
-				this.imgHeight = this.screenHeight;
-			}else {
-				this.imgHeight = this.screenWidth * this.imgRatio;
-				this.imgWidth = this.screenWidth;
-			}*/
-			if (this.screenRatio > this.imgRatio) {
-				this.imgHeight = this.screenHeight;
-				this.imgWidth = this.screenHeight / this.imgRatio; 
-			} else {
-				this.imgHeight = this.screenWidth * this.imgRatio;
-				this.imgWidth = this.screenWidth;
-			}
-			this.imgPosLeft = (this.screenWidth - this.imgWidth) / 2;
-			this.imgPosTop = (this.screenHeight - this.imgHeight) / 2;
-			console.log('img ratio: ' +this.imgRatio+' img width: '+this.imgWidth+' img height: '+this.imgHeight+' screen ratio: '+this.screenRatio+' screen height: '+this.screenHeight+ ' screen width: ' +this.screenWidth+  ' image top: '+this.imgPosTop+' img left: '+this.imgPosLeft);
-			
-
-	} 
+	getSliderImgDim(id:number) {
+		let screenWidth = window.innerWidth;
+		let screenHeight = window.innerHeight;
+		let imgHeight = this.slides[id].thumbUrl.height;
+		let imgWidth = this.slides[id].thumbUrl.width;
+		let screenRatio = screenHeight / screenWidth;
+		let imgRatio = imgHeight / imgWidth;
+		
+		if (screenRatio > imgRatio) {
+			imgHeight = screenHeight;
+			imgWidth = screenHeight / imgRatio; 
+		} else {
+			imgHeight = screenWidth * imgRatio;
+			imgWidth = screenWidth;
+		}
+		let imgPosLeft = (screenWidth - imgWidth) / 2;
+		let imgPosTop = (screenHeight - imgHeight) / 2;
+		return {width: imgWidth+'px', height: imgHeight+'px', top: imgPosTop+'px', left: imgPosLeft+'px'};
+	}
 	
 }

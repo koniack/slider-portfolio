@@ -1,9 +1,8 @@
 @import '~bulma/sass/utilities/initial-variables'
-//override img max-width of 100%
-img
-  max-width: none
+
 //override primary color
-$primary: #ff8f00
+$primary: #ff8f00 
+
 
 @import '~bulma/bulma'
 
@@ -41,6 +40,17 @@ $transparent: transparent
       margin-top: 0px
       opacity: 1
 
+// Fade Down Animation
+@keyframes fadeDown
+    from
+      margin-top: -50px
+      opacity: 0
+
+    to
+      margin-top: 0px
+      opacity: 1
+
+
 // Fade In Animation
 @keyframes fadeIn
     from
@@ -48,6 +58,33 @@ $transparent: transparent
 
     to
       opacity: 1
+
+// Grow Right Animation
+@keyframes growRight
+    0%
+      width: 0%
+    100%
+      width: 100%
+
+// Fade In from right
+@keyframes fadeInRight
+  0%
+    opacity: 0
+    transform: translateX(50%)
+
+  100%
+    opacity: 1
+    transform: translateX(0px)
+
+// Fade In from left
+@keyframes fadeInLeft
+  0%
+    opacity: 0
+    transform: translateX(-50%)
+
+  100%
+    opacity: 1
+    transform: translateX(0px)
 
 
 

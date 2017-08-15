@@ -1,10 +1,9 @@
 <div id="slider-area"
-    [@pageTransitionTrigger]="[clicked]"
     (swipeup)="navigate(1, $event)"
     (swipeleft)="navigate(1, $event)"
     (swipedown)="navigate(-1, $event)"
     (swiperight)="navigate(-1, $event)"
-    (window:resize)="onResize($event)"
+    (window:resize)="onResize()"
     mouseWheel
     (mouseWheelUp) = "mouseWheelUpFunc($event)" 
     (mouseWheelDown) = "mouseWheelDownFunc($event)"
@@ -18,24 +17,21 @@
             </li>
         </ul>
     </div>
-    <div id="next-button" class="next-button"  (click)='navigate(1)' ></div>
-    <div id="prev-button" class="prev-button"  (click)='navigate(-1)' ></div>
+    <a id="next-button" class="next-button"  (click)='navigate(1)' ></a>
+    <a id="prev-button" class="prev-button"  (click)='navigate(-1)' ></a>
     <div class="slide-container">
         <div  
             *ngFor="let slide of slides; let projectIndex = index" 
-            [attr.data-index]="projectIndex" class="project-hero" 
+            [attr.data-index]="projectIndex" 
+            class="project-hero"
             [class.active]="slide['active']" 
             [@slideTrigger]="slide['transition']"
             (@slideTrigger.start)="animStart($event)"
-            (@slideTrigger.done)="animDone($event)"
-        >
-            <a  (click)='pageTransition($event)'>
+            (@slideTrigger.done)="animDone($event)">
+            <a  [routerLink]= "['/projects', slide.id]" >
                 <img  
                     [src]='slide.thumbUrl.url' 
-                    [style.width.px]="imgWidth" 
-                    [style.height.px]="imgHeight" 
-                    [style.top.px]="imgPosTop" 
-                    [style.left.px]="imgPosLeft" 
+                    [ngStyle] = "getSliderImgDim(projectIndex)"
                 />
                 <div class="proj-title">
                     <div [@projTitleTrigger]="slide['projTitleState']">

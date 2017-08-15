@@ -1,6 +1,9 @@
 <span class="glyphicon glyphicon-refresh glyphicon-spin spinner" *ngIf="loading" >
     <img src="assets/img/k-logo-white.svg" alt="Kone Lathipanya Logo">
 </span>
+<span class="page-trans-overlay" [@pageTransitionTrigger]="state" *ngIf="state" ></span>
+
+
 <header>
     <div class="nav">
         <div class="nav-left kone-logo">

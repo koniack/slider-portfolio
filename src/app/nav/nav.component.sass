@@ -115,7 +115,7 @@
 
         a
           cursor: pointer
-          color: $orange
+          color: $white
           display: inline-block
           text-decoration: none
           font-size: 3rem
@@ -126,7 +126,7 @@
             content: ''
             position: relative
             display: block
-            background-color: orange
+            background-color: $orange
             height: 1px
             width: 0
             transition: width 500ms cubic-bezier(0.23, 1, 0.32, 1)
@@ -163,12 +163,3 @@
 
       &:nth-of-type(5)
         animation-delay: 750ms
-
-@keyframes fadeInRight
-  0%
-    opacity: 0
-    left: 50%
-
-  100%
-    opacity: 1
-    left: 0

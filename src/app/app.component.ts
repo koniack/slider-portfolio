@@ -1,4 +1,13 @@
-import { Component } from '@angular/core';
+import { 
+	Component,
+	OnInit, 
+	trigger, 
+	state, 
+	style, 
+	transition, 
+	animate, 
+	keyframes
+ } from '@angular/core';
 import { Router, Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -10,13 +19,39 @@ import { MessageService } from './messages/message.service';
 	moduleId: module.id,
 	selector: 'app-root',
 	templateUrl: 'app.component.html',
-	styleUrls: ['app.component.sass']
+	styleUrls: ['app.component.sass'],
+	animations: [
+		trigger('pageTransitionTrigger', [
+			state('false', style({
+				transform: 'translateX(100%)',
+				//opacity: 0
+
+			})),
+			state('true', style({
+				transform: 'translateX(0)',
+				//opacity: 1
+			})),
+			transition('* => true', [
+				style({
+					transform: 'translateX(-100%)',
+					//opacity: 0
+				}), animate('500ms ease-out')
+			]),
+			transition('* => false', [
+				style({
+					transform: 'translateX(0)',
+					//opacity: 1
+				}), animate('500ms ease-out')
+			])
+		])
+	]
 })
 export class AppComponent  { 
 	name = 'Kone Lathipanya';
 	title: string = 'Developer + Designer'
 	color ='#000'; 
 	loading: boolean = true;
+	state: string = 'false';
 
 constructor(private _authService: AuthService,
 			private _messageService: MessageService,
@@ -29,11 +64,16 @@ constructor(private _authService: AuthService,
 checkRouterEvent(routerEvent: Event): void {
 	if (routerEvent instanceof NavigationStart) {
 		this.loading = true;
+		this.state = 'true';
 	}
 	if (routerEvent instanceof NavigationEnd || 
 		routerEvent instanceof NavigationCancel ||
 		routerEvent instanceof NavigationError){
-			this.loading = false;
+			this.state = 'false';
+			setTimeout(()=>{
+				this.loading = false;
+			}, 800)
+			
 		}
 }
 

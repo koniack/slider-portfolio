@@ -22,17 +22,37 @@ p
     margin-left: 0
   margin-left: 25px
 
+.thumbnail
+  figure
+    opacity: 0
+    animation-fill-mode: forwards
+    animation-name: fadeIn
+    animation-duration: 2000ms
+    animation-delay: 750ms
+
 .thumbnail-text
   overflow: hidden
+  h1,
+  h2
+    opacity: 0
+    animation-fill-mode: forwards
+    animation-name: fadeDown
+    animation-duration: 500ms
+  h2
+    animation-delay: 250ms
 
   &::after
     content: ' '
     height: 1px
-    width: 100%
     background-color: $orange
     margin-top: 15px
     margin-left: 25px
+    width: 0%
     display: block
+    animation-name: growRight
+    animation-fill-mode: forwards
+    animation-duration: 2000ms
+    animation-delay: 750ms
 
 .caption
   +media ('<tablet')
@@ -47,7 +67,6 @@ p
   opacity: 0
 
   &.is-showing
-    animation-duration: .5s
+    animation-duration: 1000ms
     animation-fill-mode: forwards
     animation-name: fadeUp
-    opacity: 0
