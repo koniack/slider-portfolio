@@ -24,17 +24,15 @@
             *ngFor="let slide of slides; let projectIndex = index" 
             [attr.data-index]="projectIndex" 
             class="project-hero"
-            [class.active]="slide['active']" 
-            [@slideTrigger]="slide['transition']"
-            (@slideTrigger.start)="animStart($event)"
-            (@slideTrigger.done)="animDone($event)">
+            id="project{{projectIndex}}"
+            [class.active]="slide['active']">
             <a  [routerLink]= "['/projects', slide.id]" >
                 <img  
                     [src]='slide.thumbUrl.url' 
                     [ngStyle] = "getSliderImgDim(projectIndex)"
                 />
                 <div class="proj-title">
-                    <div [@projTitleTrigger]="slide['projTitleState']">
+                    <div id="projTitle{{projectIndex}}">
                         <h1 class="title is-1" [innerText]='slide.name' ></h1>
                         <h5 class="subtitle" >{{slide.category}}</h5>
                     </div>

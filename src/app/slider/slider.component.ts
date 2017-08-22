@@ -1,19 +1,19 @@
 import { 
 	Component, 
 	OnInit, 
-	trigger, 
-	state, 
-	style, 
-	transition, 
-	animate, 
-	keyframes
+	ElementRef
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
+import { TimelineMax} from "gsap";
 
 import { ProjectService } from '../projects/project.service';
 import { IProject } from '../projects/project';
-
+declare module "gsap" {
+	export interface TweenConfig {
+	  [p: string]: any;
+	}
+  } 
 
 @Component({
 	moduleId: module.id,
@@ -22,97 +22,7 @@ import { IProject } from '../projects/project';
 	styleUrls: ['slider.component.sass'],
 	host: {
         '(document:keydown)': 'onKeydown($event)',
-    },
-	animations: [
-		trigger('projTitleTrigger', [
-			state('slideUpIn', style({
-				transform: 'translateY(0)',
-				opacity: 1
-			})),
-			state('slideUpOut', style({
-				transform: 'translateY(-200%)',
-				opacity: 0
-			})),
-			state('slideDownIn', style({
-				transform: 'translateY(0)',
-				opacity: 1
-			})),
-			state('slideDownOut', style({
-				transform: 'translateY(200%)',
-				opacity: 0
-			})),
-			transition('* => slideUpOut', [
-				style({
-					opacity: 1,
-					transform: 'translateY(0)'
-				}), 
-				animate('1000ms cubic-bezier(0.23, 1, 0.32, 1)')
-			]),
-			transition('* => slideUpIn', [
-				style({
-					opacity: 0,
-					transform: 'translateY(200%)'
-				}), animate('1000ms 600ms cubic-bezier(0.23, 1, 0.32, 1)')
-			]),
-			transition('* => slideDownOut', [
-				style({
-					opacity: 1,
-					transform: 'translateY(0)'
-				}), 
-				animate('1000ms cubic-bezier(0.23, 1, 0.32, 1)')
-			]),
-			transition('* => slideDownIn', [
-				style({
-					opacity: 0,
-					transform: 'translateY(-200%)'
-				}), animate('1000ms 600ms cubic-bezier(0.23, 1, 0.32, 1)')
-			])
-		]),
-		trigger('slideTrigger', [
-			state('slideUpIn', style({
-				transform: 'translateY(0)',
-				opacity: 1
-			})),
-			state('slideUpOut', style({
-				transform: 'translateY(-'+ window.innerHeight+'px)',
-				opacity: 0
-			})),
-			state('slideDownIn', style({
-				transform: 'translateY(0)',
-				opacity: 1
-			})),
-			state('slideDownOut', style({
-				transform: 'translateY('+ window.innerHeight+'px)',
-				opacity: 0
-			})),
-			transition('* => slideUpOut', [
-				style({
-					opacity: 1,
-					transform: 'translateY(0)'
-				}), 
-				animate('650ms 200ms cubic-bezier(0.23, 1, 0.32, 1)')
-			]),
-			transition('* => slideUpIn', [
-				style({
-					opacity: 0,
-					transform: 'translateY('+ window.innerHeight+'px)'
-				}), animate('650ms 300ms cubic-bezier(0.23, 1, 0.32, 1)')
-			]),
-			transition('* => slideDownOut', [
-				style({
-					opacity: 1,
-					transform: 'translateY(0)'
-				}), 
-				animate('650ms 200ms cubic-bezier(0.23, 1, 0.32, 1)')
-			]),
-			transition('* => slideDownIn', [
-				style({
-					opacity: 0,
-					transform: 'translateY(-'+ window.innerHeight +'px)'
-				}), animate('650ms 300ms cubic-bezier(0.23, 1, 0.32, 1)')
-			])
-		])
-	]
+    }
 
 })
 export class SliderComponent implements OnInit { 
@@ -120,14 +30,14 @@ export class SliderComponent implements OnInit {
 	slides: IProject[];
 	errorMessage: string;
 	activeProject: number = 0;
-	screenRatio: number;
 	isMoving: boolean = false;
-	clicked: boolean = false;
-	windowHeight: string = 'translateY('+window.innerHeight+'px)';
+	winHeight: number = window.innerHeight;
+	tl = new TimelineMax;
 
-	constructor(private _projectService: ProjectService,
+	constructor(//private _projectService: ProjectService,
 				private _route: ActivatedRoute,
 				private _router: Router){}
+
 	ngOnInit(): void {
 		/*this._projectService.getProjects()
 							.subscribe(
@@ -135,13 +45,11 @@ export class SliderComponent implements OnInit {
 								error => this.errorMessage = <any>error
 							);*/
 		this._route.data.subscribe (
-      					data => this.slides = data['slides']);
+						  data => this.slides = data['slides']);
 		this.slides[this.activeProject]['active'] = true;
-		this.slides[this.slides.length - 1]['transition'] = 'slideUpOut';
-		this.slides[this.activeProject+1]['transition'] = 'slideDownOut';
-
 	}
 
+	//Mousewheel navigation using Mousewheel directive
 	mouseWheelUpFunc(){
 		if (!this.isMoving){
 			this.navigate(1, false);
@@ -153,24 +61,20 @@ export class SliderComponent implements OnInit {
 			this.navigate(-1, false);
 		}
 	}
-		
-	preventScroll(event: any) {
-		event.preventDefault();
-		event.stopPropagation();
-	}
 
-	animStart(event:any){
-
+	//Adds delay to stop MacOSX inertia from triggering navigation
+	animStart(){
 		this.isMoving = true;
 	}
-	animDone(event:any){
 
+	animDone(){
 		setTimeout(()=>{
 			this.isMoving = false;
-		}, 300)
+		}, 900)
 	}
 
-	 private onKeydown(event: KeyboardEvent) {
+	//Navigates to next or previous project using keyboard arrow keys
+	private onKeydown(event: KeyboardEvent) {
         let prevent = [38, 40]
             .find(no => no === event.keyCode)
         if (prevent) {
@@ -188,75 +92,76 @@ export class SliderComponent implements OnInit {
                 break
         }
     }
-
-	private navigate(direction: number, swipe: any) {
-		event.preventDefault();
+	
+	//Navigates to next or previous project
+	public navigate(direction: number, swipe: any) {
+		let currProject = document.getElementById('project'+(this.activeProject));
+		let currTitle = document.getElementById('projTitle'+(this.activeProject));
+		this.tl
+			.set(currProject, { y:0, autoAlpha: 1})
+			.set(currTitle, {y:0} );
+		
 		if ((direction === 1 && this.activeProject < this.slides.length - 1) ||
 			(direction === -1 && this.activeProject >0)) {
 				if (direction == -1) {
-					this.slides[this.activeProject]['transition'] = 'slideDownOut';
-					this.slides[this.activeProject]['projTitleState'] = 'slideDownOut';
-					this.slides[this.activeProject -1 ]['transition'] = 'slideDownIn';
-					this.slides[this.activeProject -1 ]['projTitleState'] = 'slideDownIn';
+					this.slide(currProject, currTitle, (this.activeProject - 1), -window.innerHeight, window.innerHeight);
 				}
 				else {
-					this.slides[this.activeProject]['transition'] = 'slideUpOut';
-					this.slides[this.activeProject]['projTitleState'] = 'slideUpOut'
-					this.slides[this.activeProject + 1]['transition'] = 'slideUpIn';
-					this.slides[this.activeProject +1 ]['projTitleState'] = 'slideUpIn';
+					this.slide(currProject, currTitle, (this.activeProject + 1), window.innerHeight, -window.innerHeight);
 				}
-				this.activeProject += direction;
 				this.updateImage();
 			}
 			else {
 				if (this.activeProject > this.slides.length - 2) {
-					this.slides[this.activeProject]['transition'] = 'slideUpOut';
-					this.slides[this.activeProject]['projTitleState'] = 'slideUpOut'
-
-					this.activeProject = 0;
-					this.slides[this.activeProject]['transition'] = 'slideUpIn';
-					this.slides[this.activeProject]['projTitleState'] = 'slideUpIn'
+					this.slide(currProject, currTitle, 0, window.innerHeight, -window.innerHeight);
 				}
 				else {
-					this.slides[this.activeProject]['transition'] = 'slideDownOut';
-					this.slides[this.activeProject]['projTitleState'] = 'slideDownOut'
-					this.activeProject = this.slides.length - 1;
-					this.slides[this.activeProject]['transition'] = 'slideDownIn';
-					this.slides[this.activeProject]['projTitleState'] = 'slideDownIn'
+					this.slide(currProject, currTitle, (this.activeProject + this.slide.length), -window.innerHeight, window.innerHeight);
 				}
 				this.updateImage();
 			}
 	}
 
+	//Navigates to specific project designated by indicators
 	private navigateToProj(indicatorIndex: number) {
+		let currProject = document.getElementById('project'+(this.activeProject));
+		let currTitle = document.getElementById('projTitle'+(this.activeProject));
 		if (indicatorIndex != this.activeProject) {
 			if (indicatorIndex > this.activeProject) {
-				this.slides[this.activeProject]['transition'] = 'slideUpOut';
-				this.slides[this.activeProject]['projTitleState'] = 'slideUpOut';
-				this.activeProject = indicatorIndex;
-				this.slides[this.activeProject]['transition'] = 'slideUpIn';
-				this.slides[this.activeProject]['projTitleState'] = 'slideUpIn';
+				this.slide(currProject, currTitle, indicatorIndex, window.innerHeight, -window.innerHeight);
 			} 
 			else {
-				this.slides[this.activeProject]['transition'] = 'slideDownOut';
-				this.slides[this.activeProject]['projTitleState'] = 'slideDownOut';
-				this.activeProject = indicatorIndex;
-				this.slides[this.activeProject]['transition'] = 'slideDownIn';
-				this.slides[this.activeProject]['projTitleState'] = 'slideDownIn';
+				this.slide(currProject, currTitle, indicatorIndex, -window.innerHeight, window.innerHeight);
 			}
 			this.updateImage();
 		}
 	}
 
+	//Slide current project out and new project in
+	slide(currProject: any, currTitle: any, id: number, slideFrom: number, slideTo: number){
+		let newProject = document.getElementById('project' + id);
+		let newTitle = document.getElementById('projTitle' + id);
+		this.tl
+			.set(newProject, { y:slideFrom, autoAlpha: 0})
+			.set(newTitle, {y:slideFrom} )
+			.to(currTitle, .5, {y: slideTo, ease:'Power4.easeIn', onStart: this.animStart() } )
+			.to(currProject, .5, {y: slideTo, autoAlpha: 0, ease:'Power4.easeIn' })
+			.to(newProject, .5, { y: 0 , autoAlpha: 1, ease:'Power4.easeOut'})
+			.to(newTitle, .5, { y: 0 , autoAlpha: 1, ease:'Power4.easeOut', onComplete: this.animDone() });
+		this.activeProject = id;
+	}
+
+	//Update image on screen resize
 	public onResize() {
 			this.slides.forEach((slide) => {
 				slide['active'] = false;
 			})
 			this.updateImage();
 	}
-	
+
+	//Updates active project
 	private updateImage() {
-		//wait for animation to end
+		//Wait for animation to end
 		setTimeout(() => {
 			this.slides[this.activeProject]['active'] = true
 			this.slides.forEach((slide) => {
@@ -265,9 +170,10 @@ export class SliderComponent implements OnInit {
 				}
 			})
 			
-		}, 300)
+		}, 900)
 	}
 
+	//Gets and assigns image dimensions and position
 	getSliderImgDim(id:number) {
 		let screenWidth = window.innerWidth;
 		let screenHeight = window.innerHeight;
