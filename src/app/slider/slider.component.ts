@@ -1,7 +1,7 @@
 import { 
 	Component, 
 	OnInit, 
-	ElementRef
+	//ElementRef
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
@@ -144,10 +144,10 @@ export class SliderComponent implements OnInit {
 		this.tl
 			.set(newProject, { y:slideFrom, autoAlpha: 0})
 			.set(newTitle, {y:slideFrom} )
-			.to(currTitle, .5, {y: slideTo, ease:'Power4.easeIn', onStart: this.animStart() } )
-			.to(currProject, .5, {y: slideTo, autoAlpha: 0, ease:'Power4.easeIn' })
+			.to(currTitle, .5, {y: slideTo, ease:'Power4.easeIn', onStart: this.animStart() })
+			.to(currProject, .5, {y: slideTo, autoAlpha: 0, ease:'Power4.easeIn' },'-=.25' )
 			.to(newProject, .5, { y: 0 , autoAlpha: 1, ease:'Power4.easeOut'})
-			.to(newTitle, .5, { y: 0 , autoAlpha: 1, ease:'Power4.easeOut', onComplete: this.animDone() });
+			.to(newTitle, .5, { y: 0 , autoAlpha: 1, ease:'Power4.easeOut', onComplete: this.animDone() },'-=.15');
 		this.activeProject = id;
 	}
 
