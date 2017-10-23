@@ -1,49 +1,9 @@
-<span class="kLoader">
-    <svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="-91.321 -91.321 300 300">
-        <g id="kLogo">
-          <path id="kLineBottom" fill="#FFF" d="M58.043 62.98l11.873 20.955h2.3l-12.77-22.537z"/>
-          <path id="kLineTop" fill="#FFF" d="M49.29 53.878L67.614 32.97h2.666L49.274 56.96z"/>
-          <path id="kTop" fill="#FFF" d="M50.682 55.366l-9.417 10.762V33.055h9.433v19.228z"/>
-          <path id="kLineLeft" fill="#FFF" d="M35 33.16h2v51.23h-2z"/>
-          <path id="kCircle" fill="none" stroke="#FFF" stroke-width="9" stroke-linecap="round" stroke-miterlimit="10" d="M58.68 10.813c26.436 0 47.867 21.43 47.867 47.866s-21.43 47.867-47.866 47.867c-26.437 0-47.868-21.432-47.868-47.868 0-26.436 21.43-47.867 47.87-47.867"/>
-          <path id="kRight" fill="#FFF" d="M61.73 57.782L76.487 83.84H87.36L68.355 50.006z"/>
-          <path id="kBottom" fill="#FFF" d="M69.577 52.16l16.63-19.152h-11.16l-33.78 38.425v12.954l21.685-24.45z"/>
-        </g>
-        <g id="kLinesStart" fill="#FFF">
-          <path id="leftStart" d="M35 33.16h2v.772h-2z"/>
-          <path id="topStart" d="M50.698 52.283v-.013l-1.41 1.608-.015 3.083 1.41-1.61z"/>
-          <path id="bottomStart" d="M59.445 61.398l-1.402 1.582.86 1.52 1.403-1.58z"/>
-        </g>
-        <g id="dots">
-          <g id="dotsGroup" fill="#FFF">
-            <circle id="dot4" cx="88.486" cy="58.679" r="4.787"/>
-            <circle id="dot3" cx="68.615" cy="58.679" r="4.787"/>
-            <circle id="dot2" cx="48.744" cy="58.679" r="4.787"/>
-            <circle id="dot1" cx="28.873" cy="58.679" r="4.787"/>
-          </g>
-        </g>
-        <g id="dotsEnd" fill="#FFF">
-          <circle id="dot4End" cx="79.28" cy="79.04" r="4.787"/>
-          <circle id="dot3End" cx="46.052" cy="73.146" r="4.787"/>
-          <circle id="dot2End" cx="46.052" cy="37.947" r="4.787"/>
-          <circle id="dot1End" cx="58.679" cy="10.709" r="4.787"/>
-        </g>
-        <g id="paths" fill="none" stroke="#30EFEF" stroke-linecap="square" stroke-miterlimit="10">
-          <path id="path1" stroke-width=".206" d="M28.932 58.254c-2.09-4.337-3.26-9.2-3.26-14.337 0-18.264 14.805-33.07 33.07-33.07l-.062-.034c26.435 0 47.865 21.43 47.865 47.866s-21.43 47.867-47.866 47.867c-26.44 0-47.87-21.432-47.87-47.868 0-26.436 21.43-47.867 47.87-47.867"/>
-          <path id="path4" stroke-width=".233" d="M88.676 58.68c0 21.505-17.434 38.94-38.94 38.94-21.507 0-38.94-17.436-38.94-38.94l.016-.002c0-26.435 21.43-47.866 47.87-47.866v.14c20.583 0 37.27 16.687 37.27 37.272 0 12.926-6.58 24.315-16.572 31"/>
-          <path id="path3" stroke-width=".299" d="M68.51 58.46c0 15.94-12.92 28.858-28.856 28.858-15.938 0-28.858-12.92-28.858-28.857l.017.22c0-26.436 21.43-47.867 47.87-47.867v.142c17.868 0 32.355 14.488 32.355 32.356 0 17.87-14.487 32.357-32.356 32.357-4.463 0-8.716-.904-12.584-2.538"/>
-          <path id="path2" stroke-width=".212" d="M48.714 58.775C39.892 54.928 33.726 46.13 33.726 35.89c0-13.78 11.172-24.953 24.954-24.953v-.125c26.436 0 47.867 21.43 47.867 47.866h.124c0 18.73-15.183 33.915-33.912 33.915-18.73 0-33.916-15.184-33.916-33.915 0-7.834 2.657-15.047 7.118-20.79"/>
-        </g>
-      </svg>
-</span>
-<span class="page-trans-overlay" [@pageTransitionTrigger]="state" *ngIf="state" ></span>
-
-
+<transition-overlay (loadingPage)="loadingPage()" (stopLoadingPage)="stopLoadingPage()"></transition-overlay>
 <header>
     <div class="nav">
         <div class="nav-left kone-logo">
             <a class="nav-item"> 
-                <img src="assets/img/k-logo-white.svg" alt="Kone Lathipanya Logo">
+                <img src="assets/img/k-logo.svg" alt="Kone Lathipanya Logo">
                 <div class="main-title nav-item">
                     <h1 class="title is-4 " [style.color]='color'>{{name}}</h1>
                     <p class="subtitle is-6" >{{title}}</p>
@@ -56,7 +16,7 @@
     </div>
 </header> 
     
-<section id="main-area">
+<section id="main-area" [class.noScroll]="loading"  >
     <router-outlet></router-outlet>
 </section>
 <!--<section id="popup-container">

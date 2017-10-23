@@ -1,7 +1,8 @@
+
 <div id="slider-area"
-    (swipeup)="navigate(1, $event)"
+    (swipeup)="navigate('next', $event)"
     (swipeleft)="navigate(1, $event)"
-    (swipedown)="navigate(-1, $event)"
+    (swipedown)="navigate('prev', $event)"
     (swiperight)="navigate(-1, $event)"
     (window:resize)="onResize()"
     mouseWheel
@@ -10,15 +11,15 @@
 >
     <div id="indicators" class="indicators">
         <ul class="dots">
-            <li *ngFor="let slide of slides; let indicatorIndex = index">
-                <a  (click)='navigateToProj(indicatorIndex)'>
+            <li *ngFor="let slide of slides; let indicatorIndex = index" [title]='slide.name'>
+                <a  (click)='navigateToProj(indicatorIndex)' >
                     <span [class.current-dot]="slide['active']" ></span>
                 </a>
             </li>
         </ul>
     </div>
-    <a id="next-button" class="next-button"  (click)='navigate(1)' ></a>
-    <a id="prev-button" class="prev-button"  (click)='navigate(-1)' ></a>
+    <a id="next-button" class="next-button"  (click)='navigate("next")' ></a>
+    <a id="prev-button" class="prev-button"  (click)='navigate("prev")' ></a>
     <div class="slide-container">
         <div  
             *ngFor="let slide of slides; let projectIndex = index" 

@@ -1,64 +1,44 @@
 @import './src/assets/sass/base'
 
-.kLoader
-  svg
-      visibility: hidden
-      width: 400px
-      height: 400px
-  position: absolute
-  top: 50%
-  left: 50%
-  z-index: 10
-  margin: -200px 0 0 -200px
-  z-index: 999
-  //animation: spin 750ms infinite linear
-    
-
-
-
-.page-trans-overlay
-  background-color: $orange
-  position: absolute
-  width: 100%
-  height: 100%
-  z-index: 998
-  border: 15px solid $white
-
 header
   position: absolute
   width: 100%
 
   .nav
     background-color: $transparent
+    text-align: left
 
-  h1
-    +media('<400px')
-      display: none
-    letter-spacing: 1px
-    color: $white
-    font-weight: 400
+    h1
+      +media('<400px')
+        display: none
+      letter-spacing: 1px
+      color: $white
+      font-weight: 400
 
-  p
-    +media('<400px')
-      display: none
-    margin-left: -1px
-    letter-spacing: 2px
+    p
+      +media('<400px')
+        display: none
+      letter-spacing: 1.8px
+      font-weight: 400
 
-  .kone-logo
-    margin-top: 25px
-    position: absolute
-    img
-      max-height: 3rem
-      display: inline-block
-      margin-left: 25px
-      float: left
-      transform: scale(1.1)
+    .kone-logo
+      margin-top: 25px
+      position: absolute
+      img
+        max-height: 3.5rem
+        display: inline-block
+        margin-left: 25px
+        float: left
 
 .main-title
   text-transform: uppercase
   letter-spacing: 2px
   display: block
   float: left
+  padding-left: .5rem
+
+  h1
+    margin-bottom: 1.4rem
 
 #main-area
   box-sizing: border-box

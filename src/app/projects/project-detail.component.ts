@@ -1,4 +1,4 @@
-import { Component, HostListener, Inject, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, Inject, Input, OnInit, ViewChild, ElementRef} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DOCUMENT } from '@angular/platform-browser';
 
@@ -8,6 +8,8 @@ import { AuthService } from '../user/auth.service';
 
 import { ProjectService } from './project.service';
 
+import { TimelineMax, TweenMax } from "gsap";
+
 @Component({
   moduleId: module.id,
   selector: 'project-detail',
@@ -15,6 +17,9 @@ import { ProjectService } from './project.service';
   styleUrls: ['./project-detail.component.sass']
 })
 export class ProjectDetailComponent implements OnInit {
+  
+  //@ViewChild('projectThumb') projectThumbEl: ElementRef;
+
   project: IProject;
   nextProject: IProject;
   title: string = 'Project Details';
@@ -34,6 +39,7 @@ export class ProjectDetailComponent implements OnInit {
     this._route.data.subscribe (
       data => this.project = data['project']
     );
+
     /*this._route.params.subscribe(
       params => {
         let id = +params['id'] + 1;
@@ -54,6 +60,10 @@ export class ProjectDetailComponent implements OnInit {
      //   this.getProject(id);
      // }
    // )
+  }
+
+  /*ngAfterViewInit(){
+    this.animateThumb();    
   }
   /*getProject(id: number) {
     this._projectService.getProject(id).subscribe(
@@ -86,4 +96,9 @@ export class ProjectDetailComponent implements OnInit {
     this._router.navigate([`/projects/${nextPage}`], { queryParamsHandling: "preserve" } );    
 
   }
+  /*animateThumb(){
+    console.log(`projectThumb: ` + this.projectThumbEl.nativeElement);
+    TweenMax.from(this.projectThumbEl.nativeElement, 5, {scale: 3, top: -254.983, left: 0});
+  }*/
+
 }

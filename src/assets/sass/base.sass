@@ -22,6 +22,12 @@ $red: #ff0
 $blue: #007acc
 $transparent: transparent
 
+// No Scroll
+.noScroll
+  position: fixed
+  overflow-y: scroll
+  width: 100%
+
 //Spin Animation
 @keyframes spin
     0%
@@ -43,11 +49,11 @@ $transparent: transparent
 // Fade Down Animation
 @keyframes fadeDown
     from
-      margin-top: -50px
+      transform: translateY(-50px)
       opacity: 0
 
     to
-      margin-top: 0px
+      transform: translateY(0px)
       opacity: 1
 
 

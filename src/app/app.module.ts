@@ -13,6 +13,7 @@ import { ProjectData } from './projects/project-data';
 import { AppComponent }  from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { MouseWheelDirective } from './shared/mousewheel.directive';
+import { TransitionOverlayComponent } from './shared/transition-overlay.component';
 import { AppRoutingModule, routableComponents } from './app-routing.module';
 import { UserModule } from './user/user.module';
 import { MessageModule } from './messages/message.module';
@@ -21,6 +22,7 @@ import { ProjectListResolver } from './projects/project-list-resolver.service'
 import { ProjectResolver } from './projects/project-resolver.service'
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
+import { KLoaderComponent } from './shared/kLoader.component';
 
 
 
@@ -37,7 +39,7 @@ export class MyHammerConfig extends HammerGestureConfig {
   	BrowserModule, 
   	FormsModule, 
   	HttpModule,
-    InMemoryWebApiModule.forRoot(ProjectData, {delay: 1000}),
+    InMemoryWebApiModule.forRoot(ProjectData, {delay: 0}),
     UserModule,
     MessageModule,
     BrowserAnimationsModule,
@@ -49,7 +51,9 @@ export class MyHammerConfig extends HammerGestureConfig {
     ContactComponent,
     routableComponents, 
     NavComponent, 
-    MouseWheelDirective
+    MouseWheelDirective,
+    KLoaderComponent,
+    TransitionOverlayComponent
   ],
   bootstrap:    [ AppComponent ],
   providers: [ {

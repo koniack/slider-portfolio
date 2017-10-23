@@ -25,17 +25,21 @@
   margin-bottom: 30px
 
 .project-list-container
-  padding: 125px 35px
+  padding: 6rem .75rem
   background-color: $grey
-  border: 15px solid $white
+  border: .75rem solid $white
 
+  .projects
+    margin: 0
 
 .project
+
   position: relative
   cursor: pointer
 
   figure
     overflow: hidden
+    
 
     &::before
       content: ''
@@ -43,7 +47,7 @@
       height: 100%
       display: block
       position: absolute
-      background-color: rgba(255, 165, 0, .75)
+      background-color: rgba(255, 165, 0, .85)
       z-index: 998
       opacity: 0
       transition: opacity 800ms ease
@@ -56,7 +60,7 @@
     line-height: 2rem
 
   img
-    background-color: $black
+    //background-color: $black
     width: 100%
     transition: transform 5000ms ease
 
@@ -72,9 +76,7 @@
   
 .project:hover
   img
-      box-shadow: 0 2px 3px rgba(255, 165, 0, .1), 0 0 0 1px rgba(255, 165, 0, .1)
       transform: scale(1.2)
-
 
   h2
     color: $white
