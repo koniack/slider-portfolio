@@ -7,6 +7,7 @@ header
   .nav
     background-color: $transparent
     text-align: left
+    margin: 1.5rem
 
     h1
       +media('<400px')
@@ -22,13 +23,16 @@ header
       font-weight: 400
 
     .kone-logo
-      margin-top: 25px
       position: absolute
+
+      .nav-item
+        margin: -4px 0 0 -4px
+
       img
         max-height: 3.5rem
         display: inline-block
-        margin-left: 25px
         float: left
+        
 
 .main-title
   text-transform: uppercase
