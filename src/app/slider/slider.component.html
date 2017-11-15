@@ -26,16 +26,17 @@
             [attr.data-index]="projectIndex" 
             class="project-hero"
             id="project{{projectIndex}}"
-            [class.active]="slide['active']">
+            [class.active]="slide['active']"
+            [style.background-image]="'url(' + slide.thumbUrl.url + ')'">
             <a  [routerLink]= "['/projects', slide.id]" >
-                <img  
+                <!--<img  
                     [src]='slide.thumbUrl.url' 
                     [ngStyle] = "getSliderImgDim(projectIndex)"
-                />
+                />-->
                 <div class="proj-title">
                     <div id="projTitle{{projectIndex}}">
                         <h1 class="title is-1" [innerText]='slide.name' ></h1>
-                        <h5 class="subtitle" >{{slide.category}}</h5>
+                        <h5 class="subtitle is-3" >{{slide.category}}</h5>
                     </div>
                 </div>
             </a>

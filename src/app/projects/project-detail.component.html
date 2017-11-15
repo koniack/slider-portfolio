@@ -4,8 +4,9 @@
             <div class="thumbnail-text column is-4">
                 <h1 class="title is-2" >{{project.name}}</h1>
                 <h2 class="subtitle is-5">{{project.category}}</h2>
+                <p>{{project.description}}</p>
             </div>
-            <div class="column is-7" >
+            <div class="column is-8" >
                 <figure >
                     <img class="thumbnail" src="{{project.thumbUrl.url}}" alt="">
                 </figure>
@@ -15,7 +16,7 @@
             *ngFor="let p of project.projectPics"
             [class.is-showing]="isShowing"
         >
-            <div class="column is-7">
+            <div class="column is-8">
                 <figure>
                     <img src="{{p.url}}" alt="">
                 </figure>
@@ -23,11 +24,13 @@
             <div class="caption column is-4">
                 <h2>{{p.caption}}</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, quisquam!</p>
-            </div>        </div>
+            </div>        
+        </div>
+        <div class="detail-footer level is-mobile columns">
+            <button class="level-item button column is-half is-uppercase" [style.background-image]="'url(' + prevProject.thumbUrl.url + ')'" (click)="onPrev()">Previous Project</button>
+            
+            <button class="level-item button column is-half is-uppercase" [style.background-image]="'url(' + nextProject.thumbUrl.url + ')'"  (click)="onNext()">Next Project</button>
+        </div>
     </div>
-    <div class="detail-footer level is-mobile">
-        <button class="level-item button is-outlined is-primary" [routerLink]="['/projects']" queryParamsHandling="preserve">Back</button>
-        <button *ngIf="_authService.isLoggedIn()" class="level-item  button is-outlined is-primary" [routerLink]="['edit']" queryParamsHandling="preserve">Edit</button>
-        <button class="level-item button is-outlined is-primary" (click)="onNext()">Next</button>
-    </div>
+    
 </section>

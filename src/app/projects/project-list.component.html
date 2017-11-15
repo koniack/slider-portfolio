@@ -1,26 +1,32 @@
-<div class="project-list-container">
+<div (window:resize)="onResize()"  class="project-list-container" [style.min-height]="_windowDimensionsService.winHeight + 'px'">
     <!--<select [(ngModel)]="listFilter" class="filter" >
         <option [selected]="all == 'two'" [ngValue]="null" >All</option>
         <option *ngFor="let f of filterCategory" [ngValue]="f">{{f}}</option>
     </select> -->
 
-    <ul class="projects columns is-multiline">
-        <li class="column is-one-third project " 
+    <div class="projects columns is-multiline">
+        <div class="column is-one-quarter-widescreen is-one-third-desktop is-half-tablet " 
             *ngFor="let project of projects | projectFilter: listFilter"
         >
             <div
                 [routerLink]= "[project.id]" 
                 [queryParams]= "{filterBy: listFilter}" 
                 [queryParamsHandling]="preserve" 
+                class="card project"
             >
-                <figure class="image">
-                    <img [src]='project.thumbUrl.url' />
-                </figure>
-                <div class="caption">
-                    <h2 [innerText]='project.name' ></h2>
-                    <h5>{{project.category}}</h5>
+                <div class="card-image">
+                    <div class="image-container">
+                        <div  class="image is-4by3" #image [style.background-image]="'url(' + project.thumbUrl.url + ')'" >
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <p class="content subtitle is-5">0{{project.id}}</p>
+                    <span></span>
+                    <h2 class="content title is-4" [innerText]='project.name' ></h2>
+                    <h5 class="content subtitle is-5">{{project.category}}</h5>
                 </div>
             </div>
-        </li>
-    </ul>
+        </div>
+    </div>
 </div>

@@ -22,6 +22,7 @@ export class ProjectDetailComponent implements OnInit {
 
   project: IProject;
   nextProject: IProject;
+  prevProject: IProject
   title: string = 'Project Details';
   errorMessage: string;
   isLoggedIn: boolean = false;
@@ -39,7 +40,14 @@ export class ProjectDetailComponent implements OnInit {
     this._route.data.subscribe (
       data => this.project = data['project']
     );
-
+    console.log('project: ' + JSON.stringify(this.project))
+    
+    let id = this.project.id  
+    this.getNextProject(id)
+    this.getPrevProject(id)
+    console.log(id)
+    
+    console.log('nextProject: ' + JSON.stringify(this.nextProject))
     /*this._route.params.subscribe(
       params => {
         let id = +params['id'] + 1;
@@ -60,10 +68,12 @@ export class ProjectDetailComponent implements OnInit {
      //   this.getProject(id);
      // }
    // )
+   
   }
 
-  /*ngAfterViewInit(){
-    this.animateThumb();    
+  ngAfterViewInit(){
+    //this.animateThumb();  
+    
   }
   /*getProject(id: number) {
     this._projectService.getProject(id).subscribe(
@@ -71,12 +81,7 @@ export class ProjectDetailComponent implements OnInit {
         error => this.errorMessage = <any>error
     );
   }*/
-  /*getNextProject(id: number) {
-    this._projectService.getProject(id).subscribe(
-        project => this.nextProject = nextProject,
-        error => this.errorMessage = <any>error
-    );
-  }*/
+ 
 
   @HostListener("window:scroll", [])
   onWindowScroll(){
@@ -86,15 +91,53 @@ export class ProjectDetailComponent implements OnInit {
     }
   }
 
-  onBack(): void {
-    this._router.navigate(['/projects'], { queryParamsHandling: "preserve" });
+  onPrev(): void {
+    var prevPage:number
+
+    if (this._route.snapshot.params['id'] > 1){
+      prevPage = (+this._route.snapshot.params['id']) - 1; 
+    } else {
+      prevPage = 6
+    }
+    this._router.navigate([`/projects/${prevPage}`], { queryParamsHandling: "preserve" });
+    this.getPrevProject(prevPage)
+    this.getNextProject(prevPage)
   }
 
   onNext(): void {
+    var nextPage:number
+    if (this._route.snapshot.params['id'] < 6 ){
+      nextPage = (+this._route.snapshot.params['id']) + 1
+    } else {
+      nextPage = 1
+    }
+    this._router.navigate([`/projects/${nextPage}`], { queryParamsHandling: "preserve" } );        
+    this.getPrevProject(nextPage)
+    this.getNextProject(nextPage)
+  }
 
-    let nextPage = (+this._route.snapshot.params['id']) + 1; 
-    this._router.navigate([`/projects/${nextPage}`], { queryParamsHandling: "preserve" } );    
+  getPrevProject(id: number) {
+    if (id > 1){
+      var id = id - 1
+    } else {
+      var id = 6
+    }
+    this._projectService.getProject(id).subscribe(
+        project => this.prevProject = project,
+        error => this.errorMessage = <any>error
+    );
+  }
 
+  getNextProject(id: number) {
+    if (id < 6){
+      var id = id + 1
+    } else {
+      var id = 1
+    }
+    this._projectService.getProject(id).subscribe(
+        project => this.nextProject = project,
+        error => this.errorMessage = <any>error
+    );
   }
   /*animateThumb(){
     console.log(`projectThumb: ` + this.projectThumbEl.nativeElement);

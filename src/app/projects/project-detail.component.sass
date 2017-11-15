@@ -2,14 +2,17 @@
 
 .project-detail-container
   +media ('<=tablet')
-    padding-top: 100px
-  padding-top: 130px
+    padding-top: 7rem
+  padding: 8rem 1.5rem 1.5rem
   background-color: $grey
-  border: 15px solid $white
+  border: .75rem solid $white
+
+  .project-detail
+    //margin: 0 1.5rem
 
 .column
   +media ('<=tablet')
-    margin: 25px
+    //margin: 25px
 
   h1
     color: $black
@@ -19,8 +22,7 @@ h1,
 h2,
 p
   +media ('<=tablet')
-    margin-left: 0
-  margin-left: 25px
+    //margin-left: 0
 
 .thumbnail
   figure
@@ -29,6 +31,10 @@ p
     animation-name: fadeIn
     animation-duration: 2000ms
     animation-delay: 5750ms
+
+img
+  box-shadow: 0 2px 3px rgba($black, 0.1), 0 0 0 1px rgba($black, 0.1)
+
 
 .thumbnail-text
   overflow: hidden
@@ -43,32 +49,47 @@ p
   h2
     animation-delay: 5250ms
 
-  &::after
-    +media ('<=tablet')
-      margin-left: 0
-    content: ' '
-    height: 1px
-    background-color: $orange
-    margin-top: 15px
-    margin-left: 25px
-    width: 0%
-    display: block
-    animation-name: growRight
-    animation-fill-mode: forwards
-    animation-duration: 2000ms
-    animation-delay: 5750ms
+    &::after
+      +media ('<=tablet')
+        margin-left: 0
+      content: ' '
+      height: 1px
+      background-color: $orange
+      margin-top: 15px
+      width: 0%
+      display: block
+      animation-name: growRight
+      animation-fill-mode: forwards
+      animation-duration: 2000ms
+      animation-delay: 5750ms
 
 .caption
-  +media ('<tablet')
+  +media ('<=tablet')
     order: 2
   order: -1
 
 .detail-footer
+  padding: 0 .75rem .75rem
   .button
     height: 100px
+    margin-top: 3rem
+    border-radius: 0
+    background-position: center
+    background-size: cover
+    background-repeat: no-repeat
+    font-size: 2rem
+    font-style: uppercase 
+    color: $orange
+    height: 10rem
+    
+    &:hover, 
+    &:focus, 
+    &:active
+      border: 1px solid $med-grey
+      box-shadow: none
 
 .picture
-  opacity: 0
+  //opacity: 0
 
   &.is-showing
     animation-duration: 1000ms

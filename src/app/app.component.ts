@@ -12,6 +12,8 @@ import { MessageService } from './messages/message.service';
 	styleUrls: ['app.component.sass'],
 })
 export class AppComponent  { 
+	winHeight = window.innerHeight
+	winWidth = window.innerWidth
 	name = 'Kone Lathipanya';
 	title: string = 'Designer + Developer'
 	color ='#000'; 

@@ -91,7 +91,7 @@ export class ProjectData implements InMemoryDbService, InMemoryBackendConfig {
             },
             {
                 'id': 4, 
-                'name': 'intelligent Design', 
+                'name': 'Intelligent Design', 
                 'thumbUrl':
                     {
                         'url': 'assets/img/proj4-1.jpg',

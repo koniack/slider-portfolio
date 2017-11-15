@@ -28,12 +28,13 @@ declare module "gsap" {
 })
 export class SliderComponent implements OnInit { 
 
-	slides: IProject[];
-	errorMessage: string;
-	activeProject: number = 0;
-	isMoving: boolean = false;
-	winHeight: number = window.innerHeight;
-	tl = new TimelineMax;
+	slides: IProject[]
+	errorMessage: string
+	activeProject: number = 0
+	isMoving: boolean = false
+	winHeight: number = window.innerHeight
+	winWidth: number = window.innerWidth
+	tl = new TimelineMax
 
 	constructor(//private _projectService: ProjectService,
 				private _route: ActivatedRoute,
@@ -46,8 +47,8 @@ export class SliderComponent implements OnInit {
 								error => this.errorMessage = <any>error
 							);*/
 		this._route.data.subscribe (
-						  data => this.slides = data['slides']);
-		this.slides[this.activeProject]['active'] = true;
+						  data => this.slides = data['slides'])
+		this.slides[this.activeProject]['active'] = true
 	}
 
 	ngAfterViewInit(){
@@ -59,13 +60,13 @@ export class SliderComponent implements OnInit {
 	//Mousewheel navigation using Mousewheel directive
 	mouseWheelUpFunc(){
 		if (!this.isMoving){
-			this.navigate('next', false);
+			this.navigate('next', false)
 		}
 	}
 	
 	mouseWheelDownFunc(){
 		if (!this.isMoving){
-			this.navigate('prev', false);
+			this.navigate('prev', false)
 		}
 	}
 
@@ -97,60 +98,61 @@ export class SliderComponent implements OnInit {
 		if ((direction === 'next' && this.activeProject < this.slides.length - 1) ||
 			(direction === 'prev' && this.activeProject >0)) {
 				if (direction == 'prev') {
-					this.slide(currProject, currTitle, (this.activeProject - 1), -this.winHeight, this.winHeight);
+					this.slide(currProject, currTitle, (this.activeProject - 1), -100, 100)
 				}
 				else {
-					this.slide(currProject, currTitle, (this.activeProject + 1), this.winHeight, -this.winHeight);
+					this.slide(currProject, currTitle, (this.activeProject + 1), 100, -100)
 				}
-				this.updateImage();
+				this.updateImage()
 			}
 			else {
 				if (this.activeProject === 0) {
-					this.slide(currProject, currTitle, (this.activeProject + this.slide.length), -this.winHeight, this.winHeight)
+					this.slide(currProject, currTitle, (this.activeProject + this.slide.length), -100, 100)
 					
 				}
 				else {
-					this.slide(currProject, currTitle, 0, this.winHeight, -this.winHeight)
+					this.slide(currProject, currTitle, 0, 100, -100)
 				}
-				this.updateImage();
+				this.updateImage()
 			}
 	}
 
 	//Navigates to specific project designated by indicators
 	private navigateToProj(indicatorIndex: number) {
-		let currProject = '#project'+(this.activeProject);
-		let currTitle = '#projTitle'+(this.activeProject);
+		let currProject = '#project'+(this.activeProject)
+		let currTitle = '#projTitle'+(this.activeProject)
 		if (indicatorIndex != this.activeProject) {
 			if (indicatorIndex > this.activeProject) {
-				this.slide(currProject, currTitle, indicatorIndex, this.winHeight, -this.winHeight);
+				this.slide(currProject, currTitle, indicatorIndex, 100, -100)
 			} 
 			else {
-				this.slide(currProject, currTitle, indicatorIndex, -this.winHeight, this.winHeight);
+				this.slide(currProject, currTitle, indicatorIndex, -100, 100)
 			}
-			this.updateImage();
+			this.updateImage()
 		}
 	}
 
 	//Slide current project out and new project in
 	slide(currProject: any, currTitle: any, id: number, slideFrom: number, slideTo: number){
-		let newProject = '#project' + id;
-		let newTitle = '#projTitle' + id;
+		let newProject = '#project' + id
+		let newTitle = '#projTitle' + id
+		console.log(2 * slideFrom)
 		this.tl
-			.set(newProject, {y:slideFrom, autoAlpha: 0})
-			.set(newTitle, {y:slideFrom} )
+			.set(newProject, {y:(2 * slideFrom), autoAlpha: 0})
+			.set(newTitle, {y:slideFrom, autoAlpha: 0} )
 			.to(currTitle, .5, {y: slideTo, autoAlpha: 0, ease:'Power2.easeIn', onStart: this.animStart() })
-			.to(currProject, .5, {y: slideTo, autoAlpha: 0, ease:'Power2.easeIn' },'-=.25' )
+			.to(currProject, .5, {y: (2 * slideTo), autoAlpha: 0, ease:'Power2.easeIn' },'-=.25' )
 			.to(newProject, .5, {y: 0 , autoAlpha: 1, ease:'Power2.easeOut'},'-=.25')
-			.to(newTitle, .5, {y: 0 , autoAlpha: 1, ease:'Power2.easeOut', onComplete: this.animDone() },'-=.15');
-		this.activeProject = id;
+			.to(newTitle, .5, {y: 0 , autoAlpha: 1, ease:'Power2.easeOut', onComplete: this.animDone() },'-=.15')
+		this.activeProject = id
 	}
 
 	//Update image on screen resize
 	public onResize() {
 			this.slides.forEach((slide) => {
-				slide['active'] = false;
+				slide['active'] = false
 			})
-			this.updateImage();
+			this.updateImage()
 	}
 
 	//Updates active project
@@ -160,7 +162,7 @@ export class SliderComponent implements OnInit {
 			this.slides[this.activeProject]['active'] = true
 			this.slides.forEach((slide) => {
 				if (slide != this.slides[this.activeProject]) {
-					slide['active'] = false;
+					slide['active'] = false
 				}
 			})
 			
@@ -168,34 +170,33 @@ export class SliderComponent implements OnInit {
 	}
 
 	//Gets and assigns image dimensions and position
-	getSliderImgDim(id:number) {
-		let screenWidth = window.innerWidth;
-		let screenHeight = window.innerHeight;
-		let imgHeight = this.slides[id].thumbUrl.height;
-		let imgWidth = this.slides[id].thumbUrl.width;
-		let screenRatio = screenHeight / screenWidth;
-		let imgRatio = imgHeight / imgWidth;
+	/*getSliderImgDim(id:number) {
+		let imgHeight = this.slides[id].thumbUrl.height
+		let imgWidth = this.slides[id].thumbUrl.width
+		let screenRatio = this.winHeight / this.winWidth
+		let imgRatio = imgHeight / imgWidth
 		
 		if (screenRatio > imgRatio) {
-			imgHeight = screenHeight;
-			imgWidth = screenHeight / imgRatio; 
+			imgHeight = this.winHeight
+			imgWidth = this.winHeight / imgRatio 
 		} else {
-			imgHeight = screenWidth * imgRatio;
-			imgWidth = screenWidth;
+			imgHeight = this.winWidth * imgRatio
+			imgWidth = this.winWidth
 		}
-		let imgPosLeft = (screenWidth - imgWidth) / 2;
-		let imgPosTop = (screenHeight - imgHeight) / 2;
-		return {width: imgWidth+'px', height: imgHeight+'px', top: imgPosTop+'px', left: imgPosLeft+'px'};
-	}
+		let imgPosLeft = (this.winWidth - imgWidth) / 2
+		let imgPosTop = (this.winHeight - imgHeight) / 2
+		//console.log('width:' + imgWidth+'px', 'height:'+ imgHeight+'px', 'top:'+ imgPosTop+'px', 'left:'+ imgPosLeft+'px')		
+		return {width: imgWidth+'px', height: imgHeight+'px', top: imgPosTop+'px', left: imgPosLeft+'px'}
+	}*/
 	
 	//Adds delay to stop MacOSX inertia from triggering navigation
 	animStart(){
-		this.isMoving = true;
+		this.isMoving = true
 	}
 
 	animDone(){
 		setTimeout(()=>{
-			this.isMoving = false;
+			this.isMoving = false
 		}, 900)
 	}
 }

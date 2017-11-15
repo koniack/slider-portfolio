@@ -23,7 +23,7 @@ import { ProjectResolver } from './projects/project-resolver.service'
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { KLoaderComponent } from './shared/kLoader.component';
-
+import { WindowDimensionsService } from './shared/window-dimensions.service'
 
 
 export class MyHammerConfig extends HammerGestureConfig {
@@ -43,7 +43,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     UserModule,
     MessageModule,
     BrowserAnimationsModule,
-    AppRoutingModule   
+    AppRoutingModule  
   ],
   declarations: [ 
     AppComponent, 
@@ -62,7 +62,8 @@ export class MyHammerConfig extends HammerGestureConfig {
   },
     ProjectService,
     ProjectListResolver,
-    ProjectResolver
+    ProjectResolver,
+    WindowDimensionsService
   ]
 })
 export class AppModule { }
