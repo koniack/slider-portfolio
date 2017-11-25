@@ -18,10 +18,10 @@
         <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" >
             <a [routerLink]="['/contact']" (click)="active('projects')">Contact</a>
         </li>
-         <li routerLinkActive="active">
+        <!--<li routerLinkActive="active">
             <a [routerLink]="['/projects', 0, 'edit']" (click)="active('add project')">Add Project</a>
         </li>
-        <!--<li *ngIf="!_authService.isLoggedIn()">
+        <li *ngIf="!_authService.isLoggedIn()">
             <a [routerLink]="['/login']" (click)="active('login')">Log In</a>
         </li>
         <li *ngIf="_authService.isLoggedIn()">

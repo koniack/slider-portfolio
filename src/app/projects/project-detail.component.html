@@ -14,8 +14,7 @@
         </div>
         <div class="picture columns" 
             *ngFor="let p of project.projectPics"
-            [class.is-showing]="isShowing"
-        >
+            [class.is-showing]="isShowing">
             <div class="column is-8">
                 <figure>
                     <img src="{{p.url}}" alt="">
@@ -27,9 +26,14 @@
             </div>        
         </div>
         <div class="detail-footer level is-mobile columns">
-            <button class="level-item button column is-half is-uppercase" [style.background-image]="'url(' + prevProject.thumbUrl.url + ')'" (click)="onPrev()">Previous Project</button>
-            
-            <button class="level-item button column is-half is-uppercase" [style.background-image]="'url(' + nextProject.thumbUrl.url + ')'"  (click)="onNext()">Next Project</button>
+            <div class="column is-half button-container" (click)="onPrev()">
+                <h5 class="title is-3 is-uppercase has-text-weight-bold">Previous Project</h5>
+                <button class="level-item button" [style.background-image]="'url(' + prevProject.thumbUrl.url + ')'" ></button>
+            </div>
+            <div class="column is-half button-container" (click)="onNext()">
+                <h5 class="title is-3 is-uppercase has-text-weight-bold">Next Project</h5>
+                <button class="level-item button" [style.background-image]="'url(' + nextProject.thumbUrl.url + ')'"  ></button>
+            </div>
         </div>
     </div>
     

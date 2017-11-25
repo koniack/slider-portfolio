@@ -93,25 +93,26 @@ export class SliderComponent implements OnInit {
 	//Navigates to next or previous project
 	public navigate(direction: string, swipe?: any) {
 		let currProject = '#project'+(this.activeProject)
-		let currTitle = '#projTitle'+(this.activeProject)
+		let currTitle = '#title'+(this.activeProject)
+		let currSubtitle = '#subtitle'+(this.activeProject)
 		
 		if ((direction === 'next' && this.activeProject < this.slides.length - 1) ||
 			(direction === 'prev' && this.activeProject >0)) {
 				if (direction == 'prev') {
-					this.slide(currProject, currTitle, (this.activeProject - 1), -100, 100)
+					this.slide(currProject, currTitle, currSubtitle, (this.activeProject - 1), -100, 100)
 				}
 				else {
-					this.slide(currProject, currTitle, (this.activeProject + 1), 100, -100)
+					this.slide(currProject, currTitle, currSubtitle, (this.activeProject + 1), 100, -100)
 				}
 				this.updateImage()
 			}
 			else {
 				if (this.activeProject === 0) {
-					this.slide(currProject, currTitle, (this.activeProject + this.slide.length), -100, 100)
+					this.slide(currProject, currTitle, currSubtitle, (this.slide.length - 1), -100, 100)
 					
 				}
 				else {
-					this.slide(currProject, currTitle, 0, 100, -100)
+					this.slide(currProject, currTitle, currSubtitle, 0, 100, -100)
 				}
 				this.updateImage()
 			}
@@ -120,30 +121,46 @@ export class SliderComponent implements OnInit {
 	//Navigates to specific project designated by indicators
 	private navigateToProj(indicatorIndex: number) {
 		let currProject = '#project'+(this.activeProject)
-		let currTitle = '#projTitle'+(this.activeProject)
+		let currTitle = '#title'+(this.activeProject)
+		let currSubtitle = '#subtitle'+(this.activeProject)
 		if (indicatorIndex != this.activeProject) {
 			if (indicatorIndex > this.activeProject) {
-				this.slide(currProject, currTitle, indicatorIndex, 100, -100)
+				this.slide(currProject, currTitle, currSubtitle, indicatorIndex, 100, -100)
 			} 
 			else {
-				this.slide(currProject, currTitle, indicatorIndex, -100, 100)
+				this.slide(currProject, currTitle, currSubtitle, indicatorIndex, -100, 100)
 			}
 			this.updateImage()
 		}
 	}
 
 	//Slide current project out and new project in
-	slide(currProject: any, currTitle: any, id: number, slideFrom: number, slideTo: number){
+	slide(currProject: any, currTitle: any, currSubtitle: any, id: number, slideFrom: number, slideTo: number){
 		let newProject = '#project' + id
-		let newTitle = '#projTitle' + id
+		let newTitle = '#title' + id
+		let newSubtitle = '#subtitle' + id
 		console.log(2 * slideFrom)
 		this.tl
 			.set(newProject, {y:(2 * slideFrom), autoAlpha: 0})
 			.set(newTitle, {y:slideFrom, autoAlpha: 0} )
-			.to(currTitle, .5, {y: slideTo, autoAlpha: 0, ease:'Power2.easeIn', onStart: this.animStart() })
-			.to(currProject, .5, {y: (2 * slideTo), autoAlpha: 0, ease:'Power2.easeIn' },'-=.25' )
-			.to(newProject, .5, {y: 0 , autoAlpha: 1, ease:'Power2.easeOut'},'-=.25')
-			.to(newTitle, .5, {y: 0 , autoAlpha: 1, ease:'Power2.easeOut', onComplete: this.animDone() },'-=.15')
+			.set(newSubtitle, {y:slideFrom, autoAlpha: 0} )
+		if (slideFrom > 0 ){
+			this.tl
+				.to(currTitle, .5, {y: slideTo, autoAlpha: 0, ease:'Power2.easeIn', onStart: this.animStart() })
+				.to(currSubtitle, .5, {y: slideTo, autoAlpha: 0, ease:'Power2.easeIn'}, '-=.35')
+				.to(currProject, .5, {y: (2 * slideTo), autoAlpha: 0, ease:'Power2.easeIn' })
+				.to(newProject, .5, {y: 0 , autoAlpha: 1, ease:'Power2.easeOut'},'-=.25')
+				.to(newTitle, .5, {y: 0 , autoAlpha: 1, ease:'Power2.easeOut'},'-=.15')
+				.to(newSubtitle, .5, {y: 0 , autoAlpha: 1, ease:'Power2.easeOut', onComplete: this.animDone() },'-=.35')
+		} else {
+			this.tl
+				.to(currSubtitle, .5, {y: slideTo, autoAlpha: 0, ease:'Power2.easeIn', onStart: this.animStart() })
+				.to(currTitle, .5, {y: slideTo, autoAlpha: 0, ease:'Power2.easeIn'}, '-=.35')
+				.to(currProject, .5, {y: (2 * slideTo), autoAlpha: 0, ease:'Power2.easeIn' })
+				.to(newProject, .5, {y: 0 , autoAlpha: 1, ease:'Power2.easeOut'},'-=.25')
+				.to(newSubtitle, .5, {y: 0 , autoAlpha: 1, ease:'Power2.easeOut'},'-=.15')
+				.to(newTitle, .5, {y: 0 , autoAlpha: 1, ease:'Power2.easeOut', onComplete: this.animDone() },'-=.35')
+		}
 		this.activeProject = id
 	}
 

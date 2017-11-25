@@ -1,18 +1,27 @@
 <transition-overlay (loadingPage)="loadingPage()" (stopLoadingPage)="stopLoadingPage()"></transition-overlay>
 <header>
-    <div class="nav">
-        <div class="nav-left kone-logo">
-            <a class="nav-item"> 
+    <div class="navbar is-transparent">
+        <div class="navbar-brand kone-logo">
+            <a class="navbar-item " [routerLink]="['/slider']"  > 
                 <img src="assets/img/k-logo.svg" alt="Kone Lathipanya Logo">
-                <div class="main-title">
-                    <h1 class="title is-4 " [style.color]='color'>{{name}}</h1>
+            </a>
+            <div class="navbar-burger">
+                <div class="navbar-item">
+                    <nav-component></nav-component>
+                </div>
+            </div>
+        </div>
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                <div class="main-title  navbar-item">
+                    <h1 class="title is-4" [style.color]='color'>{{name}}</h1>
                     <p class="subtitle is-6" >{{title}}</p>
                 </div>
-            </a>
-        </div>
-        <div class="nav-right">
-            <div class="nav-item">
-                <nav-component></nav-component>
+            </div>
+            <div class="navbar-end">
+                <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="navbar-item" [routerLink]="['/projects']" >Work</a>
+                <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="navbar-item" [routerLink]="['/about']" >About</a>   
+                <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="navbar-item" [routerLink]="['/contact']" >Contact</a>
             </div>
         </div>
     </div>

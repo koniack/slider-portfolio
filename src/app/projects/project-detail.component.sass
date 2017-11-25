@@ -17,7 +17,7 @@
   h1
     color: $black
     font-weight: $weight-normal
-
+    
 h1,
 h2,
 p
@@ -69,27 +69,69 @@ img
   order: -1
 
 .detail-footer
-  padding: 0 .75rem .75rem
-  .button
-    height: 100px
-    margin-top: 3rem
-    border-radius: 0
-    background-position: center
-    background-size: cover
-    background-repeat: no-repeat
-    font-size: 2rem
-    font-style: uppercase 
-    color: $orange
-    height: 10rem
+  margin: 0
+  //background-color: transparent
+
+  .button-container
+    position: relative
+    overflow: hidden
+    text-align: center
+    padding: 0
     
-    &:hover, 
-    &:focus, 
-    &:active
-      border: 1px solid $med-grey
-      box-shadow: none
+
+    &:hover
+
+      .button
+        transform: scale(1.1)
+        
+    h5
+      +media('<=450px')
+        font-size: 1rem
+        min-width: 80%
+
+      color: $white
+      margin: 0 auto
+      position: absolute
+      min-width: 60%
+      top: 50%
+      left: 50%
+      z-index: 2
+      transform: translate(-50%, -50%)
+      cursor: pointer
+
+    .button
+      height: 100px
+      border-radius: 0
+      width: 100%
+      height: 100%
+      background-position: center
+      background-size: cover
+      background-repeat: no-repeat
+      background-blend-mode: multiply
+      background-color: $orange
+      font-size: 2rem
+      height: 10rem
+      color: $white
+      backface-visibility: hidden
+      border-width: 0
+      transition: transform 1000ms ease-in-out
+      z-index: 1
+      
+      &:hover, 
+      &:focus, 
+      &:active
+        //border: 1px solid $med-grey
+        box-shadow: none
 
 .picture
   //opacity: 0
+  //margin: 8rem 0 
+
+  .column.is-8
+    //margin-left: 2rem
+  
+  .caption
+    //padding: 0
 
   &.is-showing
     animation-duration: 1000ms

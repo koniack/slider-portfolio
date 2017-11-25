@@ -47,23 +47,53 @@ img
       position: absolute
 
     h1, h5
+      +media ('<=450px')
+        font-size: 1.25rem
+        width: 100%
+
+      +media ('<=650px', '>450px')
+        font-size: 1.75rem
+
+      +media ('<=tablet', '>650px')
+        font-size: 2.5rem
+
+      width: 90%
       font-weight: $weight-normal
+      color: $white
+      
+    
+    h5 
+      +media ('<=450px')
+        font-size: .75rem
+        width: 90%
+
+      +media ('<=tablet', '>450px')
+        font-size: 1.5rem
+
       color: $black
 
   .active
 
     .proj-title
       overflow: hidden
-      width: 90%
+      //width: 90%
 
 .proj-title
+  +media ('>desktop')
+    width: 33.3%
+  +media('<450px')
+    padding-left: 1rem
+  
+  background-color: rgba(255,143,0, .9)
   display: flex
   position: absolute
   align-items: center
-  height: 30%
+  height: 100%
+  width: 50%
   overflow: hidden
-  top: 200px
-  left: 25px
+  top: 0
+  left: 0
+  padding-left: 2rem
 
 .next-button,
 .prev-button
@@ -117,13 +147,17 @@ img
 
 // Carousel Styles
 .indicators
+  +media ('<450px')
+    transform: scale(.75)
+    //left: 1rem
+    top: 4.5rem
   //background-color: orange
   width: 30px
   height: 100px
   display: block
   position: absolute
   z-index: 99
-  top: 5rem
+  top: 5.5rem
   left: 2rem
 
   .dots

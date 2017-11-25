@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="card-content">
-                    <p class="content subtitle is-5">0{{project.id}}</p>
+                    <p class="content subtitle is-5">{{project.id | number:'2.0'}}.</p>
                     <span></span>
                     <h2 class="content title is-4" [innerText]='project.name' ></h2>
                     <h5 class="content subtitle is-5">{{project.category}}</h5>
