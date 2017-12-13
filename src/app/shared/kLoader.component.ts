@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit} from '@angular/core';
+import { Component, OnInit, AfterViewInit, Output, EventEmitter} from '@angular/core';
 import { Router, Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 
 
@@ -49,6 +49,7 @@ import drawSVG from "gsap/DrawSVGPlugin";
 		</svg:g>`
 })
 export class  KLoaderComponent { 
+
     dotAnim = new TimelineMax({repeat:-1, repeatDelay:0, paused: true});
 
     constructor(private _router: Router){
@@ -59,9 +60,10 @@ export class  KLoaderComponent {
     }
     
     ngOnInit(): void {
-		MorphSVGPlugin.convertToPath('circle');
-		TweenMax.set(['#paths,#kLogo'], {visibility: 'hidden'});		
-        this.dotAnimation();
+		MorphSVGPlugin.convertToPath('#dotsGroup circle');
+		MorphSVGPlugin.convertToPath('#dotsEnd circle');
+		TweenMax.set(['#paths,#kLogo','#dotsEnd'], {visibility: 'hidden'});		
+        //this.dotAnimation();
 		drawSVG;	
 	}
 
@@ -69,12 +71,12 @@ export class  KLoaderComponent {
 		
 	}
 	
-    checkRouterEvent(routerEvent: Event): void {
+	checkRouterEvent(routerEvent: Event): void {
 		
 		if (routerEvent instanceof NavigationStart) {
 			TweenMax.set('#kCircle', {visibility: 'visible', rotation: 0, opacity: 1, drawSVG: '0% 0%'});
-			TweenMax.set('#dotsGroup path', {visibility: 'visible', opacity: 1, x: 0, y: 0});
-			this.dotAnim.play(0);
+			//TweenMax.set('#dotsGroup path', {visibility: 'visible', opacity: 1, x: 0, y: 0});
+			//this.dotAnim.play(0);
 		}
 
 		if (routerEvent instanceof NavigationEnd || 
@@ -86,7 +88,7 @@ export class  KLoaderComponent {
 					TweenMax.set('#kCircle', {visibility: 'hidden', opacity: 0});
 					TweenMax.set('#dotsEnd path', {visibility: 'hidden', opacity: 0});
 					TweenMax.set('#kLinesStart', {visibility: 'hidden', opacity: 0});					
-				}, 4500)
+				}, 6500)
 				
 			}
 	}
@@ -99,7 +101,8 @@ export class  KLoaderComponent {
 	};
 	
 	kAnimation(){
-		this.dotAnim.tweenTo(3.4);
+		//this.dotAnim.tweenTo(3.4);
+		TweenMax.set('#dotsGroup path', {visibility: 'visible', opacity: 1, x: 0, y: 0});
 
 		let path4 = MorphSVGPlugin.pathDataToBezier("#path4",{align:'relative'});
 		let path3 = MorphSVGPlugin.pathDataToBezier("#path3",{align:'relative'});
@@ -119,7 +122,7 @@ export class  KLoaderComponent {
 
 		var kAnim = new TimelineMax();
 		kAnim
-		  .set('#dotsGroup path', {visibility: 'visible', opacity: 1, x: 0, y: 0})
+		  //.set('#dotsGroup path', {visibility: 'visible', opacity: 1, x: 0, y: 0})
 		  .to('#dot4', .75 , {bezier:{values:path4, type: "cubic"}},"+=1.25")
 		  .to('#dot3', .75 , {bezier:{values:path3, type: "cubic"}}, "-=.5")
 		  .to('#dot2', .75 , {bezier:{values:path2, type: "cubic"}}, "-=.55")

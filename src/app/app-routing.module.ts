@@ -14,12 +14,13 @@ const routes: Routes = [
     { 
         path: 'slider', 
         component: SliderComponent,
-        resolve: {slides: ProjectListResolver}
+        resolve: {projects: ProjectListResolver}
     },
     {
         path: 'projects', 
         data: { preload: true },
-        loadChildren: 'app/projects/project.module#ProjectModule'
+        loadChildren: 'app/projects/project.module#ProjectModule',
+        resolve: {projects: ProjectListResolver}
     },
      { 
         path: 'about', 

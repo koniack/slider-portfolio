@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router, Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -12,6 +12,8 @@ import { MessageService } from './messages/message.service';
 	styleUrls: ['app.component.sass'],
 })
 export class AppComponent  { 
+	@Output() readyEvent = new EventEmitter()	
+
 	winHeight = window.innerHeight
 	winWidth = window.innerWidth
 	name = 'Kone Lathipanya';
@@ -26,6 +28,7 @@ export class AppComponent  {
 	}
 
 	ngOnInit(): void {
+		console.log('Appcomponent load..')
 	}
 
 	displayMessages(): void {
@@ -50,5 +53,8 @@ export class AppComponent  {
 
 	stopLoadingPage(){
 		this.loading = false		
+	}
+	handleAppReady(data){
+		console.log('received: ' + data)
 	}
 }

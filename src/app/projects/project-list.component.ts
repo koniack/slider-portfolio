@@ -38,9 +38,10 @@ export class ProjectListComponent implements OnInit {
 		/*this._projectService.getProjects()
 							.subscribe(
 								projects => this.projects = projects,
-								error => this.errorMessage = <any>error);*/
-		this._route.data.subscribe (
-      					data => this.projects = data['projects']);
+								error => this.errorMessage = <any>error)*/
+		/*this._route.data.subscribe (
+						  data => this.projects = data['projects'])*/
+		this.projects = this._route.snapshot.data['projects']
 
 	}
 

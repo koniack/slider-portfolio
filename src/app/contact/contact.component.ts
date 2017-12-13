@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
+
+import { WindowDimensionsService } from '../shared/window-dimensions.service'
 
 @Component({
 	moduleId: module.id,
@@ -8,5 +10,10 @@ import { Component } from '@angular/core';
 })
 
 export class ContactComponent {
-    email = 'kone.lathi@gmail.com'
+	email = 'kone.lathi@gmail.com'
+	
+	constructor(private _windowDimensionsService: WindowDimensionsService){
+		
+	}
+
 }

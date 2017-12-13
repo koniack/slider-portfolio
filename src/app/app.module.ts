@@ -23,7 +23,8 @@ import { ProjectResolver } from './projects/project-resolver.service'
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { KLoaderComponent } from './shared/kLoader.component';
-import { WindowDimensionsService } from './shared/window-dimensions.service'
+import { WindowDimensionsService } from './shared/window-dimensions.service';
+import { DOMEvents } from './shared/DOMEvents.service';
 
 
 export class MyHammerConfig extends HammerGestureConfig {
@@ -39,7 +40,7 @@ export class MyHammerConfig extends HammerGestureConfig {
   	BrowserModule, 
   	FormsModule, 
   	HttpModule,
-    InMemoryWebApiModule.forRoot(ProjectData, {delay: 0}),
+    InMemoryWebApiModule.forRoot(ProjectData, {delay: 3000}),
     UserModule,
     MessageModule,
     BrowserAnimationsModule,
@@ -63,7 +64,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     ProjectService,
     ProjectListResolver,
     ProjectResolver,
-    WindowDimensionsService
+    WindowDimensionsService,
+    DOMEvents
   ]
 })
 export class AppModule { }

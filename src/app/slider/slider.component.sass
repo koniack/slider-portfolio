@@ -25,6 +25,7 @@ img
 
   .project-hero
     visibility: visible
+    opacity: 1
     position: absolute
     width: 100%
     height: 100%
@@ -174,7 +175,18 @@ img
 
     li
       margin-bottom: 0px
+      //background-repeat: no-repeat
+      //background-position: -9999px -9999px
 
+      .preload
+        width: 1px
+        height: 1px
+        background-color: $white
+        position: absolute
+        top: 5px
+        left: 0
+        z-index: -1
+        
     a
       width: 30px
       height: 1px

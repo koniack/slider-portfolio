@@ -1,12 +1,15 @@
 import { 
 	Component, 
 	OnInit, 
-	AfterViewInit
+	AfterViewInit,
+	Output,
+	EventEmitter
 	//ElementRef
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 import { TimelineMax, TweenMax } from "gsap";
+//import { DOMEvents } from '../shared/DOMEvents.service'
 
 import { ProjectService } from '../projects/project.service';
 import { IProject } from '../projects/project';
@@ -28,6 +31,8 @@ declare module "gsap" {
 })
 export class SliderComponent implements OnInit { 
 
+	//@Output() appReadyEvent = new EventEmitter()
+
 	slides: IProject[]
 	errorMessage: string
 	activeProject: number = 0
@@ -35,10 +40,16 @@ export class SliderComponent implements OnInit {
 	winHeight: number = window.innerHeight
 	winWidth: number = window.innerWidth
 	tl = new TimelineMax
+	images= new Array
+	initialLoad: boolean = false
+
+
 
 	constructor(//private _projectService: ProjectService,
 				private _route: ActivatedRoute,
-				private _router: Router){}
+				private _router: Router,
+				//public _domEvents: DOMEvents
+			){}
 
 	ngOnInit(): void {
 		/*this._projectService.getProjects()
@@ -46,15 +57,26 @@ export class SliderComponent implements OnInit {
 								slides => this.slides = slides,
 								error => this.errorMessage = <any>error
 							);*/
-		this._route.data.subscribe (
-						  data => this.slides = data['slides'])
-		this.slides[this.activeProject]['active'] = true
+		/*this._route.data.subscribe (
+						  data => this.slides = data['slides'])*/
+
+		this.slides = this._route.snapshot.data['projects']
+		this.slides[this.activeProject]['active'] = true	
+		if (this.slides){
+			if (this.initialLoad === false){
+				setTimeout(()=>{
+					//this._domEvents.triggerOnDocument("appready")
+					console.log('Initial load..')
+				}, 4500)
+				
+			}
+		}
 	}
 
 	ngAfterViewInit(){
 		TweenMax.set('.project-hero', { y: this.winHeight, visibility: 'hidden'})
 		TweenMax.set('#project' + this.activeProject, { y:0, visibility: 'visible'})
-		TweenMax.set('#projTitle' + this.activeProject, {y:0, visibility: 'visible'} )
+		TweenMax.set('#projTitle' + this.activeProject, {y:0, visibility: 'visible'})
 	}
 
 	//Mousewheel navigation using Mousewheel directive

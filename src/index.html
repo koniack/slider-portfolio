@@ -7,8 +7,127 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  
 </head>
 <body>
-  <app-root></app-root>
+  <app-root id="appRoot">Loading...</app-root>
+
+  <div id="pre-bootstrap-container">
+    
+            <!--
+                In this approach, rather than putting the pre-bootstrap content inside
+                the <my-app> component content, we're leaving it external to the Angular 2
+                application entirely. This way, the content is not automatically removed when
+                the root component template is rendered. Instead, we'll leave this overlay in
+                place until the "appready" event bubbles up to the document, at which point,
+                we can gracefully fade it out of view.
+            -->
+
+            <style type="text/css">
+                .kSvgContainer svg{
+                    /*display:none;*/
+                    width: 400px;
+                    height: 400px;
+                }
+                .kSvgContainer{
+                    position: fixed;
+                    top: 45%;
+                    left: 50%;
+                    z-index: 10;
+                    margin: -200px 0 0 -200px;
+                    z-index: 999;
+                }
+                  
+                .page-trans-overlay{
+                    background-color: #ff8800;
+                    z-index: 998;
+                    margin: 0 .75rem;
+                    border-top: .75rem solid #fff;
+                    border-bottom: .75rem solid #fff;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    position: fixed;
+                }
+                #loadingDotsGroup circle{
+                    animation-name: upDown;
+                    animation-duration: 1000ms;
+                    animation-iteration-count: infinite;
+                }
+                #loadingDotsGroup circle:nth-child(2){
+                    animation-delay: 100ms;
+                }
+                #loadingDotsGroup circle:nth-child(3){
+                    animation-delay: 200ms;
+                }
+                #loadingDotsGroup circle:nth-child(4){
+                    animation-delay: 300ms;
+                }
+
+                #pre-bootstrap.loaded #loadingDotsGroup circle{
+                    animation-iteration-count: 2;
+                }
+                /*upDown Animation*/
+                @keyframes upDown{
+                    0%  {opacity: 1; transform: translateY(0);}
+                    50% {opacity: .2; transform: translateY(-20px);}
+                    80% {opacity: 1; transform: translateY(0);}
+                    100% {opacity: 1; transform: translateY(0);}
+                }
+            </style>
+            
+          <div id="pre-bootstrap">
+              <span class="kSvgContainer" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="-91.321 -91.321 300 300">
+                        <g id="dots">
+                            <g id="loadingDotsGroup" fill="#FFF">
+                            <circle id="dot4" cx="88.486" cy="58.679" r="4.787"/>
+                            <circle id="dot3" cx="68.615" cy="58.679" r="4.787"/>
+                            <circle id="dot2" cx="48.744" cy="58.679" r="4.787"/>
+                            <circle id="dot1" cx="28.873" cy="58.679" r="4.787"/>
+                            </g>
+                        </g>
+                  </svg>
+                  
+              </span>
+              <span class="page-trans-overlay"></span>
+        </div>
+
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenLite.min.js"></script>-->
+    
+    <script type="text/javascript">
+        console.log('javascript running');
+        //TweenLite.set('.kLoader', {visibility: 'visible'});
+        //TweenMax.set(['#paths,#kLogo'], {visibility: 'hidden'});
+        //TweenMax.set('#kCircle', {visibility: 'visible', rotation: 0, opacity: 1, drawSVG: '0% 0%'});
+		//TweenMax.set('#dotsGroup path', {visibility: 'visible', opacity: 1, x: 0, y: 0});
+        // Listen for the "appready" event, which will be emitted by the application
+        // and bubble up (as far as we know) to the document root.
+        document.addEventListener( "appready", handleAppReady );
+        // I handle the "appready" event and teardown the loading screen.
+        function handleAppReady( event ) {
+            console.log('handleAppReady Running')
+            var preBootstrapContainer = document.getElementById( "pre-bootstrap-container" );
+            var preBootstrap = document.getElementById( "pre-bootstrap" );
+            var loadingDotsGroup = document.getElementById("loadingDotsGroup");
+            // Add the class-name to initiate the transitions.
+            preBootstrap.className = "loaded";
+            // Remove the bootstrap container after the transition has
+            // completed (based on the known transition time).
+            setTimeout(
+                function removeLoadingScreen() {
+                    preBootstrapContainer
+                        .parentNode
+                            .removeChild( preBootstrapContainer )
+                    ;
+                },
+                300
+            );
+        }
+    </script>
+  </div>
+
 </body>
 </html>

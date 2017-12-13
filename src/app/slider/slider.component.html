@@ -11,10 +11,14 @@
 >
     <div id="indicators" class="indicators">
         <ul class="dots">
-            <li *ngFor="let slide of slides; let indicatorIndex = index" [title]='slide.name'>
+            <li 
+                *ngFor="let slide of slides; let indicatorIndex = index" 
+                [title]='slide.name' 
+            >
                 <a  (click)='navigateToProj(indicatorIndex)' >
                     <span [class.current-dot]="slide['active']" ></span>
                 </a>
+                <div class="preload" [style.background-image]="'url(' + slide.thumbUrl.url + ')'"></div>
             </li>
         </ul>
     </div>

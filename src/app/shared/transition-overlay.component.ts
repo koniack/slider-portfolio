@@ -11,6 +11,9 @@ import {
 	EventEmitter
  } from '@angular/core';
 import { Router, Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
+
+import { DOMEvents } from './DOMEvents.service'
+
 import { TimelineMax, TweenMax } from "gsap";
 
 @Component({
@@ -20,7 +23,7 @@ import { TimelineMax, TweenMax } from "gsap";
     `
     <span class="kLoader" >
         <svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="-91.321 -91.321 300 300">
-            <g kLoader></g>
+		<g kLoader></g>
         </svg>
         
     </span>
@@ -32,7 +35,7 @@ import { TimelineMax, TweenMax } from "gsap";
 	animations: [
 		trigger('pageTransitionTrigger', [
 			state('false', style({
-				transform: 'translateX(200%)',
+				transform: 'translateX(-200%)',
 				//opacity: 0
 
 			})),
@@ -58,18 +61,20 @@ import { TimelineMax, TweenMax } from "gsap";
 export class TransitionOverlayComponent implements OnInit { 
 	@Output() loadingPage = new EventEmitter()
 	@Output() stopLoadingPage = new EventEmitter()
-
+	@Output() appReadyEvent = new EventEmitter()
+	
 	loading: boolean = false;
 	state: string = 'false';
 
-	constructor(private _router: Router) {
+	constructor(private _router: Router,
+		private _domEvents: DOMEvents) {
 		_router.events.subscribe((routerEvent : Event) =>{
 			this.checkRouterEvent(routerEvent);
 		});
 	}
 
 	ngOnInit(): void {
-		//TweenMax.set('.kLoader svg', {visibility: 'hidden'});
+		TweenMax.set('.kLoader svg', {visibility: 'hidden'});
 		
 	}
 
@@ -79,20 +84,21 @@ export class TransitionOverlayComponent implements OnInit {
 			this.loadingPage.emit()
 			this.loading = true;
 			this.state = 'true';
-			TweenMax.set('.kLoader', {visibility: 'visible'});
+			//TweenMax.set('.kLoader', {visibility: 'visible'});
 			console.log(`loading: ` + this.loading);
 		}
 
 		if (routerEvent instanceof NavigationEnd || 
 			routerEvent instanceof NavigationCancel ||
 			routerEvent instanceof NavigationError){
+				this._domEvents.triggerOnDocument("appready")
 				setTimeout(()=>{
 					this.loading = false;
 					this.state = 'false';
 					this.stopLoadingPage.emit()
-					TweenMax.set('.kLoader', {visibility: 'hidden'});
+					//TweenMax.set('.kLoader', {visibility: 'hidden'});
 					console.log(`loading: ` + this.loading);				
-				}, 4500)
+				}, 6500)
 				
 			}
 	}
