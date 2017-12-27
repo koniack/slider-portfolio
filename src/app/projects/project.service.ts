@@ -17,16 +17,15 @@ export class ProjectService {
 
 	constructor(private _http: Http) {}
 
-	getProjects() {
-		return this._http
-		.get(this._urlProject)
+	getProjects(): Observable<IProject[]>{
+		return this._http.get(this._urlProject)
 		//.map((response: Response) => <IProject[]> response.json());
-        .map(this.extractData)
+            .map(this.extractData)
             .do(data => console.log('getProjects: ' + JSON.stringify(data)))
             .catch(this.handleError);
 	}
 
-	getProject(id: number){
+	getProject(id: number): Observable<IProject>{
         if (id === 0) {
             return Observable.of(this.initializeProject())
         };

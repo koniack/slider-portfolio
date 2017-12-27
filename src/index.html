@@ -10,10 +10,10 @@
   
 </head>
 <body>
-  <app-root id="appRoot">Loading...</app-root>
+    <app-root id="appRoot">Loading...</app-root>
 
-  <div id="pre-bootstrap-container">
-    
+    <div id="pre-bootstrap-container">
+
             <!--
                 In this approach, rather than putting the pre-bootstrap content inside
                 the <my-app> component content, we're leaving it external to the Angular 2
@@ -22,7 +22,31 @@
                 place until the "appready" event bubbles up to the document, at which point,
                 we can gracefully fade it out of view.
             -->
-
+            <script type="text/javascript">
+                console.log('javascript running');
+                // Listen for the "appready" event, which will be emitted by the application
+                // and bubble up (as far as we know) to the document root.
+                document.addEventListener( "appready", handleAppReady );
+                // I handle the "appready" event and teardown the loading screen.
+                function handleAppReady( event ) {
+                    console.log('handleAppReady Running')
+                    var preBootstrapContainer = document.getElementById( "pre-bootstrap-container" );
+                    var preBootstrap = document.getElementById( "pre-bootstrap" );
+                    // Add the class-name to initiate the transitions.
+                    preBootstrap.className = "loaded";
+                    // Remove the bootstrap container after the transition has
+                    // completed (based on the known transition time).
+                    setTimeout(
+                        function removeLoadingScreen() {
+                            preBootstrapContainer
+                                .parentNode
+                                    .removeChild( preBootstrapContainer )
+                            ;
+                        },
+                        300
+                    );
+                }
+            </script>
             <style type="text/css">
                 .kSvgContainer svg{
                     /*display:none;*/
@@ -92,42 +116,8 @@
                   
               </span>
               <span class="page-trans-overlay"></span>
-        </div>
-
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenLite.min.js"></script>-->
-    
-    <script type="text/javascript">
-        console.log('javascript running');
-        //TweenLite.set('.kLoader', {visibility: 'visible'});
-        //TweenMax.set(['#paths,#kLogo'], {visibility: 'hidden'});
-        //TweenMax.set('#kCircle', {visibility: 'visible', rotation: 0, opacity: 1, drawSVG: '0% 0%'});
-		//TweenMax.set('#dotsGroup path', {visibility: 'visible', opacity: 1, x: 0, y: 0});
-        // Listen for the "appready" event, which will be emitted by the application
-        // and bubble up (as far as we know) to the document root.
-        document.addEventListener( "appready", handleAppReady );
-        // I handle the "appready" event and teardown the loading screen.
-        function handleAppReady( event ) {
-            console.log('handleAppReady Running')
-            var preBootstrapContainer = document.getElementById( "pre-bootstrap-container" );
-            var preBootstrap = document.getElementById( "pre-bootstrap" );
-            var loadingDotsGroup = document.getElementById("loadingDotsGroup");
-            // Add the class-name to initiate the transitions.
-            preBootstrap.className = "loaded";
-            // Remove the bootstrap container after the transition has
-            // completed (based on the known transition time).
-            setTimeout(
-                function removeLoadingScreen() {
-                    preBootstrapContainer
-                        .parentNode
-                            .removeChild( preBootstrapContainer )
-                    ;
-                },
-                300
-            );
-        }
-    </script>
-  </div>
+        </div>    
+    </div>
 
 </body>
 </html>

@@ -61,10 +61,10 @@ import { TimelineMax, TweenMax } from "gsap";
 export class TransitionOverlayComponent implements OnInit { 
 	@Output() loadingPage = new EventEmitter()
 	@Output() stopLoadingPage = new EventEmitter()
-	@Output() appReadyEvent = new EventEmitter()
 	
 	loading: boolean = false;
 	state: string = 'false';
+	initialLoad: boolean = true
 
 	constructor(private _router: Router,
 		private _domEvents: DOMEvents) {
@@ -75,7 +75,6 @@ export class TransitionOverlayComponent implements OnInit {
 
 	ngOnInit(): void {
 		TweenMax.set('.kLoader svg', {visibility: 'hidden'});
-		
 	}
 
 	checkRouterEvent(routerEvent: Event): void {
@@ -84,19 +83,22 @@ export class TransitionOverlayComponent implements OnInit {
 			this.loadingPage.emit()
 			this.loading = true;
 			this.state = 'true';
-			//TweenMax.set('.kLoader', {visibility: 'visible'});
+			TweenMax.set('.kLoader', {visibility: 'visible'});
 			console.log(`loading: ` + this.loading);
 		}
 
 		if (routerEvent instanceof NavigationEnd || 
 			routerEvent instanceof NavigationCancel ||
 			routerEvent instanceof NavigationError){
-				this._domEvents.triggerOnDocument("appready")
+				if (this.initialLoad){
+					this._domEvents.triggerOnDocument("appready")
+					this.initialLoad = false
+				}
 				setTimeout(()=>{
 					this.loading = false;
 					this.state = 'false';
 					this.stopLoadingPage.emit()
-					//TweenMax.set('.kLoader', {visibility: 'hidden'});
+					TweenMax.set('.kLoader', {visibility: 'hidden'});
 					console.log(`loading: ` + this.loading);				
 				}, 6500)
 				

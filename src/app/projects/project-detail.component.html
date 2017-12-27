@@ -8,7 +8,7 @@
             </div>
             <div class="column is-8" >
                 <figure >
-                    <img class="thumbnail" src="{{project.thumbUrl.url}}" alt="">
+                    <img class="thumbnail" [src]="project.thumbUrl.url"alt="">
                 </figure>
             </div>
         </div>
@@ -25,12 +25,12 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, quisquam!</p>
             </div>        
         </div>
-        <div class="detail-footer level is-mobile columns">
-            <div class="column is-half button-container" (click)="onPrev()">
+        <div class="detail-footer level is-mobile columns" >
+            <div class="column is-half button-container" (click)="onPrev()" *ngIf="prevProject">
                 <h5 class="title is-3 is-uppercase has-text-weight-bold">Previous Project</h5>
                 <button class="level-item button" [style.background-image]="'url(' + prevProject.thumbUrl.url + ')'" ></button>
             </div>
-            <div class="column is-half button-container" (click)="onNext()">
+            <div class="column is-half button-container" (click)="onNext()" *ngIf="nextProject">
                 <h5 class="title is-3 is-uppercase has-text-weight-bold">Next Project</h5>
                 <button class="level-item button" [style.background-image]="'url(' + nextProject.thumbUrl.url + ')'"  ></button>
             </div>

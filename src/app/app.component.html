@@ -28,7 +28,7 @@
 </header> 
     
 <section id="main-area" [class.noScroll]="loading"  >
-    <router-outlet (appReadyEvent)="handleAppReady($event)" ></router-outlet>
+    <router-outlet></router-outlet>
 </section>
 <!--<section id="popup-container">
     <a *ngIf="!_messageService.isDisplayed" (click)="displayMessages()"> Show Messages</a>

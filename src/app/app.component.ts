@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -12,7 +12,6 @@ import { MessageService } from './messages/message.service';
 	styleUrls: ['app.component.sass'],
 })
 export class AppComponent  { 
-	@Output() readyEvent = new EventEmitter()	
 
 	winHeight = window.innerHeight
 	winWidth = window.innerWidth
@@ -24,11 +23,9 @@ export class AppComponent  {
 	constructor(private _authService: AuthService,
 				private _messageService: MessageService,
 				private _router: Router) {
-	
 	}
 
 	ngOnInit(): void {
-		console.log('Appcomponent load..')
 	}
 
 	displayMessages(): void {
@@ -53,8 +50,5 @@ export class AppComponent  {
 
 	stopLoadingPage(){
 		this.loading = false		
-	}
-	handleAppReady(data){
-		console.log('received: ' + data)
 	}
 }

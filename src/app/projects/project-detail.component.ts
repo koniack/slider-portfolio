@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, HostListener, Inject, Input, OnInit, ViewChild, ElementRef} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DOCUMENT } from '@angular/platform-browser';
+import { Observable } from 'rxjs/Observable';
+
 
 import { IProject } from './project';
 import { IProjectPicture } from './project-picture';
@@ -22,7 +24,7 @@ export class ProjectDetailComponent implements OnInit {
 
   project: IProject;
   nextProject: IProject;
-  prevProject: IProject
+  prevProject: IProject;
   title: string = 'Project Details';
   errorMessage: string;
   isLoggedIn: boolean = false;
@@ -34,20 +36,18 @@ export class ProjectDetailComponent implements OnInit {
               @Inject(DOCUMENT) private _document: Document,
               private _projectService: ProjectService
               ) { 
-
   }
-  ngOnInit(): void {
-    this._route.data.subscribe (
+  
+  ngOnInit() {
+    this._route.data.subscribe(
       data => this.project = data['project']
     );
-    console.log('project: ' + JSON.stringify(this.project))
-    
-    let id = this.project.id  
-    this.getNextProject(id)
-    this.getPrevProject(id)
-    console.log(id)
-    
-    console.log('nextProject: ' + JSON.stringify(this.nextProject))
+    //console.log('project thumbUrl: ' + this.project.thumbUrl.url)
+    let id = this._route.snapshot.params['id']
+    this.getNextProject(+id)
+    this.getPrevProject(+id)
+    console.log(this._route.snapshot.params['id'])
+    console.log('nextProject: ' + this.nextProject)
     /*this._route.params.subscribe(
       params => {
         let id = +params['id'] + 1;
@@ -73,14 +73,10 @@ export class ProjectDetailComponent implements OnInit {
 
   ngAfterViewInit(){
     //this.animateThumb();  
+    console.log('nextProject afterviewinit: ' + this.nextProject)
     
   }
-  /*getProject(id: number) {
-    this._projectService.getProject(id).subscribe(
-        project => this.project = project,
-        error => this.errorMessage = <any>error
-    );
-  }*/
+  
  
 
   @HostListener("window:scroll", [])
@@ -116,26 +112,33 @@ export class ProjectDetailComponent implements OnInit {
     this.getNextProject(nextPage)
   }
 
-  getPrevProject(id: number) {
+  getPrevProject(id: number): void {
     if (id > 1){
       var id = id - 1
     } else {
       var id = 6
     }
-    this._projectService.getProject(id).subscribe(
+    this._projectService.getProject(+id).subscribe(
         project => this.prevProject = project,
         error => this.errorMessage = <any>error
     );
   }
 
-  getNextProject(id: number) {
+  getNextProject(id: number): void{          
     if (id < 6){
       var id = id + 1
     } else {
       var id = 1
     }
-    this._projectService.getProject(id).subscribe(
+    this._projectService.getProject(+id).subscribe(
         project => this.nextProject = project,
+        error => this.errorMessage = <any>error
+    );
+  }
+
+  /*getProject(id: number) {
+    this._projectService.getProject(id).subscribe(
+        project => this.project = project,
         error => this.errorMessage = <any>error
     );
   }
