@@ -23,7 +23,7 @@ import { TimelineMax, TweenMax } from "gsap";
     `
     <span class="kLoader" >
         <svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="-91.321 -91.321 300 300">
-		<g kLoader></g>
+		<g kLoader [initialLoadKLoader]="initialLoad" ></g>
         </svg>
         
     </span>
@@ -64,7 +64,7 @@ export class TransitionOverlayComponent implements OnInit {
 	
 	loading: boolean = false;
 	state: string = 'false';
-	initialLoad: boolean = true
+	initialLoad: boolean = true;
 
 	constructor(private _router: Router,
 		private _domEvents: DOMEvents) {
@@ -81,10 +81,12 @@ export class TransitionOverlayComponent implements OnInit {
 
 		if (routerEvent instanceof NavigationStart) {
 			this.loadingPage.emit()
-			this.loading = true;
-			this.state = 'true';
-			TweenMax.set('.kLoader', {visibility: 'visible'});
-			console.log(`loading: ` + this.loading);
+			if (this.initialLoad){
+				this.loading = true;
+				this.state = 'true';
+				TweenMax.set('.kLoader', {visibility: 'visible'});
+				console.log(`loading: ` + this.loading);
+			}
 		}
 
 		if (routerEvent instanceof NavigationEnd || 
@@ -100,7 +102,7 @@ export class TransitionOverlayComponent implements OnInit {
 					this.stopLoadingPage.emit()
 					TweenMax.set('.kLoader', {visibility: 'hidden'});
 					console.log(`loading: ` + this.loading);				
-				}, 6500)
+				}, 5500)
 				
 			}
 	}

@@ -40,7 +40,7 @@ export class MyHammerConfig extends HammerGestureConfig {
   	BrowserModule, 
   	FormsModule, 
   	HttpModule,
-    InMemoryWebApiModule.forRoot(ProjectData, {delay: 3000}),
+    InMemoryWebApiModule.forRoot(ProjectData, {delay: 0}),
     UserModule,
     MessageModule,
     BrowserAnimationsModule,

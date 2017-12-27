@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, AfterViewInit, Output, Input, EventEmitter} from '@angular/core';
 import { Router, Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 
 
@@ -49,6 +49,7 @@ import drawSVG from "gsap/DrawSVGPlugin";
 		</svg:g>`
 })
 export class  KLoaderComponent { 
+	@Input() initialLoadKLoader: boolean;
 
     dotAnim = new TimelineMax({repeat:-1, repeatDelay:0, paused: true});
 
@@ -73,25 +74,25 @@ export class  KLoaderComponent {
 	
 	checkRouterEvent(routerEvent: Event): void {
 		
-		if (routerEvent instanceof NavigationStart) {
+		if (routerEvent instanceof NavigationStart && this.initialLoadKLoader) {
 			TweenMax.set('#kCircle', {visibility: 'visible', rotation: 0, opacity: 1, drawSVG: '0% 0%'});
 			//TweenMax.set('#dotsGroup path', {visibility: 'visible', opacity: 1, x: 0, y: 0});
 			//this.dotAnim.play(0);
 		}
 
-		if (routerEvent instanceof NavigationEnd || 
+		if ((routerEvent instanceof NavigationEnd || 
 			routerEvent instanceof NavigationCancel ||
-			routerEvent instanceof NavigationError){
+			routerEvent instanceof NavigationError) && this.initialLoadKLoader){
 				
 				this.kAnimation();
 				setTimeout(()=>{
 					TweenMax.set('#kCircle', {visibility: 'hidden', opacity: 0});
 					TweenMax.set('#dotsEnd path', {visibility: 'hidden', opacity: 0});
 					TweenMax.set('#kLinesStart', {visibility: 'hidden', opacity: 0});					
-				}, 6500)
+				}, 5500)
 				
 			}
-	}
+	} 
 
     dotAnimation(){
 		
