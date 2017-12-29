@@ -53,7 +53,7 @@ export class  KLoaderComponent {
 
     dotAnim = new TimelineMax({repeat:-1, repeatDelay:0, paused: true});
 
-    constructor(private _router: Router){
+	constructor(private _router: Router){
 		
         _router.events.subscribe((routerEvent : Event) =>{
         this.checkRouterEvent(routerEvent);
@@ -89,7 +89,7 @@ export class  KLoaderComponent {
 					TweenMax.set('#kCircle', {visibility: 'hidden', opacity: 0});
 					TweenMax.set('#dotsEnd path', {visibility: 'hidden', opacity: 0});
 					TweenMax.set('#kLinesStart', {visibility: 'hidden', opacity: 0});					
-				}, 5500)
+				}, 6000)
 				
 			}
 	} 

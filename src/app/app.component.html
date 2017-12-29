@@ -1,4 +1,4 @@
-<transition-overlay (appReadyEvent)="handleAppReady($event)" (loadingPage)="loadingPage()" (stopLoadingPage)="stopLoadingPage()"></transition-overlay>
+<transition-overlay  (appReadyEvent)="handleAppReady($event)" (loadingPage)="loadingPage()" (stopLoadingPage)="stopLoadingPage()"></transition-overlay>
 <header>
     <div class="navbar is-transparent">
         <div class="navbar-brand kone-logo">
@@ -27,8 +27,8 @@
     </div>
 </header> 
     
-<section id="main-area" [class.noScroll]="loading"  >
-    <router-outlet></router-outlet>
+<section id="main-area" [class.noScroll]="loading">
+    <router-outlet ></router-outlet>
 </section>
 <!--<section id="popup-container">
     <a *ngIf="!_messageService.isDisplayed" (click)="displayMessages()"> Show Messages</a>

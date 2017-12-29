@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { ProjectListComponent } from './project-list.component';
 import { ProjectDetailComponent } from './project-detail.component';
@@ -16,7 +17,8 @@ import { ProjectFilterPipe } from './project-filter.pipe';
     imports: [
         CommonModule,
         FormsModule,
-        ProjectRoutingModule
+        ProjectRoutingModule,
+        HttpClientModule
     ],
     declarations: [
         ProjectListComponent,

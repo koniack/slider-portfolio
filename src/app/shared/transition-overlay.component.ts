@@ -1,18 +1,22 @@
 import { 
 	Component,
 	OnInit, 
+	Output,
+	EventEmitter
+ } from '@angular/core';
+
+ import {
 	trigger, 
 	state, 
 	style, 
 	transition, 
 	animate, 
-	keyframes,
-	Output,
-	EventEmitter
- } from '@angular/core';
+	keyframes
+ } from '@angular/animations';
+
 import { Router, Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 
-import { DOMEvents } from './DOMEvents.service'
+import { DOMEvents } from './DOMEvents.service';
 
 import { TimelineMax, TweenMax } from "gsap";
 
@@ -27,7 +31,7 @@ import { TimelineMax, TweenMax } from "gsap";
         </svg>
         
     </span>
-    <span class="page-trans-overlay" [@pageTransitionTrigger]="state" *ngIf="state" ></span>
+    <span class="page-trans-overlay" [@pageTransitionTrigger]="state" *ngIf="loading" ></span>
     `
     ,
 	styleUrls: ['transition-overlay.component.sass']
@@ -35,24 +39,24 @@ import { TimelineMax, TweenMax } from "gsap";
 	animations: [
 		trigger('pageTransitionTrigger', [
 			state('false', style({
-				transform: 'translateX(-200%)',
-				//opacity: 0
+				//transform: 'translateX(-200%)',
+				opacity: 0
 
 			})),
 			state('true', style({
-				transform: 'translateX(0)',
-				//opacity: 1
+				//transform: 'translateX(0)',
+				opacity: 1
 			})),
 			transition('* => true', [
 				style({
-					transform: 'translateX(-200%)',
-					//opacity: 0
+					//transform: 'translateX(-200%)',
+					opacity: 1
 				}), animate('500ms ease-out')
 			]),
 			transition('* => false', [
 				style({
-					transform: 'translateX(0)',
-					//opacity: 1
+					//transform: 'translateX(0)',
+					opacity: 1
 				}), animate('500ms ease-out')
 			])
 		])
@@ -79,30 +83,30 @@ export class TransitionOverlayComponent implements OnInit {
 
 	checkRouterEvent(routerEvent: Event): void {
 
-		if (routerEvent instanceof NavigationStart) {
+		if (routerEvent instanceof NavigationStart && this.initialLoad) {
 			this.loadingPage.emit()
-			if (this.initialLoad){
-				this.loading = true;
-				this.state = 'true';
-				TweenMax.set('.kLoader', {visibility: 'visible'});
-				console.log(`loading: ` + this.loading);
-			}
+			this.loading = true;
+			this.state = 'true';
+			TweenMax.set('.kLoader', {visibility: 'visible'});
+			console.log(`loading: ` + this.loading);
 		}
 
-		if (routerEvent instanceof NavigationEnd || 
+		if ((routerEvent instanceof NavigationEnd || 
 			routerEvent instanceof NavigationCancel ||
-			routerEvent instanceof NavigationError){
-				if (this.initialLoad){
-					this._domEvents.triggerOnDocument("appready")
-					this.initialLoad = false
-				}
+			routerEvent instanceof NavigationError) && this.initialLoad){
+				this._domEvents.triggerOnDocument("appready")
+				
 				setTimeout(()=>{
-					this.loading = false;
 					this.state = 'false';
 					this.stopLoadingPage.emit()
 					TweenMax.set('.kLoader', {visibility: 'hidden'});
-					console.log(`loading: ` + this.loading);				
-				}, 5500)
+					console.log(`loading: ` + this.loading);	
+					this.initialLoad = false			
+				}, 6000);
+
+				setTimeout(()=>{
+					this.loading = false;
+				}, 6500);
 				
 			}
 	}

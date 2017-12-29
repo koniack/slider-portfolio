@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
@@ -15,12 +16,12 @@ export class ProjectService {
 
 	private _urlProject = 'api/projects';
 
-	constructor(private _http: Http) {}
+	constructor(private _http: HttpClient) {}
 
 	getProjects(): Observable<IProject[]>{
 		return this._http.get(this._urlProject)
 		//.map((response: Response) => <IProject[]> response.json());
-            .map(this.extractData)
+            //.map(this.extractData)
             .do(data => console.log('getProjects: ' + JSON.stringify(data)))
             .catch(this.handleError);
 	}
@@ -33,14 +34,13 @@ export class ProjectService {
 		//.map(projects => projects.find(project => project.id === id));
         const url = `${this._urlProject}/${id}`;
         return this._http.get(url)
-            .map(this.extractData)
+            //.map(this.extractData)
             .do(data => console.log('getProject: ' + JSON.stringify(data)))
             .catch(this.handleError);
 	}
 
 	deleteProject(id: number): Observable<Response> {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+        let options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
         const url = `${this._urlProject}/${id}`;
         return this._http.delete(url, options)
@@ -49,8 +49,7 @@ export class ProjectService {
     }
 
     saveProject(project: IProject): Observable<IProject> {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
+        let options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
         if (project.id === 0) {
             return this.createProject(project, options);
@@ -58,15 +57,15 @@ export class ProjectService {
         return this.updateProject(project, options);
     }
 
-	private createProject(project: IProject, options: RequestOptions): Observable<IProject> {
+	private createProject(project: IProject, options: any): Observable<IProject> {
         project.id = undefined;
         return this._http.post(this._urlProject, project, options)
-            .map(this.extractData)
+            //.map(this.extractData)
             .do(data => console.log('createProject: ' + JSON.stringify(data)))
             .catch(this.handleError);
     }
 
-    private updateProject(project: IProject, options: RequestOptions): Observable<IProject> {
+    private updateProject(project: IProject, options: any): Observable<IProject> {
         const url = `${this._urlProject}/${project.id}`;
         return this._http.put(url, project, options)
             .map(() => project)
@@ -74,16 +73,16 @@ export class ProjectService {
             .catch(this.handleError);
     }
 
-    private extractData(response: Response) {
-        let body = response.json();
-        return body.data || {};
-    }
+    /*private extractData(response: Response) {
+        let body = response;
+        return body || {};
+    }*/
 
     private handleError(error: Response): Observable<any> {
         // in a real world app, we may send the server to some remote logging infrastructure
         // instead of just logging it to the console
         console.error(error);
-        return Observable.throw(error.json().error || 'Server error');
+        return Observable.throw(error || 'Server error');
     }
 
     initializeProject(): IProject {

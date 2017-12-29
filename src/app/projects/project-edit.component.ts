@@ -55,7 +55,7 @@ export class ProjectEditComponent implements OnInit {
         }
     }
 
-    deleteProject(): void {
+    /*deleteProject(): void {
         if (this.project.id === 0) {
             // Don't delete, it was never saved.
             this.onSaveComplete(`${this.project.name} was deleted`);
@@ -68,7 +68,7 @@ export class ProjectEditComponent implements OnInit {
                     );
             }
         }
-    }
+    }*/
 
     isValid(path: string): boolean {
         this.validate();
@@ -79,7 +79,7 @@ export class ProjectEditComponent implements OnInit {
             Object.keys(this.dataIsValid).every(d => this.dataIsValid[d] === true));
     }
 
-    saveProject(): void {
+    /*saveProject(): void {
         if (this.isValid(null)) {
             this.projectService.saveProject(this.project)
                 .subscribe(
@@ -89,7 +89,7 @@ export class ProjectEditComponent implements OnInit {
         } else {
             this.errorMessage = 'Please correct the validation errors.';
         }
-    }
+    }*/
 
     onSaveComplete(message?: string): void {
         if (message) {
