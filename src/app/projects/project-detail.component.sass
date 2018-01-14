@@ -2,10 +2,19 @@
 
 .project-detail-container
   +media ('<=tablet')
-    padding-top: 7rem
-  padding: 8rem 1.5rem 1.5rem
+    //padding-top: 7rem
+  //padding: 8rem 1.5rem 1.5rem
+  padding: 0
   background-color: $grey
-  border: .75rem solid $white
+  //border: .75rem solid $white
+
+.thumb-container
+  width: 100%
+  height: 100%
+  background-size: cover
+  background-position: center center
+  background-repeat: no-repeat
+  overflow: hidden
 
   .project-detail
     //margin: 0 1.5rem
@@ -26,11 +35,11 @@ p
 
 .thumbnail
   figure
-    opacity: 0
-    animation-fill-mode: forwards
-    animation-name: fadeIn
-    animation-duration: 2000ms
-    animation-delay: 750ms
+    //opacity: 0
+    //animation-fill-mode: forwards
+    //animation-name: fadeIn
+    //animation-duration: 2000ms
+    //animation-delay: 750ms
 
 img
   box-shadow: 0 2px 3px rgba($black, 0.1), 0 0 0 1px rgba($black, 0.1)
@@ -40,26 +49,26 @@ img
   overflow: hidden
   h1,
   h2
-    opacity: 0
-    animation-fill-mode: forwards
-    animation-name: fadeDown
-    animation-duration: 500ms
+    //opacity: 0
+    //animation-fill-mode: forwards
+    //animation-name: fadeDown
+    //animation-duration: 500ms
   h2
-    animation-delay: 250ms
+    //animation-delay: 250ms
+    margin-bottom: 1rem
 
-    &::after
-      +media ('<=tablet')
-        margin-left: 0
-      content: ' '
-      height: 1px
-      background-color: $orange
-      margin-top: 15px
-      width: 0%
-      display: block
-      animation-name: growRight
-      animation-fill-mode: forwards
-      animation-duration: 2000ms
-      animation-delay: 750ms
+  .line
+    +media ('<=tablet')
+      margin-left: 0
+    height: 1px
+    background-color: $orange
+    margin-bottom: 1rem
+    width: 100%
+    display: block
+    //animation-name: growRight
+    //animation-fill-mode: forwards
+    //animation-duration: 2s
+    //animation-delay: 500ms
 
 .caption
   +media ('<=tablet')

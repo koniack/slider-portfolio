@@ -7,9 +7,11 @@ import {
 	//ElementRef
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import { TimelineMax, TweenMax } from "gsap";
 //import { DOMEvents } from '../shared/DOMEvents.service'
+import { sliderTransition } from '../shared/slider-transition.animations';
+
 
 import { ProjectService } from '../projects/project.service';
 import { IProject } from '../projects/project';
@@ -24,8 +26,10 @@ declare module "gsap" {
 	selector: 'slider-component',
 	templateUrl: 'slider.component.html',
 	styleUrls: ['slider.component.sass'],
+	animations: [ sliderTransition ],
 	host: {
-        '(document:keydown)': 'onKeydown($event)',
+		'(document:keydown)': 'onKeydown($event)',
+		'[@sliderTransition]': ''
     }
 
 })
@@ -62,7 +66,7 @@ export class SliderComponent implements OnInit {
 
 		this.slides = this._route.snapshot.data['projects']
 		this.slides[this.activeProject]['active'] = true	
-		if (this.slides){
+		/*if (this.slides){
 			if (this.initialLoad === false){
 				setTimeout(()=>{
 					//this._domEvents.triggerOnDocument("appready")
@@ -70,11 +74,11 @@ export class SliderComponent implements OnInit {
 				}, 4500)
 				
 			}
-		}
+		}*/
 	}
 
 	ngAfterViewInit(){
-		TweenMax.set('.project-hero', { y: this.winHeight, visibility: 'hidden'})
+		TweenMax.set('.project-hero', { y: this.winHeight, visibility: 'visible'})
 		TweenMax.set('#project' + this.activeProject, { y:0, visibility: 'visible'})
 		TweenMax.set('#projTitle' + this.activeProject, {y:0, visibility: 'visible'})
 	}

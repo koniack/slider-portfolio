@@ -9,14 +9,20 @@ import { IProjectPicture } from './project-picture';
 import { AuthService } from '../user/auth.service';
 
 import { ProjectService } from './project.service';
+import { ProjectDetailIdService } from '../shared/project-detail-id.service';
 
 import { TimelineMax, TweenMax } from "gsap";
+import { projectDetailTransition } from 'app/shared/project-detail.animations';
 
 @Component({
   moduleId: module.id,
   selector: 'project-detail',
   templateUrl: './project-detail.component.html',
-  styleUrls: ['./project-detail.component.sass']
+  styleUrls: ['./project-detail.component.sass'],
+  animations: [ projectDetailTransition ],
+  host: {
+    '[@projectDetailTransition]': ''
+  }
 })
 export class ProjectDetailComponent implements OnInit {
   
@@ -30,11 +36,14 @@ export class ProjectDetailComponent implements OnInit {
   isLoggedIn: boolean = false;
   isShowing: boolean = false;
   url: string;
+  id: number;
+  winHeight: string = (window.innerHeight + 'px'); 
   constructor(private _route: ActivatedRoute,
               private _router: Router,
               private _authService: AuthService,
               @Inject(DOCUMENT) private _document: Document,
-              private _projectService: ProjectService
+              private _projectService: ProjectService,
+              public _projectDetailIdService: ProjectDetailIdService
               ) { 
   }
   
@@ -43,11 +52,13 @@ export class ProjectDetailComponent implements OnInit {
       data => this.project = data['project']
     );
     //console.log('project thumbUrl: ' + this.project.thumbUrl.url)
-    let id = this._route.snapshot.params['id']
-    this.getNextProject(+id)
-    this.getPrevProject(+id)
-    console.log(this._route.snapshot.params['id'])
-    console.log('nextProject: ' + this.nextProject)
+    this.id = this._route.snapshot.params['id'];
+    this.updateId(this.id);
+    this.getNextProject(+this.id);
+    this.getPrevProject(+this.id);
+    console.log(this._route.snapshot.params['id']);
+    console.log('nextProject: ' + this.nextProject);
+
     /*this._route.params.subscribe(
       params => {
         let id = +params['id'] + 1;
@@ -76,8 +87,6 @@ export class ProjectDetailComponent implements OnInit {
     console.log('nextProject afterviewinit: ' + this.nextProject)
     
   }
-  
- 
 
   @HostListener("window:scroll", [])
   onWindowScroll(){
@@ -98,6 +107,7 @@ export class ProjectDetailComponent implements OnInit {
     this._router.navigate([`/projects/${prevPage}`], { queryParamsHandling: "preserve" });
     this.getPrevProject(prevPage)
     this.getNextProject(prevPage)
+    this.updateId(prevPage);
   }
 
   onNext(): void {
@@ -110,6 +120,8 @@ export class ProjectDetailComponent implements OnInit {
     this._router.navigate([`/projects/${nextPage}`], { queryParamsHandling: "preserve" } );        
     this.getPrevProject(nextPage)
     this.getNextProject(nextPage)
+    this.updateId(nextPage)
+
   }
 
   getPrevProject(id: number): void {
@@ -136,6 +148,9 @@ export class ProjectDetailComponent implements OnInit {
     );
   }
 
+  updateId(id: number){
+    this._projectDetailIdService.updateId(id);
+  }
   /*getProject(id: number) {
     this._projectService.getProject(id).subscribe(
         project => this.project = project,

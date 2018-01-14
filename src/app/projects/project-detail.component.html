@@ -1,15 +1,22 @@
 <section class="project-detail-container">
     <div class="project-detail" *ngIf="project">
+        <div class="thumb-container" 
+        [style.background-image]="'url(' + project.thumbUrl.url + ')'"
+        [style.height]="winHeight"
+        >
+            <!--<figure >
+                <img class="" [src]="project.thumbUrl.url"alt="">
+            </figure>-->
+        </div>
+
         <div class="thumbnail columns">
-            <div class="thumbnail-text column is-4">
+            
+            
+            <div class="thumbnail-text column is-offset-2 is-8">
                 <h1 class="title is-2 has-text-weight-semibold" >{{project.name}}</h1>
                 <h2 class="subtitle is-5">{{project.category}}</h2>
-                <p>{{project.description}}</p>
-            </div>
-            <div class="column is-8" >
-                <figure >
-                    <img class="thumbnail" [src]="project.thumbUrl.url"alt="">
-                </figure>
+                <span class="line"></span>
+                <p>{{winHeight}}</p>
             </div>
         </div>
         <div class="picture columns" 

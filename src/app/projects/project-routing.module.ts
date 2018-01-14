@@ -17,12 +17,14 @@ import { ProjectEditGuard } from './project-guard.service';
 const routes: Routes = [
     { 
         path: '', 
+        data: {state: 'projects'},
         component: ProjectListComponent,
         resolve: { projects: ProjectListResolver }
     },
     { 
         path: ':id', 
         component: ProjectDetailComponent, 
+        data: {state: 'projectDetail'},
         resolve: { project: ProjectResolver}
     },
     { 

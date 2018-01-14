@@ -14,23 +14,23 @@ const routes: Routes = [
     { 
         path: 'slider', 
         component: SliderComponent,
-        data: {depth: 1},
+        data: {state: 'slider'},
         resolve: {projects: ProjectListResolver}
     },
     {
         path: 'projects', 
-        data: { preload: true, depth: 2 },
+        data: { preload: true, state: 'projects' },
         loadChildren: 'app/projects/project.module#ProjectModule',
         resolve: {projects: ProjectListResolver}
     },
      { 
         path: 'about', 
-        data: {depth: 2},
+        data: {state: 'about'},
         component: AboutComponent,
     },
      { 
         path: 'contact', 
-        data: {depth: 2},
+        data: {state: 'contact'},
         component: ContactComponent,
     },
     { path: '', pathMatch: 'full', redirectTo: 'slider'},

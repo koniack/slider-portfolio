@@ -27,8 +27,8 @@
     </div>
 </header> 
     
-<section id="main-area" [class.noScroll]="loading">
-    <router-outlet ></router-outlet>
+<section id="main-area" [class.noScroll]="loading" [@routeAnimation]="getState(myOutlet)" >
+    <router-outlet #myOutlet="outlet" ></router-outlet>
 </section>
 <!--<section id="popup-container">
     <a *ngIf="!_messageService.isDisplayed" (click)="displayMessages()"> Show Messages</a>

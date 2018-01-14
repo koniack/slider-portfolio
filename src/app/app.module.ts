@@ -25,6 +25,7 @@ import { ContactComponent } from './contact/contact.component';
 import { KLoaderComponent } from './shared/kLoader.component';
 import { WindowDimensionsService } from './shared/window-dimensions.service';
 import { DOMEvents } from './shared/DOMEvents.service';
+import { ProjectDetailIdService } from 'app/shared/project-detail-id.service';
 
 
 export class MyHammerConfig extends HammerGestureConfig {
@@ -65,7 +66,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     ProjectListResolver,
     ProjectResolver,
     WindowDimensionsService,
-    DOMEvents
+    DOMEvents,
+    ProjectDetailIdService
   ]
 })
 export class AppModule { }

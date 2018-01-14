@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Rx';
 import { ProjectService } from './project.service';
 import { IProject } from './project';
 import { WindowDimensionsService } from '../shared/window-dimensions.service'
+import { projectListTransition } from 'app/shared/project-list.animations';
 
 
 
@@ -12,7 +13,11 @@ import { WindowDimensionsService } from '../shared/window-dimensions.service'
 	moduleId: module.id,
 	selector: 'project-list',
 	templateUrl: 'project-list.component.html',
-	styleUrls: ['project-list.component.sass'],
+	styleUrls: ['project-list.component.sass']
+	/*animations: [ projectListTransition ],
+	host: {
+		'[@projectListTransition]' : ''
+	}*/
 
 })
 export class ProjectListComponent implements OnInit {
