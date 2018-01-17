@@ -1,25 +1,33 @@
-import {sequence, trigger, stagger, animate, style, group, query as q, transition, keyframes, animateChild} from '@angular/animations';
+import {sequence, trigger, stagger, animate, style, group, query as q, transition, keyframes, animateChild, useAnimation } from '@angular/animations';
 const query = (s,a,o={optional:true})=>q(s,a,o);
+import { fadeAnimation } from './animations';
 
 export const projectListTransition = 
-  trigger('projectDetailTransition', [
+  trigger('projectListTransition', [
       transition(':enter', [
-        //query('h1, h2', style({ opacity: 0, transform: 'translateY(-100%)' })),
-        group([
-          query('h1, h2', stagger(200, [
-            style({ transform: 'translateY(-100px)', opacity: 0 }),
-            animate('500ms ease-out', 
-            style({transform: 'translateY(0)', opacity: 1})),
-          ]))
+        query('.columns', [
+          useAnimation(fadeAnimation, {
+            params: {
+              opacityFrom: 0,
+              opacityTo: 1,
+              translate3dFrom: 'translate3d(0,2.5%,0)',
+              translate3dTo: 'translate3d(0,0,0)',
+              time: '500ms'
+            }
+          })
         ])
       ]),
       transition(':leave', [
-        sequence([ 
-          query('h1, h2', stagger(150, [
-            style({ transform: 'translateY(0px)', opacity: 1 }),
-            animate('250ms ease-out', 
-            style({transform: 'translateY(-100px)', opacity: 0})),
-          ]))
-        ])  
+        query('.columns', [
+          useAnimation(fadeAnimation, {
+            params: {
+              opacityFrom: 1,
+              opacityTo: 0,
+              translate3dFrom: 'translate3d(0,0,0)',
+              translate3dTo: 'translate3d(0,2.5%,0)',
+              time: '500ms'
+            }
+          })
+        ])
       ])
   ]);

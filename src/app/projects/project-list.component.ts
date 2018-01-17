@@ -13,11 +13,11 @@ import { projectListTransition } from 'app/shared/project-list.animations';
 	moduleId: module.id,
 	selector: 'project-list',
 	templateUrl: 'project-list.component.html',
-	styleUrls: ['project-list.component.sass']
-	/*animations: [ projectListTransition ],
+	styleUrls: ['project-list.component.sass'],
+	animations: [ projectListTransition ],
 	host: {
 		'[@projectListTransition]' : ''
-	}*/
+	}
 
 })
 export class ProjectListComponent implements OnInit {

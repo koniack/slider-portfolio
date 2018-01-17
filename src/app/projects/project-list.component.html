@@ -5,7 +5,7 @@
     </select> -->
 
     <div class="projects columns is-multiline">
-        <div class="column is-one-quarter-widescreen is-one-third-desktop is-half-tablet" 
+        <div class="column is-one-quarter-widescreen is-one-third-desktop is-half-tablet image{{projectIndex}}" 
             *ngFor="let project of projects | projectFilter: listFilter; let projectIndex = index"
         >
             <div
@@ -16,7 +16,7 @@
             >
                 <div class="card-image">
                     <div class="image-container">
-                        <div  class="image image{{projectIndex}} is-4by3" #image [style.background-image]="'url(' + project.thumbUrl.url + ')'" >
+                        <div  class="image  is-4by3" #image [style.background-image]="'url(' + project.thumbUrl.url + ')'" >
                         </div>
                     </div>
                 </div>

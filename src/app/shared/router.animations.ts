@@ -3,31 +3,6 @@ const query = (s,a,o={optional:true})=>q(s,a,o);
 
 export const routerAnimation = 
 trigger('routeAnimation', [
-    transition('projects => projectDetail1', [
-        query(':enter, :leave', style({ position: 'fixed', width:'100%' })),
-        sequence([
-            query(':leave', animateChild()), 
-            //query('.image3', style({})),
-            query('.image0', [
-                style('*'),
-                animate('2000ms ease-out',
-                style({width: '100%', height: '100%', position: 'absolute', 'z-index': '999', transform: 'translate(-50%,-50%)'}))
-            ]),
-            group([
-                query(':leave', [
-                    style({ opacity: 1 }),
-                    animate('1s ease-in-out', 
-                      style({ opacity: 0 })
-                  )]),
-                  query(':enter', [
-                    style({ opacity: 0 }),
-                    animate('1s ease-in-out', 
-                      style({ opacity: 1 })
-                  )])
-            ])
-            
-        ])
-    ]),
     transition('slider => projectDetail1, slider => projectDetail2, slider => projectDetail3, slider => projectDetail4, slider => projectDetail5, slider => projectDetail6', [
         sequence([
             query(':leave', animateChild()), 
