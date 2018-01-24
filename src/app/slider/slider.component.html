@@ -38,7 +38,7 @@
                     [ngStyle] = "getSliderImgDim(projectIndex)"
                 />-->
                 <div class="proj-title">
-                    <div id="projTitle{{projectIndex}}">
+                    <div id="projTitle{{projectIndex}}" class="projTitle">
                         <h5 id="projectId{{slide.id}}" class="subtitle is-2 has-text-weight-semibold" >{{slide.id | number:'2.0'}}.</h5>
                         <h1 id="title{{projectIndex}}" class="title is-1 has-text-weight-semibold" [innerText]='slide.name' ></h1>
                         <h5 id="subtitle{{projectIndex}}" class="subtitle is-4" >{{slide.category}}</h5>

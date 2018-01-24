@@ -1,47 +1,48 @@
-<section class="project-detail-container">
+<div class="project-detail-container">
     <div class="project-detail" *ngIf="project">
         <div class="thumb-container" 
         [style.background-image]="'url(' + project.thumbUrl.url + ')'"
         [style.height]="winHeight"
         >
-            <!--<figure >
-                <img class="" [src]="project.thumbUrl.url"alt="">
-            </figure>-->
         </div>
-
-        <div class="thumbnail columns">
-            
-            
-            <div class="thumbnail-text column is-offset-2 is-8">
-                <h1 class="title is-2 has-text-weight-semibold" >{{project.name}}</h1>
-                <h2 class="subtitle is-5">{{project.category}}</h2>
-                <span class="line"></span>
-                <p>{{winHeight}}</p>
+        <section class="project-detail-content">
+            <div class="thumbnail columns">
+                <div class="thumbnail-text column is-offset-2 is-8">
+                    <h1 class="title is-2 has-text-weight-semibold" >{{project.name}}</h1>
+                    <h2 class="subtitle is-5">{{project.category}}</h2>
+                    <span class="line"></span>
+                    <p>{{winHeight}}</p>
+                </div>
             </div>
-        </div>
-        <div class="picture columns" 
-            *ngFor="let p of project.projectPics"
-            [class.is-showing]="isShowing">
-            <div class="column is-8">
-                <figure>
-                    <img src="{{p.url}}" alt="">
-                </figure>
+            <div class="picture columns" 
+                *ngFor="let p of project.projectPics"
+                [class.is-showing]="isShowing">
+                <div class="column is-8">
+                    <figure>
+                        <img src="{{p.url}}" alt="">
+                    </figure>
+                </div>
+                <div class="caption column is-4">
+                    <h2>{{p.caption}}</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, quisquam!</p>
+                </div>        
             </div>
-            <div class="caption column is-4">
-                <h2>{{p.caption}}</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, quisquam!</p>
-            </div>        
-        </div>
+        </section>
+        
+        
         <div class="detail-footer level is-mobile columns" >
-            <div class="column is-half button-container" (click)="onPrev()" *ngIf="prevProject">
+            <!--<div class="column is-half button-container" (click)="onPrev()" *ngIf="prevProject">
                 <h5 class="title is-3 is-uppercase has-text-weight-bold">Previous Project</h5>
                 <button class="level-item button" [style.background-image]="'url(' + prevProject.thumbUrl.url + ')'" ></button>
-            </div>
-            <div class="column is-half button-container" (click)="onNext()" *ngIf="nextProject">
-                <h5 class="title is-3 is-uppercase has-text-weight-bold">Next Project</h5>
+            </div>-->
+            <div class="column is-12 button-container" (click)="onNext()" *ngIf="nextProject">
+                <div class="text-wrap">
+                    <h5 class="subtitle is-3 is-uppercase">Next Project:</h5>
+                    <h5 class="title is-1 is-uppercase has-text-weight-bold">{{nextProject.name}}</h5>
+                </div>
                 <button class="level-item button" [style.background-image]="'url(' + nextProject.thumbUrl.url + ')'"  ></button>
             </div>
         </div>
     </div>
     
-</section>
+</div>

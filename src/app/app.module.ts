@@ -26,7 +26,7 @@ import { KLoaderComponent } from './shared/kLoader.component';
 import { WindowDimensionsService } from './shared/window-dimensions.service';
 import { DOMEvents } from './shared/DOMEvents.service';
 import { ProjectDetailIdService } from 'app/shared/project-detail-id.service';
-
+import { ScrollMagicService } from './shared/scrollMagic.service';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -67,7 +67,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     ProjectResolver,
     WindowDimensionsService,
     DOMEvents,
-    ProjectDetailIdService
+    ProjectDetailIdService,
+    ScrollMagicService
   ]
 })
 export class AppModule { }

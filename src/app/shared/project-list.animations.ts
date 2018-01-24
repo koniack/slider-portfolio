@@ -5,12 +5,12 @@ import { fadeAnimation } from './animations';
 export const projectListTransition = 
   trigger('projectListTransition', [
       transition(':enter', [
-        query('.columns', [
+        query('.column', [
           useAnimation(fadeAnimation, {
             params: {
               opacityFrom: 0,
               opacityTo: 1,
-              translate3dFrom: 'translate3d(0,2.5%,0)',
+              translate3dFrom: 'translate3d(0,5%,0)',
               translate3dTo: 'translate3d(0,0,0)',
               time: '500ms'
             }
@@ -18,13 +18,13 @@ export const projectListTransition =
         ])
       ]),
       transition(':leave', [
-        query('.columns', [
+        query('.column', [
           useAnimation(fadeAnimation, {
             params: {
               opacityFrom: 1,
               opacityTo: 0,
               translate3dFrom: 'translate3d(0,0,0)',
-              translate3dTo: 'translate3d(0,2.5%,0)',
+              translate3dTo: 'translate3d(0,5%,0)',
               time: '500ms'
             }
           })

@@ -6,7 +6,6 @@ import { environment } from './environments/environment';
 
 import 'gsap';
 
-
 if (environment.production) {
   enableProdMode();
 }
