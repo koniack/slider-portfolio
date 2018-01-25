@@ -12,7 +12,6 @@ import { TimelineMax, TweenMax } from "gsap";
 //import { DOMEvents } from '../shared/DOMEvents.service'
 import { sliderTransition } from '../shared/slider-transition.animations';
 
-
 import { ProjectService } from '../projects/project.service';
 import { IProject } from '../projects/project';
 declare module "gsap" {

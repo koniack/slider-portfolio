@@ -13,8 +13,8 @@ import { ProjectDetailIdService } from '../shared/project-detail-id.service';
 
 import { TimelineMax, TweenMax } from "gsap";
 import { projectDetailTransition } from 'app/shared/project-detail.animations';
-import { ScrollMagicService } from '../shared/scrollMagic.service';
 
+import { ScrollMagicService } from '../shared/scrollMagic.service';
 
 @Component({
   moduleId: module.id,
@@ -51,16 +51,6 @@ export class ProjectDetailComponent implements OnInit {
   }
   
   ngOnInit() {
-    var controller = new this._scrollMagicService.ScrollMagic.Controller();
-    var scene = new this._scrollMagicService.ScrollMagic.Scene({
-      triggerElement: '.project-detail-container'
-    })
-    .setClassToggle('.project-detail-container', 'fadeIn')
-    .addTo(controller);
-
-    scene.triggerElement = '.project-detail-container';
-    
-
     this._route.data.subscribe(
       data => this.project = data['project']
     );
@@ -98,6 +88,13 @@ export class ProjectDetailComponent implements OnInit {
   ngAfterViewInit(){
     //this.animateThumb();  
     console.log('nextProject afterviewinit: ' + this.nextProject)
+
+    var controller = new this._scrollMagicService.ScrollMagic.Controller();
+    var scene = new this._scrollMagicService.ScrollMagic.Scene({
+      triggerElement: '.thumbnail-text'
+    })
+    .setClassToggle('.thumbnail-text', 'fadeIn')
+    .addTo(controller);    
     
   }
 
