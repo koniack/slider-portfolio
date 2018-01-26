@@ -65,10 +65,10 @@ export class AppComponent  {
 	getState(outlet){
 		if (outlet.activatedRouteData.state === 'projectDetail'){
 			var id: number = this._projectDetailIdService.getId();
-			console.log('projDetail state: ' + outlet.activatedRouteData['state'] + id)
+			//console.log('projDetail state: ' + outlet.activatedRouteData['state'] + id)
 			return outlet.activatedRouteData['state'] + id;
 		} else {
-			console.log('state: ' + outlet.activatedRouteData['state'])
+			//console.log('state: ' + outlet.activatedRouteData['state'])
 			return outlet.activatedRouteData['state'];
 		}
 	}

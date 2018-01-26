@@ -14,7 +14,7 @@ import { ProjectDetailIdService } from '../shared/project-detail-id.service';
 import { TimelineMax, TweenMax } from "gsap";
 import { projectDetailTransition } from 'app/shared/project-detail.animations';
 
-import { ScrollMagicService } from '../shared/scrollMagic.service';
+import { SCROLLMAGIC_TOKEN } from '../shared/scrollMagic.service';
 
 @Component({
   moduleId: module.id,
@@ -46,7 +46,7 @@ export class ProjectDetailComponent implements OnInit {
               @Inject(DOCUMENT) private _document: Document,
               private _projectService: ProjectService,
               public _projectDetailIdService: ProjectDetailIdService,
-              private _scrollMagicService: ScrollMagicService
+              @Inject(SCROLLMAGIC_TOKEN) private _scrollMagic: any
               ) { 
   }
   
@@ -89,11 +89,12 @@ export class ProjectDetailComponent implements OnInit {
     //this.animateThumb();  
     console.log('nextProject afterviewinit: ' + this.nextProject)
 
-    var controller = new this._scrollMagicService.ScrollMagic.Controller();
-    var scene = new this._scrollMagicService.ScrollMagic.Scene({
+    var controller = new this._scrollMagic.Controller();
+    var scene = new this._scrollMagic.Scene({
       triggerElement: '.thumbnail-text'
     })
-    .setClassToggle('.thumbnail-text', 'fadeIn')
+    .setTween(TweenMax.from('.thumbnail-text', 1, {autoAlpha: 1, x: '-300px', ease:'Power2.easeOut'}))
+    .addIndicators()
     .addTo(controller);    
     
   }

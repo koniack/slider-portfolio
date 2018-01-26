@@ -14,11 +14,11 @@ import { sliderTransition } from '../shared/slider-transition.animations';
 
 import { ProjectService } from '../projects/project.service';
 import { IProject } from '../projects/project';
-declare module "gsap" {
+/*declare module "gsap" {
 	export interface TweenConfig {
 	  [p: string]: any;
 	}
-  } 
+  } */
 
 @Component({
 	moduleId: module.id,

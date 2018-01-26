@@ -26,7 +26,9 @@ import { KLoaderComponent } from './shared/kLoader.component';
 import { WindowDimensionsService } from './shared/window-dimensions.service';
 import { DOMEvents } from './shared/DOMEvents.service';
 import { ProjectDetailIdService } from 'app/shared/project-detail-id.service';
-import { ScrollMagicService } from './shared/scrollMagic.service';
+import { SCROLLMAGIC_TOKEN } from './shared/scrollMagic.service';
+
+
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -34,7 +36,7 @@ export class MyHammerConfig extends HammerGestureConfig {
   }
 }
 
-
+declare let ScrollMagic: Object;
 
 @NgModule({
   imports: [ 
@@ -68,7 +70,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     WindowDimensionsService,
     DOMEvents,
     ProjectDetailIdService,
-    ScrollMagicService
+    {provide: SCROLLMAGIC_TOKEN, useValue: ScrollMagic}
   ]
 })
 export class AppModule { }
