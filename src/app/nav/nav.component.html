@@ -5,11 +5,11 @@
     <nav class="overlay-menu">   
     <ul>
         <li routerLinkActive="active">
-            <a [routerLink]="['/slider']" (click)="active('slider')">Home
+            <a [routerLink]="['/slider']" queryParamsHandling= "preserve" (click)="active('slider')">Home
             </a>
         </li>
         <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" >
-            <a [routerLink]="['/projects']" (click)="active('projects')">Work
+            <a [routerLink]="['/projects']" [queryParamsHandling]= "preserve" (click)="active('projects')">Work
             </a>
         </li>
         <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" >

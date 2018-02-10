@@ -32,7 +32,9 @@
             id="project{{projectIndex}}"
             [class.active]="slide['active']"
             [style.background-image]="'url(' + slide.thumbUrl.url + ')'">
-            <a  [routerLink]= "['/projects', slide.id]" >
+            <a  [routerLink]= "['/projects', slide.id]" 
+            [queryParams]= "{project: slide.id}" 
+            queryParamsHandling="merge" >
                 <!--<img  
                     [src]='slide.thumbUrl.url' 
                     [ngStyle] = "getSliderImgDim(projectIndex)"

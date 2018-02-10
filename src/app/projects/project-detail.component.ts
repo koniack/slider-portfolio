@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, HostListener, Inject, Input, OnInit, ViewChild, ElementRef} from '@angular/core';
+import { OnChanges, OnDestroy, AfterViewInit, Component, HostListener, Inject, Input, OnInit, ViewChild, ViewChildren, ElementRef, QueryList} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DOCUMENT } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
@@ -15,6 +15,7 @@ import { TimelineMax, TweenMax } from "gsap";
 import { projectDetailTransition } from 'app/shared/project-detail.animations';
 
 import { SCROLLMAGIC_TOKEN } from '../shared/scrollMagic.service';
+//import { JQ_TOKEN } from 'app/shared/jQuery.service';
 
 @Component({
   moduleId: module.id,
@@ -27,7 +28,8 @@ import { SCROLLMAGIC_TOKEN } from '../shared/scrollMagic.service';
   }
 })
 export class ProjectDetailComponent implements OnInit {
-  
+  @ViewChildren("picture") pictures: QueryList<any>;
+  //@ViewChild("header") header: ElementRef;
   //@ViewChild('projectThumb') projectThumbEl: ElementRef;
 
   project: IProject;
@@ -39,14 +41,19 @@ export class ProjectDetailComponent implements OnInit {
   isShowing: boolean = false;
   url: string;
   id: number;
-  winHeight: string = (window.innerHeight + 'px'); 
+  winHeight: number = window.innerHeight; 
+  controller: any;
+  pinHeader: any;
+  fadeScene: any;
+
   constructor(private _route: ActivatedRoute,
               private _router: Router,
               private _authService: AuthService,
-              @Inject(DOCUMENT) private _document: Document,
+              //@Inject(DOCUMENT) private _document: Document,
               private _projectService: ProjectService,
-              public _projectDetailIdService: ProjectDetailIdService,
-              @Inject(SCROLLMAGIC_TOKEN) private _scrollMagic: any
+              private _projectDetailIdService: ProjectDetailIdService,
+              @Inject(SCROLLMAGIC_TOKEN) private _scrollMagic: any,
+              //@Inject(JQ_TOKEN) public $: any
               ) { 
   }
   
@@ -88,24 +95,77 @@ export class ProjectDetailComponent implements OnInit {
   ngAfterViewInit(){
     //this.animateThumb();  
     console.log('nextProject afterviewinit: ' + this.nextProject)
-
-    var controller = new this._scrollMagic.Controller();
-    var scene = new this._scrollMagic.Scene({
-      triggerElement: '.thumbnail-text'
-    })
-    .setTween(TweenMax.from('.thumbnail-text', 1, {autoAlpha: 1, x: '-300px', ease:'Power2.easeOut'}))
-    .addIndicators()
-    .addTo(controller);    
     
+
+    this.controller = new this._scrollMagic.Controller();
+    this.pinHeader = new this._scrollMagic.Scene({
+      triggerElement: 'header',
+      triggerHook: 0,
+      duration: '30%'
+    })
+    .setPin('header', {pushFollowers: false})
+    .addTo(this.controller);
+
+    var pinIntro = new this._scrollMagic.Scene({
+      triggerElement: '.thumbnail-container',
+      triggerHook: 0,
+      duration: '30%'
+    })
+    .setPin('.thumb-container', {pushFollowers: false})
+    .addTo(this.controller)
+
+
+    this.pictures.forEach((picture) => {
+      //console.log('picture: ' + picture.nativeElement);
+      this.fadeScene = new this._scrollMagic.Scene({
+        triggerElement: picture.nativeElement,
+        triggerHook: 0.8
+      })
+      .setTween(TweenMax.from(picture.nativeElement, 1, {autoAlpha: 0, ease:'Power2.easeOut'}))
+      .addIndicators({
+        name: 'fade scene',
+        colorTrigger: 'black',
+        colorStart: '#75c695',
+        colorEnd: 'pink'
+      })
+      .addTo(this.controller);
+    });
   }
 
-  @HostListener("window:scroll", [])
+  /*ngOnChanges(){
+    console.log('OnChanges triggered!')
+    this.controller = new this._scrollMagic.Controller();
+    this.pictures.forEach((picture) => {
+      console.log('picture: ' + picture.nativeElement);
+      this.fadeScene = new this._scrollMagic.Scene({
+        triggerElement: picture.nativeElement,
+        triggerHook: 0.8
+      })
+      .setTween(TweenMax.from(picture.nativeElement, 1, {autoAlpha: 0, ease:'Power2.easeOut'}))
+      .addIndicators({
+        name: 'fade scene',
+        colorTrigger: 'black',
+        colorStart: '#75c695',
+        colorEnd: 'pink'
+      })
+      .addTo(this.controller);
+    });
+  }*/
+
+  ngOnDestroy(){
+    //console.log('OnDestroy triggered!')
+    this.controller.destroy('reset');
+    //this.controller = null;
+    //this.pinHeader = this.pinHeader.destroy(true);
+  }
+
+  /*@HostListener("window:scroll", [])
   onWindowScroll(){
     let number = this._document.body.scrollTop;
     if (number > 180) {
       this.isShowing = true;
     }
-  }
+  }*/
 
   onPrev(): void {
     var prevPage:number
@@ -115,7 +175,7 @@ export class ProjectDetailComponent implements OnInit {
     } else {
       prevPage = 6
     }
-    this._router.navigate([`/projects/${prevPage}`], { queryParamsHandling: "preserve" });
+    this._router.navigate([`/slider`], { queryParamsHandling: "preserve" });
     this.getPrevProject(prevPage)
     this.getNextProject(prevPage)
     this.updateId(prevPage);
@@ -128,7 +188,7 @@ export class ProjectDetailComponent implements OnInit {
     } else {
       nextPage = 1
     }
-    this._router.navigate([`/projects/${nextPage}`], { queryParamsHandling: "preserve" } );        
+    this._router.navigate([`/projects/${nextPage}`], { queryParamsHandling: "preserve" });        
     this.getPrevProject(nextPage)
     this.getNextProject(nextPage)
     this.updateId(nextPage)

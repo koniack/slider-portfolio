@@ -22,7 +22,7 @@ export class ProjectService {
 		return this._http.get(this._urlProject)
 		//.map((response: Response) => <IProject[]> response.json());
             //.map(this.extractData)
-            .do(data => console.log('getProjects: ' + JSON.stringify(data)))
+            //.do(data => console.log('getProjects: ' + JSON.stringify(data)))
             .catch(this.handleError);
 	}
 
@@ -35,7 +35,7 @@ export class ProjectService {
         const url = `${this._urlProject}/${id}`;
         return this._http.get(url)
             //.map(this.extractData)
-            .do(data => console.log('getProject: ' + JSON.stringify(data)))
+            //.do(data => console.log('getProject: ' + JSON.stringify(data)))
             .catch(this.handleError);
 	}
 

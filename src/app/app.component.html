@@ -1,8 +1,8 @@
 <transition-overlay  (appReadyEvent)="handleAppReady($event)" (loadingPage)="loadingPage()" (stopLoadingPage)="stopLoadingPage()"></transition-overlay>
-<header>
+<header #header>
     <div class="navbar is-transparent">
         <div class="navbar-brand kone-logo">
-            <a class="navbar-item " [routerLink]="['/slider']"  > 
+            <a class="navbar-item " [routerLink]="['/slider']" queryParamsHandling="preserve"> 
                 <img src="assets/img/k-logo.svg" alt="Kone Lathipanya Logo">
             </a>
             <div class="navbar-burger">

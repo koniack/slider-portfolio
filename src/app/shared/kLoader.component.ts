@@ -3,9 +3,9 @@ import { Router, Event, NavigationStart, NavigationEnd, NavigationCancel, Naviga
 
 
 import { TimelineMax, TweenMax } from "gsap";
-import MorphSVGPlugin from "gsap/MorphSVGPlugin";
-import DrawSVGPlugin from "gsap/DrawSVGPlugin";
-import drawSVG from "gsap/DrawSVGPlugin";
+import * as MorphSVGPlugin from "gsap/MorphSVGPlugin";
+//import * as DrawSVGPlugin from "gsap/DrawSVGPlugin";
+import * as drawSVG from "gsap/DrawSVGPlugin";
 
 @Component({
     moduleId: module.id,

@@ -27,8 +27,13 @@ import { WindowDimensionsService } from './shared/window-dimensions.service';
 import { DOMEvents } from './shared/DOMEvents.service';
 import { ProjectDetailIdService } from 'app/shared/project-detail-id.service';
 import { SCROLLMAGIC_TOKEN } from './shared/scrollMagic.service';
+import { JQ_TOKEN } from './shared/jQuery.service';
 
-
+declare module "gsap" {
+	export interface TweenConfig {
+	  [p: string]: any;
+	}
+  }
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -37,6 +42,7 @@ export class MyHammerConfig extends HammerGestureConfig {
 }
 
 declare let ScrollMagic: Object;
+declare let jQuery: Object;
 
 @NgModule({
   imports: [ 
@@ -70,7 +76,8 @@ declare let ScrollMagic: Object;
     WindowDimensionsService,
     DOMEvents,
     ProjectDetailIdService,
-    {provide: SCROLLMAGIC_TOKEN, useValue: ScrollMagic}
+    {provide: SCROLLMAGIC_TOKEN, useValue: ScrollMagic},
+    {provide: JQ_TOKEN, useValue: jQuery}
   ]
 })
 export class AppModule { }

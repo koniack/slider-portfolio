@@ -4,22 +4,36 @@ const query = (s,a,o={optional:true})=>q(s,a,o);
 export const routerAnimation = 
 trigger('routeAnimation', [
     transition('slider => projectDetail1, slider => projectDetail2, slider => projectDetail3, slider => projectDetail4, slider => projectDetail5, slider => projectDetail6', [
+        query(':enter, :leave', style({ position: 'fixed', width:'100%' })),
         sequence([
             query(':leave', animateChild()), 
             query('#slider-area', [
                 style('*'),
                 animate('1s ease-out', 
                 style({border: 0}))
-            ])
+            ]),
+            query(':leave', [
+                style({ opacity: 1 }),
+                animate('1s ease-in-out', 
+                style({ opacity: 0 })
+            )]),
+            query(':enter', animateChild())
         ])
     ]),
     transition('projectDetail1 => slider, projectDetail2 => slider, projectDetail3 => slider, projectDetail4 => slider, projectDetail5 => slider, projectDetail6 => slider', [
+        query(':enter, :leave', style({ position: 'fixed', width:'100%' })),
         sequence([ 
+            query(':leave', animateChild()), 
             query('#slider-area', [
                 style({border: 0}),
                 animate('1s ease-out', 
                 style('*'))
             ]),
+            query(':leave', [
+                style({ opacity: 1 }),
+                animate('1s ease-in-out', 
+                style({ opacity: 0 })
+            )]),
             query(':enter', animateChild())
         ])
     ]),

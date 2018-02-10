@@ -106,7 +106,7 @@ export class TransitionOverlayComponent implements OnInit {
 
 				setTimeout(()=>{
 					this.loading = false;
-				}, 6500);
+				}, 8500);
 				
 			}
 	}

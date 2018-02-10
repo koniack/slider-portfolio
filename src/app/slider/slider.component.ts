@@ -64,6 +64,7 @@ export class SliderComponent implements OnInit {
 						  data => this.slides = data['slides'])*/
 
 		this.slides = this._route.snapshot.data['projects']
+		this.activeProject = (+this._route.snapshot.queryParams['project'] - 1) || 0;
 		this.slides[this.activeProject]['active'] = true	
 		/*if (this.slides){
 			if (this.initialLoad === false){

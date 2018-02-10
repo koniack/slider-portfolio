@@ -5,17 +5,21 @@
     //padding-top: 7rem
   //padding: 8rem 1.5rem 1.5rem
   padding: 0
-  background-color: $grey
-  //border: .75rem solid $white
-section
-  margin: 1rem 2rem
-  padding: 1rem
+  //background-color: $grey
+  //border: .75rem solid $white  
 
 .project-detail-content
+  +media ('<=tablet')
+    margin: 2rem
   background-color: $white
+  //z-index: 999
+  //display: flex
+  margin: 3rem 8rem
+  padding: 1rem
+  position: relative
+  margin-top: 70%
 
 .thumbnail-text  
-  opacity: 0
   transition: opacity 1s ease-out
 
   &.fadeIn
@@ -29,6 +33,9 @@ section
   background-position: center center
   background-repeat: no-repeat
   overflow: hidden
+  //position: fixed
+  z-index: -1
+  top: 0
 
   .project-detail
     //margin: 0 1.5rem
@@ -147,8 +154,9 @@ img
         box-shadow: none
 
 .picture
-  //opacity: 0
-  //margin: 8rem 0 
+  +media ('<=tablet')
+    margin: 2rem 0
+  margin: 6rem 0 
 
   .column.is-8
     //margin-left: 2rem
