@@ -1,8 +1,8 @@
 <div (window:resize)="onResize()"  class="project-list-container" [style.min-height]="_windowDimensionsService.winHeight + 'px'">
-    <select [(ngModel)]="listFilter" class="filter" >
+    <!--<select [(ngModel)]="listFilter" class="filter" >
         <option [selected]="all == 'two'" [ngValue]="null" >All</option>
         <option *ngFor="let f of filterCategory" [ngValue]="f">{{f}}</option>
-    </select>
+    </select>-->
 
     <div class="projects columns is-multiline">
         <div class="column is-one-quarter-widescreen is-one-third-desktop is-half-tablet image{{projectIndex}}" 

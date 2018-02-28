@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { RouteReuseStrategy } from '@angular/router';
 
 
 // Imports for loading & configuring the in-memory web api
@@ -28,6 +29,7 @@ import { DOMEvents } from './shared/DOMEvents.service';
 import { ProjectDetailIdService } from 'app/shared/project-detail-id.service';
 import { SCROLLMAGIC_TOKEN } from './shared/scrollMagic.service';
 import { JQ_TOKEN } from './shared/jQuery.service';
+import { CustomReuseStrategy } from './shared/route.reuse';
 
 declare module "gsap" {
 	export interface TweenConfig {
@@ -77,7 +79,8 @@ declare let jQuery: Object;
     DOMEvents,
     ProjectDetailIdService,
     {provide: SCROLLMAGIC_TOKEN, useValue: ScrollMagic},
-    {provide: JQ_TOKEN, useValue: jQuery}
+    {provide: JQ_TOKEN, useValue: jQuery},
+    {provide: RouteReuseStrategy, useClass: CustomReuseStrategy}
   ]
 })
 export class AppModule { }

@@ -8,12 +8,12 @@ export const sliderTransition =
             query('.dots a', stagger( 100, [
               style('*'),
               animate('500ms cubic-bezier(0.95, 0.05, 0.795, 0.035)',
-              style({transform: 'translateX(-300%)'}))
+              style({transform: 'translate3d(-300%,0,0)'}))
             ])),
             query('.proj-title', [
               style('*'),
               animate('500ms cubic-bezier(0.95, 0.05, 0.795, 0.035)',
-              style({transform: 'translateX(-100%)'}))
+              style({transform: 'translate3d(-100%,0,0)'}))
             ]),
             query('.active', [
               style('*'),
@@ -30,12 +30,12 @@ export const sliderTransition =
         transition(':enter', [
           sequence([
             query('.proj-title', [
-              style({transform: 'translateX(-100%)'}),
+              style({transform: 'translate3d(-100%,0,0)'}),
               animate('500ms 300ms ease-out',
               style('*'))
             ]),
             query('.dots a', stagger( 100, [
-              style({transform: 'translateX(-300%)'}),
+              style({transform: 'translate3d(-300%,0,0)'}),
               animate('500ms ease-out',
               style('*'))
             ])),

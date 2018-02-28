@@ -58,6 +58,8 @@ export class ProjectDetailComponent implements OnInit {
   }
   
   ngOnInit() {
+    window.scrollTo(0, 0);
+
     this._route.data.subscribe(
       data => this.project = data['project']
     );
@@ -182,13 +184,15 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   onNext(): void {
+
+
     var nextPage:number
     if (this._route.snapshot.params['id'] < 6 ){
       nextPage = (+this._route.snapshot.params['id']) + 1
     } else {
       nextPage = 1
     }
-    this._router.navigate([`/projects/${nextPage}`], { queryParamsHandling: "preserve" });        
+    this._router.navigate([`/projects/${nextPage}`], { queryParams: {'project': nextPage}, queryParamsHandling: "merge", fragment: "top"});        
     this.getPrevProject(nextPage)
     this.getNextProject(nextPage)
     this.updateId(nextPage)
@@ -203,7 +207,7 @@ export class ProjectDetailComponent implements OnInit {
     }
     this._projectService.getProject(+id).subscribe(
         project => this.prevProject = project,
-        error => this.errorMessage = <any>error
+        //error => this.errorMessage = <any>error
     );
   }
 
@@ -215,7 +219,7 @@ export class ProjectDetailComponent implements OnInit {
     }
     this._projectService.getProject(+id).subscribe(
         project => this.nextProject = project,
-        error => this.errorMessage = <any>error
+        //error => this.errorMessage = <any>error
     );
   }
 
