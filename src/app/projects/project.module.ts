@@ -7,9 +7,7 @@ import { ProjectListComponent } from './project-list.component';
 import { ProjectDetailComponent } from './project-detail.component';
 //import { ProjectService } from './project.service';
 import { ProjectRoutingModule, projectRoutableComponents } from './project-routing.module';
-import { ProjectFilterPipe } from './project-filter.pipe';
-
-
+import { ProjectFilterPipe } from './project-filter.pipe'
 
 
 

@@ -37,25 +37,30 @@ trigger('routeAnimation', [
             query(':enter', animateChild())
         ])
     ]),
-    transition('projectDetail1 => projectDetail2, projectDetail2 => projectDetail3, projectDetail3 => projectDetail4, projectDetail4 => projectDetail5, projectDetail5 => projectDetail6, projectDetail6 => projectDetail1', [
+    transition('projects <=> *', [
+        query(':leave', animateChild()), 
         query(':enter, :leave', style({ position: 'fixed', width:'100%' })),
-        sequence([ 
-            query(':leave', animateChild()), 
-            query('#slider-area', [
-                style({border: 0}),
-                animate('1s ease-out', 
-                style('*'))
-            ]),
+        query(':enter', style({opacity: 0})),
+        sequence([
+          //query(':leave', animateChild()), 
+          group([
             query(':leave', [
-                style({ opacity: 1 }),
-                animate('1s ease-in-out', 
+              style({ opacity: 1 }),
+              animate('1s ease-in-out', 
                 style({ opacity: 0 })
             )]),
-            query(':enter', animateChild())
+            query(':enter', [
+              style({ opacity: 0 }),
+              animate('1s ease-in-out', 
+                style({ opacity: 1 })
+            )]),
+          ]),
+          query(':enter', animateChild())
         ])
-    ]),
+      ]),
     transition('* <=> *', [
         query(':enter, :leave', style({ position: 'fixed', width:'100%' })),
+        query(':enter', style({opacity: 0})),
         sequence([
           query(':leave', animateChild()), 
           group([

@@ -27,7 +27,7 @@
     </div>
 </header> 
     
-<section id="main-area" [class.noScroll]="loading" [@routeAnimation]="getState(myOutlet)" >
+<section id="main-area" [class.noScroll]="loading" [class.is-animating]="isAnimating" [@routeAnimation]="getState(myOutlet)" >
     <router-outlet #myOutlet="outlet" ></router-outlet>
 </section>
 <!--<section id="popup-container">

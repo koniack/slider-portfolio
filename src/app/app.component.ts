@@ -6,6 +6,7 @@ import { AuthService } from './user/auth.service';
 import { MessageService } from './messages/message.service';
 import { ProjectDetailIdService } from './shared/project-detail-id.service';
 import { routerAnimation } from './shared/router.animations';
+import { LoadingService } from './shared/loading.service';
 
 //import { setTimeout } from 'timers';
 
@@ -23,16 +24,22 @@ export class AppComponent  {
 	name = 'Kone Lathipanya';
 	title: string = 'Designer + Developer'
 	color ='#000'; 
-	loading: boolean = true
+	loading: boolean = true;
+	isAnimating: boolean = false;
 
 	constructor(private _authService: AuthService,
 				private _messageService: MessageService,
 				private _router: Router,
 				private _activatedRoute: ActivatedRoute,
-				public _projectDetailIdService: ProjectDetailIdService) {
+				private _loadingService: LoadingService,
+				private _projectDetailIdService: ProjectDetailIdService,) {
 	}
 
 	ngOnInit(): void {
+		this._loadingService.getData().subscribe(data => {
+			this.isAnimating = data;
+			console.log('loadservice: ' +this.isAnimating);
+		})
 	}
 
 	displayMessages(): void {

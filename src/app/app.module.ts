@@ -30,6 +30,7 @@ import { ProjectDetailIdService } from 'app/shared/project-detail-id.service';
 import { SCROLLMAGIC_TOKEN } from './shared/scrollMagic.service';
 import { JQ_TOKEN } from './shared/jQuery.service';
 import { CustomReuseStrategy } from './shared/route.reuse';
+import { LoadingService } from './shared/loading.service';
 
 declare module "gsap" {
 	export interface TweenConfig {
@@ -76,6 +77,7 @@ declare let jQuery: Object;
     ProjectListResolver,
     ProjectResolver,
     WindowDimensionsService,
+    LoadingService,
     DOMEvents,
     ProjectDetailIdService,
     {provide: SCROLLMAGIC_TOKEN, useValue: ScrollMagic},

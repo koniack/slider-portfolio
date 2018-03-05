@@ -15,7 +15,9 @@ import { TimelineMax, TweenMax } from "gsap";
 import { projectDetailTransition } from 'app/shared/project-detail.animations';
 
 import { SCROLLMAGIC_TOKEN } from '../shared/scrollMagic.service';
+import { LoadingService } from '../shared/loading.service';
 //import { JQ_TOKEN } from 'app/shared/jQuery.service';
+
 
 @Component({
   moduleId: module.id,
@@ -45,6 +47,8 @@ export class ProjectDetailComponent implements OnInit {
   controller: any;
   pinHeader: any;
   fadeScene: any;
+  loading: boolean;
+  easing: any = 'Power2.easeOut';
 
   constructor(private _route: ActivatedRoute,
               private _router: Router,
@@ -53,12 +57,16 @@ export class ProjectDetailComponent implements OnInit {
               private _projectService: ProjectService,
               private _projectDetailIdService: ProjectDetailIdService,
               @Inject(SCROLLMAGIC_TOKEN) private _scrollMagic: any,
+              private _loadingService: LoadingService 
               //@Inject(JQ_TOKEN) public $: any
               ) { 
   }
   
   ngOnInit() {
-    window.scrollTo(0, 0);
+
+    this._loadingService.getData().subscribe(data => {
+      this.loading = data;
+    })
 
     this._route.data.subscribe(
       data => this.project = data['project']
@@ -124,12 +132,12 @@ export class ProjectDetailComponent implements OnInit {
         triggerHook: 0.8
       })
       .setTween(TweenMax.from(picture.nativeElement, 1, {autoAlpha: 0, ease:'Power2.easeOut'}))
-      .addIndicators({
+      /*.addIndicators({
         name: 'fade scene',
         colorTrigger: 'black',
         colorStart: '#75c695',
         colorEnd: 'pink'
-      })
+      })*/
       .addTo(this.controller);
     });
   }
@@ -184,7 +192,12 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   onNext(): void {
+    this._loadingService.updateData(true);
 
+    //TweenMax.set('scrollmagic-pin-spacer', {visibilty: 'hidden', height: 0 });
+    TweenMax.to('.project-detail', .4, {autoAlpha: 0, height: 0, ease: this.easing });
+    TweenMax.to(['.detail-footer','.button'], .4, {height: this.winHeight+'px',  ease: this.easing});
+    //window.scrollTo(0, 0);
 
     var nextPage:number
     if (this._route.snapshot.params['id'] < 6 ){
@@ -192,10 +205,13 @@ export class ProjectDetailComponent implements OnInit {
     } else {
       nextPage = 1
     }
-    this._router.navigate([`/projects/${nextPage}`], { queryParams: {'project': nextPage}, queryParamsHandling: "merge", fragment: "top"});        
-    this.getPrevProject(nextPage)
-    this.getNextProject(nextPage)
-    this.updateId(nextPage)
+    setTimeout(()=>{
+      this._router.navigate([`/projects/${nextPage}`], { queryParams: {'project': nextPage}, queryParamsHandling: "merge", fragment: "top"});        
+      this.getPrevProject(nextPage)
+      this.getNextProject(nextPage)
+      this.updateId(nextPage)
+      this._loadingService.updateData(false);
+    }, 800)
 
   }
 
