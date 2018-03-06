@@ -193,10 +193,11 @@ export class ProjectDetailComponent implements OnInit {
 
   onNext(): void {
     this._loadingService.updateData(true);
+    var tl = new TimelineMax;
 
     //TweenMax.set('scrollmagic-pin-spacer', {visibilty: 'hidden', height: 0 });
-    TweenMax.to('.project-detail', .4, {autoAlpha: 0, height: 0, ease: this.easing });
-    TweenMax.to(['.detail-footer','.button'], .4, {height: this.winHeight+'px',  ease: this.easing});
+    tl.to('.project-detail', .4, {autoAlpha: 0, height: 0, transform: 'scale(0.8)', ease: this.easing })
+    .to(['.detail-footer','.button'], .4, {height: this.winHeight+'px',  ease: this.easing}, '-=.4');
     //window.scrollTo(0, 0);
 
     var nextPage:number
