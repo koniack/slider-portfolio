@@ -108,18 +108,19 @@ export class ProjectDetailComponent implements OnInit {
     
 
     this.controller = new this._scrollMagic.Controller();
+    
     this.pinHeader = new this._scrollMagic.Scene({
-      triggerElement: 'header',
+      triggerElement: '.transition-overlay',
       triggerHook: 0,
-      duration: '30%'
+      duration: '50%'
     })
-    .setPin('header', {pushFollowers: false})
+    .setPin('.navbar', {pushFollowers: false})
     .addTo(this.controller);
 
     var pinIntro = new this._scrollMagic.Scene({
       triggerElement: '.thumbnail-container',
       triggerHook: 0,
-      duration: '30%'
+      duration: '50%'
     })
     .setPin('.thumb-container', {pushFollowers: false})
     .addTo(this.controller)
@@ -212,7 +213,7 @@ export class ProjectDetailComponent implements OnInit {
       this.getNextProject(nextPage)
       this.updateId(nextPage)
       this._loadingService.updateData(false);
-    }, 800)
+    }, 1000)
 
   }
 

@@ -6,7 +6,8 @@ img
 
 #slider-area
   background-color: $grey
-  border: .75rem solid $white
+  //border: .75rem solid $white
+  transform: scale(0.95)
   overflow: hidden
   top: 0
   bottom: 0
@@ -113,7 +114,7 @@ img
   width: 30px
   height: 30px
   position: absolute
-  right: 24px
+  right: 2rem
   z-index: 100
   cursor: pointer
   border: 1px solid $black
@@ -143,7 +144,7 @@ img
   position: absolute
 
 .next-button
-  bottom: 20px
+  bottom: 2rem
 
   &::after
     bottom: 12px
@@ -151,7 +152,7 @@ img
     transform: rotate(135deg)
 
 .prev-button
-  bottom: 60px
+  bottom: 4.5rem
 
   &::after
     top: 12px
@@ -165,7 +166,7 @@ img
     //left: 1rem
     top: 4.5rem
   //background-color: orange
-  width: 30px
+  width: 45px
   height: 100px
   display: block
   position: absolute
@@ -190,17 +191,17 @@ img
       //background-repeat: no-repeat
       //background-position: -9999px -9999px
 
-      .preload
+      /*.preload
         width: 1px
         height: 1px
         background-color: $white
         position: absolute
         top: 5px
         left: 0
-        z-index: -1
+        z-index: -1 */
         
     a
-      width: 30px
+      width: 45px
       height: 1px
       padding: 8px 0
       cursor: pointer
@@ -216,7 +217,7 @@ img
 
       &::before
         content: ''
-        width: 30px
+        width: 45px
         height: 1px
         background-color: $white
         display: block
@@ -233,4 +234,4 @@ img
 
       &.current-dot
         background-color: $black
-        width: 30px
+        width: 45px

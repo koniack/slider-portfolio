@@ -19,18 +19,23 @@ export const sliderTransition =
             ]),
             query('.proj-title', [
               style('*'),
-              animate('500ms cubic-bezier(0.95, 0.05, 0.795, 0.035)',
+              animate('1s cubic-bezier(0.95, 0.05, 0.795, 0.035)',
               style({transform: 'translate3d(-1000px,0,0)'}))
             ]),
-            query('.active', [
+            /*query('.active', [
               style('*'),
               animate('500ms ease-out', 
               style({width: '100%', height: '100%' })),
-            ])
+            ])*/
           ])
         ]),
         transition(':enter', [
           sequence([
+            /*query('.active', [
+              style({width: '100%', height: '100%' }),
+              animate('500ms ease-out', 
+              style('*')),
+            ]),*/
             query('.proj-title', [
               style({transform: 'translate3d(-100%,0,0)'}),
               animate('500ms 300ms ease-out',

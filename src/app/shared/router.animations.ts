@@ -11,7 +11,7 @@ trigger('routeAnimation', [
             query('#slider-area', [
                 style('*'),
                 animate('1s ease-out', 
-                style({border: 0}))
+                style({transform: 'scale(1)'}))
             ]),
             group([
                 query(':leave', [
@@ -33,14 +33,14 @@ trigger('routeAnimation', [
         query(':enter, :leave', style({ position: 'fixed', width:'100%' })),
         sequence([ 
             query(':leave', animateChild()), 
-            query('#slider-area', [
-                style({border: 0}),
-                animate('500ms ease-out', 
-                style('*'))
+            query('.thumb-container', [
+                style('*'),
+                animate('1s ease-out', 
+                style({transform: 'scale(0.95)'}))
             ]),
             group([
                 query(':leave', [
-                    style('*'),
+                    style({ opacity: 1 }),
                     animate('1s ease-in-out', 
                     style({ opacity: 0 })
                 )]),
