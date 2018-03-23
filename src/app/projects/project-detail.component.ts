@@ -1,5 +1,5 @@
 import { OnChanges, OnDestroy, AfterViewInit, Component, HostListener, Inject, Input, OnInit, ViewChild, ViewChildren, ElementRef, QueryList} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError, } from '@angular/router';
 import { DOCUMENT } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 
@@ -209,12 +209,16 @@ export class ProjectDetailComponent implements OnInit {
     }
     setTimeout(()=>{
       this._router.navigate([`/projects/${nextPage}`], { queryParams: {'project': nextPage}, queryParamsHandling: "merge", fragment: "top"});        
-      this.getPrevProject(nextPage)
-      this.getNextProject(nextPage)
-      this.updateId(nextPage)
-      this._loadingService.updateData(false);
     }, 1000)
 
+    if ((this._router.events instanceof NavigationEnd || 
+			this._router.events instanceof NavigationCancel ||
+			this._router.events instanceof NavigationError)){
+          this.getPrevProject(nextPage)
+          this.getNextProject(nextPage)
+          this.updateId(nextPage)
+          this._loadingService.updateData(false);
+		}
   }
 
   getPrevProject(id: number): void {

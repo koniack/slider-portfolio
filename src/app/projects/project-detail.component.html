@@ -5,29 +5,31 @@
         [style.height]="winHeight + 'px'"
         >
         </div>
-        <div class="project-detail-content" [style.margin-top]="'-' + winHeight/3 + 'px'">
-            <div class="thumbnail ">
-                <div class="thumbnail-text ">
-                    <h1 class="title is-2 has-text-weight-semibold" >{{project.name}}</h1>
-                    <h2 class="subtitle is-5">{{project.category}}</h2>
-                    <span class="line"></span>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus omnis assumenda voluptas praesentium sit earum, vero sequi explicabo rerum quos cupiditate temporibus dolore debitis iure!</p>
+        <div class="project-detail-wrapper">
+            <div class="project-detail-content" [style.margin-top]="'-' + winHeight/3 + 'px'">
+                <div class="thumbnail ">
+                    <div class="thumbnail-text ">
+                        <h1 class="title is-2 has-text-weight-semibold" >{{project.name}}</h1>
+                        <h2 class="subtitle is-5">{{project.category}}</h2>
+                        <span class="line"></span>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus omnis assumenda voluptas praesentium sit earum, vero sequi explicabo rerum quos cupiditate temporibus dolore debitis iure!</p>
+                    </div>
                 </div>
-            </div>
-            <div class="picture " 
-                *ngFor="let p of project.projectPics"
-                [class.is-showing]="isShowing"
-                #picture>
-                
-                <div class="">
-                    <figure>
-                        <img src="{{p.url}}" alt="">
-                    </figure>
+                <div class="picture " 
+                    *ngFor="let p of project.projectPics"
+                    [class.is-showing]="isShowing"
+                    #picture>
+                    
+                    <div class="">
+                        <figure>
+                            <img src="{{p.url}}" alt="">
+                        </figure>
+                    </div>
+                    <div class="caption">
+                        <h2>{{p.caption}}</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, quisquam!</p>
+                    </div>        
                 </div>
-                <div class="caption">
-                    <h2>{{p.caption}}</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, quisquam!</p>
-                </div>        
             </div>
         </div>
     </div>

@@ -8,22 +8,27 @@
   //background-color: $grey
   //border: .75rem solid $white  
 
-.project-detail-content
-  +media ('<=tablet')
-    margin: 2rem
-  background-color: $white
-  //z-index: 999
-  //display: flex
-  margin: 3rem 8rem
-  padding: 1rem
-  position: relative
-  margin-top: 70%
+  .project-detail
+    //padding: 0 2.5%
 
-.thumbnail-text  
-  transition: opacity 1s ease-out
+  .project-detail-wrapper
+    padding: 0 1.5rem
 
-  &.fadeIn
-    opacity: 1
+    .project-detail-content
+      +media ('<=tablet')
+        margin: 2.5%
+      background-color: $white
+      //z-index: 999
+      //display: flex
+      margin: 70% 2.5% 0 
+      padding: 3rem 1.5rem
+      position: relative
+
+    .thumbnail-text  
+      transition: opacity 1s ease-out
+
+      &.fadeIn
+        opacity: 1
 
 
 .thumb-container
@@ -36,9 +41,6 @@
   //position: fixed
   z-index: -1
   top: 0
-
-  .project-detail
-    //margin: 0 1.5rem
 
 .column
   +media ('<=tablet')

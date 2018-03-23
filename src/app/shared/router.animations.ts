@@ -38,18 +38,16 @@ trigger('routeAnimation', [
                 animate('1s ease-out', 
                 style({transform: 'scale(0.95)'}))
             ]),
-            group([
-                query(':leave', [
-                    style({ opacity: 1 }),
-                    animate('1s ease-in-out', 
-                    style({ opacity: 0 })
-                )]),
-                query(':enter', [
-                    style('*'),
-                    animate('1s ease-in-out', 
-                      style({ opacity: 1 })
-                  )]),
-            ]),
+            query(':enter', [
+                style({ opacity: 0 }),
+                animate('500ms ease-in-out', 
+                    style({ opacity: 1 })
+            )]),
+            query(':leave', [
+                style({ opacity: 1 }),
+                animate('500ms ease-in-out', 
+                style({ opacity: 0 })
+            )]),
             query(':enter', animateChild())
         ])
     ]),

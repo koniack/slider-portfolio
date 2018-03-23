@@ -9,7 +9,7 @@ export const sliderTransition =
               query('.dots a', stagger( 100, [
                 style('*'),
                 animate('500ms cubic-bezier(0.95, 0.05, 0.795, 0.035)',
-                style({transform: 'translate3d(-100px,0,0)'}))
+                style({transform: 'translate3d(-300%,0,0)'}))
               ])),
               query('#prev-button, #next-button', stagger(100, [
                 style('*'),
@@ -19,8 +19,8 @@ export const sliderTransition =
             ]),
             query('.proj-title', [
               style('*'),
-              animate('1s cubic-bezier(0.95, 0.05, 0.795, 0.035)',
-              style({transform: 'translate3d(-1000px,0,0)'}))
+              animate('500ms cubic-bezier(0.95, 0.05, 0.795, 0.035)',
+              style({transform: 'translate3d(-100%,0,0)'}))
             ]),
             /*query('.active', [
               style('*'),
@@ -38,7 +38,7 @@ export const sliderTransition =
             ]),*/
             query('.proj-title', [
               style({transform: 'translate3d(-100%,0,0)'}),
-              animate('500ms 300ms ease-out',
+              animate('500ms ease-out',
               style('*'))
             ]),
             group([

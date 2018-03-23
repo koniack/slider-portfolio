@@ -3,9 +3,9 @@
 header
   position: absolute
   //width: 95%
-  margin: 2.5%
+  margin: 0 2.5%
   z-index: 9
-  top: 0
+  top: 4.5%
   left: 0
   right: 0
 
@@ -13,7 +13,7 @@ header
   .navbar
     background-color: $transparent
     text-align: left
-    margin: 0 1rem
+    margin: 0 1.5rem
     min-height: 4.5rem
     //position: absolute
 
@@ -31,7 +31,8 @@ header
       font-weight: 400
   
     .kone-logo
-      padding: .5rem
+      padding: .5rem .5rem .5rem 0
+      margin-left: -4px
 
       .navbar-item
         padding: 0
@@ -64,6 +65,9 @@ header
     padding: .75rem 0 0
     margin: 0 1rem
     color: $dark-grey
+
+    &:last-child
+      margin-right: 0
 
     &::after
       content: ' '

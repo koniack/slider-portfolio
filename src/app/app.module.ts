@@ -52,7 +52,7 @@ declare let jQuery: Object;
   	BrowserModule, 
   	FormsModule, 
   	HttpClientModule,
-    InMemoryWebApiModule.forRoot(ProjectData, {delay: 0}),
+    InMemoryWebApiModule.forRoot(ProjectData, {delay: 3000}),
     UserModule,
     MessageModule,
     BrowserAnimationsModule,

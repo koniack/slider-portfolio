@@ -125,20 +125,20 @@ export class SliderComponent implements OnInit {
 		if ((direction === 'next' && this.activeProject < this.slides.length - 1) ||
 			(direction === 'prev' && this.activeProject >0)) {
 				if (direction == 'prev') {
-					this.slide(currProject, currTitle, currSubtitle, (this.activeProject - 1), -100, 100)
+					this.slide(currProject, currTitle, currSubtitle, (this.activeProject - 1), -300, 300)
 				}
 				else {
-					this.slide(currProject, currTitle, currSubtitle, (this.activeProject + 1), 100, -100)
+					this.slide(currProject, currTitle, currSubtitle, (this.activeProject + 1), 300, -300)
 				}
 				this.updateImage()
 			}
 			else {
 				if (this.activeProject === 0) {
-					this.slide(currProject, currTitle, currSubtitle, (this.slide.length - 1), -100, 100)
+					this.slide(currProject, currTitle, currSubtitle, (this.slide.length - 1), -300, 300)
 					
 				}
 				else {
-					this.slide(currProject, currTitle, currSubtitle, 0, 100, -100)
+					this.slide(currProject, currTitle, currSubtitle, 0, 300, -300)
 				}
 				this.updateImage()
 			}
@@ -151,10 +151,10 @@ export class SliderComponent implements OnInit {
 		let currSubtitle = '#subtitle'+(this.activeProject)
 		if (indicatorIndex != this.activeProject) {
 			if (indicatorIndex > this.activeProject) {
-				this.slide(currProject, currTitle, currSubtitle, indicatorIndex, 100, -100)
+				this.slide(currProject, currTitle, currSubtitle, indicatorIndex, 300, -300)
 			} 
 			else {
-				this.slide(currProject, currTitle, currSubtitle, indicatorIndex, -100, 100)
+				this.slide(currProject, currTitle, currSubtitle, indicatorIndex, -300, 300)
 			}
 			this.updateImage()
 		}
@@ -168,12 +168,12 @@ export class SliderComponent implements OnInit {
 		console.log(2 * slideFrom)
 		this.tl
 			.set(newProject, {y:(2 * slideFrom), autoAlpha: 0})
-			.set(newTitle, {y:slideFrom, autoAlpha: 0} )
-			.set(newSubtitle, {y:slideFrom, autoAlpha: 0} )
+			.set(newTitle, {y:slideFrom, autoAlpha: 1} )
+			.set(newSubtitle, {y:slideFrom, autoAlpha: 1} )
 		if (slideFrom > 0 ){
 			this.tl
-				.to(currTitle, .5, {y: slideTo, autoAlpha: 0, ease:'Power2.easeIn', onStart: this.animStart() })
-				.to(currSubtitle, .5, {y: slideTo, autoAlpha: 0, ease:'Power2.easeIn'}, '-=.35')
+				.to(currTitle, .5, {y: slideTo, autoAlpha: 1, ease:'Power2.easeIn', onStart: this.animStart() })
+				.to(currSubtitle, .5, {y: slideTo, autoAlpha: 1, ease:'Power2.easeIn'}, '-=.35')
 				.to(currProject, .5, {y: (2 * slideTo), autoAlpha: 0, ease:'Power2.easeIn' })
 				.to(newProject, .5, {y: 0 , autoAlpha: 1, ease:'Power2.easeOut'},'-=.25')
 				.to(newTitle, .5, {y: 0 , autoAlpha: 1, ease:'Power2.easeOut'},'-=.15')

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { Router, Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -33,6 +33,7 @@ export class AppComponent  {
 				private _activatedRoute: ActivatedRoute,
 				private _loadingService: LoadingService,
 				private _projectDetailIdService: ProjectDetailIdService,) {
+					
 	}
 
 	ngOnInit(): void {
@@ -41,6 +42,25 @@ export class AppComponent  {
 			console.log('loadservice: ' +this.isAnimating);
 		})
 	}
+
+	/*ngOnChanges(){
+		this._router.events.subscribe((routerEvent : Event) =>{
+			this.checkRouterEvent(routerEvent);
+		});
+	}
+
+	checkRouterEvent(routerEvent: Event): void {
+
+		if (routerEvent instanceof NavigationStart) {
+			this._loadingService.updateData(true);
+		}
+
+		if ((routerEvent instanceof NavigationEnd || 
+			routerEvent instanceof NavigationCancel ||
+			routerEvent instanceof NavigationError)){
+				this._loadingService.updateData(false);
+		}
+	}*/
 
 	displayMessages(): void {
 		this._router.navigate([{ outlets: { popup: ['messages'] }}]);

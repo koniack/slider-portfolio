@@ -83,10 +83,10 @@ img
 
 .proj-title
   +media ('>desktop')
-    width: 33.3%
+    width: 35%
   +media('<450px')
     width: 100%
-    padding-left: 1rem
+    //padding-left: 1rem
   
   background-color: rgba(255,143,0, .85)
   //background-blend-mode: overlay 
@@ -98,7 +98,7 @@ img
   overflow: hidden
   top: 0
   left: 0
-  padding-left: 2rem
+  padding-left: 1.5rem
 
   .projTitle
     height: auto
@@ -162,17 +162,17 @@ img
 // Carousel Styles
 .indicators
   +media ('<450px')
-    transform: scale(.75)
+    //transform: scale(.75)
     //left: 1rem
-    top: 4.5rem
+    //top: 5.5rem
   //background-color: orange
-  width: 45px
+  width: 50px
   height: 100px
   display: block
   position: absolute
   z-index: 99
-  top: 5.5rem
-  left: 2rem
+  top: 6.5rem
+  left: 1.5rem
 
   .dots
     margin: 0
@@ -201,7 +201,7 @@ img
         z-index: -1 */
         
     a
-      width: 45px
+      width: 50px
       height: 1px
       padding: 8px 0
       cursor: pointer
@@ -217,7 +217,7 @@ img
 
       &::before
         content: ''
-        width: 45px
+        width: 50px
         height: 1px
         background-color: $white
         display: block
@@ -234,4 +234,4 @@ img
 
       &.current-dot
         background-color: $black
-        width: 45px
+        width: 50px
