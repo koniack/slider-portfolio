@@ -10,7 +10,7 @@ export class ProjectData implements InMemoryDbService, InMemoryBackendConfig {
                 'name': 'Ascend Magazine', 
                 'thumbUrl':
                     {
-                        'url': 'assets/img/proj1-1.jpg',
+                        'url': 'assets/img/dbb-ltr-bc.jpg',
                         'width': 3872,
                         'height': 2592,
                         'caption': 'This is the thumbnail of this project.'
