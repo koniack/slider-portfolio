@@ -1,5 +1,5 @@
-import { Injectable, Inject } from "@angular/core";
-import { DOCUMENT } from "@angular/common";
+import { Injectable, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 @Injectable()
 
@@ -24,26 +24,28 @@ export class DOMEvents{
         eventType: string,
         bubbles: boolean = true,
         cancelable: boolean = false
-    ) : Event {
-        var customEvent = this.createEvent(eventType, bubbles, cancelable)
+    ): Event {
+        // tslint:disable-next-line:prefer-const
+        let customEvent = this.createEvent(eventType, bubbles, cancelable)
         nativeElement.dispatchEvent(customEvent)
         return(customEvent)
     }
 
-    //PRIVATE METHODS
+    // PRIVATE METHODS
 
     // Create and return a custom event with the given configuration.
     private createEvent(
         eventType: string,
         bubbles: boolean,
         cancelable: boolean
-    ) : Event {
+    ): Event {
 
         // IE (shakes fist) uses some other kind of event initialization. As such,
         // we'll default to trying the "normal" event generation and then fallback to
         // using the IE version.
         try {
-            var customEvent: any = new CustomEvent(
+            // tslint:disable-next-line:prefer-const
+            let customEvent: any = new CustomEvent(
                 eventType,
                 {
                     bubbles: bubbles,
@@ -51,11 +53,13 @@ export class DOMEvents{
                 }
 
             )
+            return(customEvent)
         } catch (error){
-            var customEvent: any = this.doc.createEvent( "CustomEvent")
+            // tslint:disable-next-line:prefer-const
+            let customEvent: any = this.doc.createEvent( 'CustomEvent')
 
             customEvent.initCustomEvent( eventType, bubbles, cancelable)
+            return(customEvent)
         }
-        return(customEvent)
     }
 }

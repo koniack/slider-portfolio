@@ -12,14 +12,16 @@ import { AuthService } from './auth.service';
 export class LoginComponent {
     errorMessage: string;
     pageTitle= 'Log In';
+    userName: string;
+    password: string;
 
     constructor(private _authService: AuthService,
                 private _router: Router) {}
 
     login(loginForm: NgForm) {
         if (loginForm && loginForm.valid) {
-            let userName = loginForm.form.value.userName;
-            let password = loginForm.form.value.password;
+            const userName = loginForm.form.value.userName;
+            const password = loginForm.form.value.password;
             this._authService.login(userName, password);
 
             if (this._authService.redirectUrl) {

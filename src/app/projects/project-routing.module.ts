@@ -15,36 +15,36 @@ import { ProjectEditGuard } from './project-guard.service';
 
 
 const routes: Routes = [
-    { 
-        path: '', 
+    {
+        path: '',
         data: {state: 'projects'},
         component: ProjectListComponent,
         resolve: { projects: ProjectListResolver }
     },
-    { 
-        path: ':id', 
-        component: ProjectDetailComponent, 
+    {
+        path: ':id',
+        component: ProjectDetailComponent,
         data: {state: 'projectDetail'},
         resolve: { project: ProjectResolver}
     },
-    { 
-        path: ':id/edit', 
+    {
+        path: ':id/edit',
         component: ProjectEditComponent,
         resolve: { project: ProjectResolver },
-        canActivate: [ AuthGuard ], 
+        canActivate: [ AuthGuard ],
         canDeactivate: [ ProjectEditGuard ],
         children: [
             {
-                path: '', 
-                redirectTo: 'info', 
+                path: '',
+                redirectTo: 'info',
                 pathMatch: 'full'
             },
             {
-                path: 'info', 
+                path: 'info',
                 component: ProjectEditInfoComponent
             },
             {
-                path: 'tags', 
+                path: 'tags',
                 component: ProjectEditTagsComponent
             }
         ]
@@ -56,7 +56,7 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
     providers: [
-        AuthGuard, 
+        AuthGuard,
         ProjectEditGuard
         ]
 })

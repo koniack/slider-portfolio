@@ -1,7 +1,9 @@
-import {sequence, trigger, stagger, animate, style, group, query as q, transition, keyframes, animateChild} from '@angular/animations';
-const query = (s,a,o={optional:true})=>q(s,a,o);
+import {sequence, trigger, stagger, animate, style, group, query, transition, keyframes, animateChild} from '@angular/animations';
 
-export const sliderTransition = 
+
+// const query = (s, a, o= {optional: true}) => q(s, a, o);
+
+export const sliderTransition =
     trigger('sliderTransition', [
         transition(':leave', [
           sequence([
@@ -10,7 +12,7 @@ export const sliderTransition =
                 style('*'),
                 animate('500ms cubic-bezier(0.95, 0.05, 0.795, 0.035)',
                 style({transform: 'translate3d(-300%,0,0)'}))
-              ])),
+              ]), { optional: true }),
               query('#prev-button, #next-button', stagger(100, [
                 style('*'),
                 animate('500ms cubic-bezier(0.68, -0.55, 0.265, 1.55)',
@@ -24,7 +26,7 @@ export const sliderTransition =
             ]),
             /*query('.active', [
               style('*'),
-              animate('500ms ease-out', 
+              animate('500ms ease-out',
               style({width: '100%', height: '100%' })),
             ])*/
           ])
@@ -33,7 +35,7 @@ export const sliderTransition =
           sequence([
             /*query('.active', [
               style({width: '100%', height: '100%' }),
-              animate('500ms ease-out', 
+              animate('500ms ease-out',
               style('*')),
             ]),*/
             query('.proj-title', [
@@ -47,7 +49,7 @@ export const sliderTransition =
                 animate('500ms ease-out',
                 style('*'))
               ])),
-              query('#prev-button, #next-button',stagger(100, [
+              query('#prev-button, #next-button', stagger(100, [
                 style({transform: 'scale(0)'}),
                 animate('500ms cubic-bezier(0.68, -0.55, 0.265, 1.55)',
                 style('*'))
@@ -56,3 +58,5 @@ export const sliderTransition =
           ])
         ])
     ])
+
+

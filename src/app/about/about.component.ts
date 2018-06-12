@@ -1,8 +1,19 @@
 import { Component } from '@angular/core';
 import { WindowDimensionsService } from '../shared/window-dimensions.service'
 // Import Animation Assets
-import {sequence, trigger, stagger, animate, style, group, query as q, transition, keyframes, animateChild, useAnimation } from '@angular/animations';
-const query = (s,a,o={optional:true})=>q(s,a,o);
+import {
+	sequence,
+	trigger,
+	stagger,
+	animate,
+	style,
+	group,
+	query,
+	transition,
+	keyframes,
+	animateChild,
+	useAnimation } from '@angular/animations';
+// const query = (s, a, o= {optional: true}) => q(s, a, o);
 import { fadeAnimation } from '../shared/animations';
 
 @Component({
@@ -47,6 +58,6 @@ import { fadeAnimation } from '../shared/animations';
 
 export class AboutComponent {
 	email = 'kone.lathi@gmail.com'
-	
-	constructor(private _windowDimensionsService: WindowDimensionsService){}
+
+	constructor(public _windowDimensionsService: WindowDimensionsService){}
 }

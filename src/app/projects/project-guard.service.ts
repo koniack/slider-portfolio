@@ -7,7 +7,7 @@ import { ProjectEditComponent } from './project-edit.component';
 export class ProjectEditGuard implements CanDeactivate<ProjectEditComponent> {
     canDeactivate(component: ProjectEditComponent): boolean {
         if (component.isDirty) {
-            let projectName = component.project.name || 'New Project';
+            const projectName = component.project.name || 'New Project';
             return confirm(`Navigate away and lose all changes to ${projectName}?`);
         }
         return true;

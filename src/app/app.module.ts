@@ -1,4 +1,4 @@
-import { NgModule }      from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,7 +11,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { ProjectData } from './projects/project-data';
 
-import { AppComponent }  from './app.component';
+import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { MouseWheelDirective } from './shared/mousewheel.directive';
 import { TransitionOverlayComponent } from './shared/transition-overlay.component';
@@ -32,11 +32,11 @@ import { JQ_TOKEN } from './shared/jQuery.service';
 import { CustomReuseStrategy } from './shared/route.reuse';
 import { LoadingService } from './shared/loading.service';
 
-declare module "gsap" {
-	export interface TweenConfig {
-	  [p: string]: any;
-	}
+declare module 'gsap' {
+  export interface TweenConfig {
+    [p: string]: any;
   }
+}
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -44,26 +44,30 @@ export class MyHammerConfig extends HammerGestureConfig {
   }
 }
 
-declare let ScrollMagic: Object;
-declare let jQuery: Object;
+
+// declare let ScrollMagic: Object;
+// tslint:disable-next-line:prefer-const
+let ScrollMagic = window['ScrollMagic'];
+// tslint:disable-next-line:prefer-const
+let jQuery = window['$'];
 
 @NgModule({
-  imports: [ 
-  	BrowserModule, 
-  	FormsModule, 
-  	HttpClientModule,
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
     InMemoryWebApiModule.forRoot(ProjectData, {delay: 0}),
     UserModule,
     MessageModule,
     BrowserAnimationsModule,
-    AppRoutingModule  
+    AppRoutingModule
   ],
-  declarations: [ 
-    AppComponent, 
+  declarations: [
+    AppComponent,
     AboutComponent,
     ContactComponent,
-    routableComponents, 
-    NavComponent, 
+    routableComponents,
+    NavComponent,
     MouseWheelDirective,
     KLoaderComponent,
     TransitionOverlayComponent

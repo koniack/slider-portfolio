@@ -20,9 +20,9 @@ export class ProjectService {
 
 	getProjects(): Observable<IProject[]>{
 		return this._http.get(this._urlProject)
-		//.map((response: Response) => <IProject[]> response.json());
-            //.map(this.extractData)
-            //.do(data => console.log('getProjects: ' + JSON.stringify(data)))
+		// .map((response: Response) => <IProject[]> response.json());
+            // .map(this.extractData)
+            // .do(data => console.log('getProjects: ' + JSON.stringify(data)))
             .catch(this.handleError);
 	}
 
@@ -30,17 +30,17 @@ export class ProjectService {
         if (id === 0) {
             return Observable.of(this.initializeProject())
         };
-		//return this.getProjects()
-		//.map(projects => projects.find(project => project.id === id));
+		// return this.getProjects()
+		// .map(projects => projects.find(project => project.id === id));
         const url = `${this._urlProject}/${id}`;
         return this._http.get(url)
-            //.map(this.extractData)
-            //.do(data => console.log('getProject: ' + JSON.stringify(data)))
+            // .map(this.extractData)
+            // .do(data => console.log('getProject: ' + JSON.stringify(data)))
             .catch(this.handleError);
 	}
 
 	deleteProject(id: number): Observable<Response> {
-        let options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+        const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
         const url = `${this._urlProject}/${id}`;
         return this._http.delete(url, options)
@@ -49,7 +49,7 @@ export class ProjectService {
     }
 
     saveProject(project: IProject): Observable<IProject> {
-        let options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+        const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
         if (project.id === 0) {
             return this.createProject(project, options);
@@ -60,7 +60,7 @@ export class ProjectService {
 	private createProject(project: IProject, options: any): Observable<IProject> {
         project.id = undefined;
         return this._http.post(this._urlProject, project, options)
-            //.map(this.extractData)
+            // .map(this.extractData)
             .do(data => console.log('createProject: ' + JSON.stringify(data)))
             .catch(this.handleError);
     }

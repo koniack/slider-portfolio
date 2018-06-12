@@ -1,4 +1,4 @@
-<div class="main-menu" [class.active]="isActive" (click)="active(name)">
+<div class="main-menu" [class.active]="isActive" (click)="active('main menu btn')">
     <h6>menu</h6>
 </div>
 <div class="overlay" [class.open]="isActive" >
@@ -9,7 +9,7 @@
             </a>
         </li>
         <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" >
-            <a [routerLink]="['/projects']" [queryParamsHandling]= "preserve" (click)="active('projects')">Work
+            <a [routerLink]="['/projects']" queryParamsHandling= "preserve" (click)="active('projects')">Work
             </a>
         </li>
         <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" >

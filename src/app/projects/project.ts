@@ -4,7 +4,7 @@ import {IProjectPicture} from './project-picture';
 export interface IProject {
 	id: number;
 	name: string;
-	thumbUrl: 
+	thumbUrl:
 		{
 			url: string,
 			width: number,

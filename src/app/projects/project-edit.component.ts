@@ -12,7 +12,7 @@ import { ProjectService } from './project.service';
     styleUrls: ['project-edit.component.sass']
 })
 export class ProjectEditComponent implements OnInit {
-    pageTitle: string = 'Project Edit';
+    pageTitle = 'Project Edit';
     errorMessage: string;
 
     private currentProject: IProject;
@@ -54,7 +54,9 @@ export class ProjectEditComponent implements OnInit {
             this.pageTitle = `Edit Project: ${this.project.name}`;
         }
     }
-
+    deleteProject(){
+        console.log('delete project')
+    }
     /*deleteProject(): void {
         if (this.project.id === 0) {
             // Don't delete, it was never saved.
@@ -79,6 +81,9 @@ export class ProjectEditComponent implements OnInit {
             Object.keys(this.dataIsValid).every(d => this.dataIsValid[d] === true));
     }
 
+    saveProject(){
+        console.log('save project')
+    }
     /*saveProject(): void {
         if (this.isValid(null)) {
             this.projectService.saveProject(this.project)
@@ -140,7 +145,7 @@ export class ProjectEditComponent implements OnInit {
 	        category: null,
             description: null,
             tags: []
-            
+
         };
     }
 }

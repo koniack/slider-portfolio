@@ -11,7 +11,7 @@ import { ProjectService } from './project.service';
 
 @Injectable()
 export class ProjectListResolver implements Resolve<IProject[]> {
-    projects : IProject[];
+    projects: IProject[];
 
     constructor(
         private _projectService: ProjectService,
@@ -19,13 +19,13 @@ export class ProjectListResolver implements Resolve<IProject[]> {
     ) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IProject[]> {
-        
+
         return this._projectService.getProjects()
 							.map(
 								projects => this.projects = projects);
-               
-      
-      
+
+
+
     }
 
     }

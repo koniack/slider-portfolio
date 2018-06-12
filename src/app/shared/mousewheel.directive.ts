@@ -1,14 +1,19 @@
 import { Directive, Output, HostListener, EventEmitter } from '@angular/core';
 
-@Directive({ selector: '[mouseWheel]' }) 
+// tslint:disable-next-line:directive-selector
+@Directive({ selector: '[mouseWheel]' })
 
 export class MouseWheelDirective {
 
-    @Output() mouseWheelUp = new EventEmitter();
-    @Output() mouseWheelDown = new EventEmitter();
+  deltas: any[] = [null, null, null, null, null, null, null, null, null];
+  lock = 0;
+  seen = 0;
 
-    @HostListener('mousewheel', ['$event']) onMouseWheelChrome(event: any) {
-    this.mouseWheelFunc(event);
+  @Output() mouseWheelUp = new EventEmitter();
+  @Output() mouseWheelDown = new EventEmitter();
+
+  @HostListener('mousewheel', ['$event']) onMouseWheelChrome(event: any) {
+  this.mouseWheelFunc(event);
   }
 
   @HostListener('DOMMouseScroll', ['$event']) onMouseWheelFirefox(event: any) {
@@ -19,26 +24,21 @@ export class MouseWheelDirective {
     this.mouseWheelFunc(event);
   }
 
-    deltas: any[] = [null, null, null, null, null, null, null, null, null];
-    lock: number = 0;
-    seen: number = 0;
-
-
-  mouseWheelFunc(event: any) {
-    var event = window.event || event; // old IE support
-    //var delta = Math.max(-1, Math.min(1, (event.wheelDelta || -event.detail)));
-    var delta = event.wheelDelta || -event.detail;
+  mouseWheelFunc(e: any) {
+    const event = window.event || e; // old IE support
+    // var delta = Math.max(-1, Math.min(1, (event.wheelDelta || -event.detail)));
+    const delta = event.wheelDelta || -event.detail;
     this.update(delta);
 
-    if(this.hasPeak() && delta < 0) {
+    if (this.hasPeak() && delta < 0) {
         this.mouseWheelUp.emit(event);
-    } else if(this.hasPeak() && delta > 0) {
+    } else if (this.hasPeak() && delta > 0) {
         this.mouseWheelDown.emit(event);
     }
     // for IE
     event.returnValue = false;
     // for Chrome and Firefox
-    if(event.preventDefault) {
+    if (event.preventDefault) {
         event.preventDefault();
     }
   }
@@ -72,7 +72,7 @@ export class MouseWheelDirective {
         this.deltas[6] <= this.deltas[4] &&
         this.deltas[7] <= this.deltas[4] &&
         this.deltas[8] <  this.deltas[4]
-      ) 
+      )
       {
           return true;
       }

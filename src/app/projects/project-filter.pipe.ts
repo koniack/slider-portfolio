@@ -9,11 +9,11 @@ import { IProject } from './project';
 export class ProjectFilterPipe implements PipeTransform {
 
 	transform(value: IProject[], filterBy: string): IProject[] {
-		if (value==null) {
+		if (value == null) {
       		return null;
     	}
 		filterBy = filterBy ? filterBy.toLocaleLowerCase() : null;
-		return filterBy ? value.filter((project: IProject) => 
+		return filterBy ? value.filter((project: IProject) =>
 			project.category.toLocaleLowerCase().indexOf(filterBy) !== -1) : value;
 
 	}

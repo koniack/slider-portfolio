@@ -11,8 +11,8 @@ import { AuthService } from '../user/auth.service';
 	styleUrls: ['nav.component.sass']
 })
 
-export class NavComponent implements OnInit{	
-	isActive: boolean = false;
+export class NavComponent implements OnInit{
+	isActive = false;
 	isLoggedIn: boolean;
 
 	constructor(private _authService: AuthService,
@@ -24,10 +24,10 @@ export class NavComponent implements OnInit{
 	}
 
 	active(name: string){
-		let msg = `You clicked ${name}`;
+		const msg = `You clicked ${name}`;
 		console.log(msg);
-		this.isActive = !this.isActive;	
+		this.isActive = !this.isActive;
 	}
-	
+
 	ngOnInit(){}
 }

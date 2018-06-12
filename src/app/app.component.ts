@@ -8,7 +8,7 @@ import { ProjectDetailIdService } from './shared/project-detail-id.service';
 import { routerAnimation } from './shared/router.animations';
 import { LoadingService } from './shared/loading.service';
 
-//import { setTimeout } from 'timers';
+// import { setTimeout } from 'timers';
 
 @Component({
 	moduleId: module.id,
@@ -17,29 +17,29 @@ import { LoadingService } from './shared/loading.service';
 	styleUrls: ['app.component.sass'],
 	animations: [ routerAnimation ]
 })
-export class AppComponent  { 
+export class AppComponent implements OnInit  {
 
 	winHeight = window.innerHeight
 	winWidth = window.innerWidth
 	name = 'Kone Lathipanya';
-	title: string = 'Designer + Developer'
-	color ='#000'; 
-	loading: boolean = true;
-	isAnimating: boolean = false;
+	title = 'Designer + Developer'
+	color = '#000';
+	loading = true;
+	isAnimating = false;
 
 	constructor(private _authService: AuthService,
 				private _messageService: MessageService,
 				private _router: Router,
 				private _activatedRoute: ActivatedRoute,
 				private _loadingService: LoadingService,
-				private _projectDetailIdService: ProjectDetailIdService,) {
-					
+				private _projectDetailIdService: ProjectDetailIdService, ) {
+
 	}
 
 	ngOnInit(): void {
 		this._loadingService.getData().subscribe(data => {
 			this.isAnimating = data;
-			console.log('loadservice: ' +this.isAnimating);
+			console.log('loadservice: ' + this.isAnimating);
 		})
 	}
 
@@ -55,7 +55,7 @@ export class AppComponent  {
 			this._loadingService.updateData(true);
 		}
 
-		if ((routerEvent instanceof NavigationEnd || 
+		if ((routerEvent instanceof NavigationEnd ||
 			routerEvent instanceof NavigationCancel ||
 			routerEvent instanceof NavigationError)){
 				this._loadingService.updateData(false);
@@ -72,32 +72,34 @@ export class AppComponent  {
 		this._messageService.isDisplayed = false;
 	}
 
-	logOut(): void{
+	logOut(): void {
 		this._authService.logout();
 		console.log('Log Out');
 		this._router.navigateByUrl('./slider');
 	}
-	
-	loadingPage(){
+
+	loadingPage() {
 		this.loading = true
 	}
 
-	stopLoadingPage(){
-		setTimeout(()=>{
+	stopLoadingPage() {
+		setTimeout(() => {
 			this.loading = false
 	}, 5500)
-				
+
 	}
 
-	getState(outlet){
-		if (outlet.activatedRouteData.state === 'projectDetail'){
-			var id: number = this._projectDetailIdService.getId();
-			//console.log('projDetail state: ' + outlet.activatedRouteData['state'] + id)
+	getState(outlet) {
+		if (outlet.activatedRouteData.state === 'projectDetail') {
+			const id: number = this._projectDetailIdService.getId();
+			// console.log('projDetail state: ' + outlet.activatedRouteData['state'] + id)
 			return outlet.activatedRouteData['state'] + id;
 		} else {
-			//console.log('state: ' + outlet.activatedRouteData['state'])
+			// console.log('state: ' + outlet.activatedRouteData['state'])
 			return outlet.activatedRouteData['state'];
 		}
 	}
-
+	handleAppReady(event) {
+		console.log('handleAppReady Running')
+	}
 }

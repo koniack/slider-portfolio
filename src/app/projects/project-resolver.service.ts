@@ -17,7 +17,7 @@ export class ProjectResolver implements Resolve<IProject> {
     ) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IProject> {
-        let id = route.params['id'];
+        const id = route.params['id'];
         if (isNaN(id)) {
             console.log(`Project id was not a number: ${id}`);
             this._router.navigate(['/projects']);
@@ -37,7 +37,7 @@ export class ProjectResolver implements Resolve<IProject> {
                 this._router.navigate(['/projects']);
                 return Observable.of(null);
             });
-      
+
     }
 
     }

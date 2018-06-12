@@ -11,7 +11,7 @@ export class CustomReuseStrategy implements RouteReuseStrategy {
     }
 
     shouldAttach(route: ActivatedRouteSnapshot): boolean {
-        return false;        
+        return false;
     }
 
     retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle {
@@ -21,5 +21,5 @@ export class CustomReuseStrategy implements RouteReuseStrategy {
     shouldReuseRoute(future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean {
         return false;
     }
-    
+
 }

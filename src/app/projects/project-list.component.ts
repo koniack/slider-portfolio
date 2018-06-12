@@ -20,22 +20,22 @@ import { projectListTransition } from 'app/shared/project-list.animations';
 	}
 
 })
-export class ProjectListComponent implements OnInit {
-	@ViewChild('image') image:ElementRef
+export class ProjectListComponent implements OnInit, AfterViewInit {
+	@ViewChild('image') image: ElementRef
 
 	listFilter: string;
 	errorMessage: string;
 	projects: IProject[];
-	filterCategory: string[] = ['Branding','Web Design','Logo Design'];
-	imgHeight: number = 100
+	filterCategory: string[] = ['Branding', 'Web Design', 'Logo Design'];
+	imgHeight = 100
 	imgWidth: number
 
 	constructor(private _projectService: ProjectService,
 				private _route: ActivatedRoute,
-				private _windowDimensionsService: WindowDimensionsService){}
+				public _windowDimensionsService: WindowDimensionsService){}
 
 	ngOnInit(): void {
-		if (this._route.snapshot.queryParams['filterBy'] == 'null'){
+		if (this._route.snapshot.queryParams['filterBy'] === 'null'){
 			this.listFilter = '';
 		} else {
 		this.listFilter = this._route.snapshot.queryParams['filterBy'] || '';
@@ -56,7 +56,7 @@ export class ProjectListComponent implements OnInit {
 
 	onResize(){
 		this.imgWidth = this.image.nativeElement.getBoundingClientRect().width
-		let screenRatio = this._windowDimensionsService.winHeight / this._windowDimensionsService.winWidth
+		const screenRatio = this._windowDimensionsService.winHeight / this._windowDimensionsService.winWidth
 		this.imgHeight = this.imgWidth * screenRatio
 		console.log('image height: ' + this.imgHeight)
 	}

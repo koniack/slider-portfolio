@@ -21,9 +21,9 @@ export class ProjectEditTagsComponent implements OnInit {
     }
 
     // Add the defined tags
-    
+
     addTags(): void {
-        let tagArray = this.newTags.split(',');
+        const tagArray = this.newTags.split(',');
         this.project.tags = this.project.tags ? this.project.tags.concat(tagArray) : tagArray;
         this.newTags = '';
     }
@@ -32,6 +32,6 @@ export class ProjectEditTagsComponent implements OnInit {
     removeTag(idx: number): void {
         this.project.tags.splice(idx, 1);
     }
-    
+
 
 }

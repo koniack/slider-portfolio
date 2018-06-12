@@ -1,12 +1,23 @@
-import {sequence, trigger, stagger, animate, style, group, query as q, transition, keyframes, animateChild, useAnimation} from '@angular/animations';
-const query = (s,a,o={optional:true})=>q(s,a,o);
+import {
+  sequence,
+  trigger,
+  stagger,
+  animate,
+  style,
+  group,
+  query,
+  transition,
+  keyframes,
+  animateChild,
+  useAnimation} from '@angular/animations';
+// const query = (s, a, o= {optional: true}) => q(s, a, o);
 
 import { fadeAnimation } from './animations'
 
-export const projectDetailTransition = 
+export const projectDetailTransition =
   trigger('projectDetailTransition', [
       transition(':enter', [
-        //query('h1, h2', style({ opacity: 0, transform: 'translateY(-100%)' })),
+        // query('h1, h2', style({ opacity: 0, transform: 'translateY(-100%)' })),
         sequence([
           query('.project-detail-content', [
             useAnimation(fadeAnimation, {
@@ -21,7 +32,7 @@ export const projectDetailTransition =
             ]),
          /* query('h1, h2', stagger(150, [
             style({ transform: 'translateY(100px)', opacity: 0 }),
-            animate('500ms ease-out', 
+            animate('500ms ease-out',
             style({transform: 'translateY(0)', opacity: 1})),
           ])),
           query('.line', [
@@ -32,7 +43,7 @@ export const projectDetailTransition =
         ])
       ]),
       transition(':leave', [
-        sequence([ 
+        sequence([
           /*query('.line', [
             style('*'),
             animate('800ms ease-out',
@@ -40,7 +51,7 @@ export const projectDetailTransition =
           ]),
           query('h1, h2', stagger(150, [
             style({ transform: 'translateY(0px)', opacity: 1 }),
-            animate('500ms ease-out', 
+            animate('500ms ease-out',
             style({transform: 'translateY(100px)', opacity: 0})),
           ])),*/
           query('.project-detail-content', [
@@ -54,6 +65,6 @@ export const projectDetailTransition =
               }
             })
             ])
-        ])  
+        ])
       ])
   ]);

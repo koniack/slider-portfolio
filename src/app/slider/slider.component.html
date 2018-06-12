@@ -1,13 +1,13 @@
 
 <div id="slider-area"
     (swipeup)="navigate('next', $event)"
-    (swipeleft)="navigate(1, $event)"
+    (swipeleft)="navigate('prev', $event)"
     (swipedown)="navigate('prev', $event)"
-    (swiperight)="navigate(-1, $event)"
+    (swiperight)="navigate('next', $event)"
     (window:resize)="onResize()"
     mouseWheel
-    (mouseWheelUp) = "mouseWheelUpFunc($event)" 
-    (mouseWheelDown) = "mouseWheelDownFunc($event)"
+    (mouseWheelUp) = "mouseWheelUpFunc()" 
+    (mouseWheelDown) = "mouseWheelDownFunc()"
 >
     <div id="indicators" class="indicators">
         <ul class="dots">

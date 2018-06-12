@@ -3,33 +3,33 @@ import { Routes, RouterModule  } from '@angular/router';
 
 import { AuthGuard } from './user/auth-guard.service';
 import { SelectiveStrategy } from './selective-strategy.service';
-import { SliderComponent }  from './slider/slider.component';
+import { SliderComponent } from './slider/slider.component';
 import { ProjectListResolver } from './projects/project-list-resolver.service'
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 
 
 const routes: Routes = [
-    
-    { 
-        path: 'slider', 
+
+    {
+        path: 'slider',
         component: SliderComponent,
         data: {state: 'slider'},
         resolve: {projects: ProjectListResolver}
     },
     {
-        path: 'projects', 
+        path: 'projects',
         data: { preload: true, state: 'projects' },
         loadChildren: 'app/projects/project.module#ProjectModule',
         resolve: {projects: ProjectListResolver}
     },
-     { 
-        path: 'about', 
+     {
+        path: 'about',
         data: {state: 'about'},
         component: AboutComponent,
     },
-     { 
-        path: 'contact', 
+     {
+        path: 'contact',
         data: {state: 'contact'},
         component: ContactComponent,
     },
@@ -39,7 +39,7 @@ const routes: Routes = [
 
 @NgModule({
     imports: [RouterModule.forRoot(routes, {enableTracing: true, preloadingStrategy: SelectiveStrategy} )],
-    providers: [ 
+    providers: [
         SelectiveStrategy
          ],
     exports: [RouterModule]

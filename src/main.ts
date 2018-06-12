@@ -3,10 +3,10 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
-//import 'gsap';
+import 'gsap';
 
 if (environment.production) {
   enableProdMode();
 }
-const platform = platformBrowserDynamic();
-platform.bootstrapModule(AppModule);
+// const platform = platformBrowserDynamic();
+platformBrowserDynamic().bootstrapModule(AppModule);

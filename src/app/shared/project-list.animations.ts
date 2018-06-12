@@ -1,8 +1,19 @@
-import {sequence, trigger, stagger, animate, style, group, query as q, transition, keyframes, animateChild, useAnimation } from '@angular/animations';
-const query = (s,a,o={optional:true})=>q(s,a,o);
+import {
+  sequence,
+  trigger,
+  stagger,
+  animate,
+  style,
+  group,
+  query,
+  transition,
+  keyframes,
+  animateChild,
+  useAnimation } from '@angular/animations';
+// const query = (s, a, o= {optional: true}) => q(s, a, o);
 import { fadeAnimation } from './animations';
 
-export const projectListTransition = 
+export const projectListTransition =
   trigger('projectListTransition', [
       transition(':enter', [
         query('.column', [

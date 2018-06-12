@@ -1,15 +1,15 @@
-import { 
-	Component, 
-	OnInit, 
+import {
+	Component,
+	OnInit,
 	AfterViewInit,
 	Output,
 	EventEmitter
-	//ElementRef
+	// ElementRef
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { TimelineMax, TweenMax } from "gsap";
-//import { DOMEvents } from '../shared/DOMEvents.service'
+import { TimelineMax, TweenMax } from 'gsap';
+// import { DOMEvents } from '../shared/DOMEvents.service'
 import { sliderTransition } from '../shared/slider-transition.animations';
 
 import { ProjectService } from '../projects/project.service';
@@ -32,27 +32,27 @@ import { IProject } from '../projects/project';
     }
 
 })
-export class SliderComponent implements OnInit { 
+export class SliderComponent implements OnInit, AfterViewInit {
 
-	//@Output() appReadyEvent = new EventEmitter()
+	// @Output() appReadyEvent = new EventEmitter()
 
 	slides: IProject[]
 	errorMessage: string
-	activeProject: number = 0
-	isMoving: boolean = false
+	activeProject = 0
+	isMoving = false
 	winHeight: number = window.innerHeight
 	winWidth: number = window.innerWidth
 	tl = new TimelineMax
 	images= new Array
-	initialLoad: boolean = false
+	initialLoad = false
 
 
 
-	constructor(//private _projectService: ProjectService,
+	constructor(// private _projectService: ProjectService,
 				private _route: ActivatedRoute,
 				private _router: Router,
-				//public _domEvents: DOMEvents
-			){}
+				// public _domEvents: DOMEvents
+			) {}
 
 	ngOnInit(): void {
 		/*this._projectService.getProjects()
@@ -65,40 +65,40 @@ export class SliderComponent implements OnInit {
 
 		this.slides = this._route.snapshot.data['projects']
 		this.activeProject = (+this._route.snapshot.queryParams['project'] - 1) || 0;
-		this.slides[this.activeProject]['active'] = true	
+		this.slides[this.activeProject]['active'] = true
 		/*if (this.slides){
 			if (this.initialLoad === false){
 				setTimeout(()=>{
 					//this._domEvents.triggerOnDocument("appready")
 					console.log('Initial load..')
 				}, 4500)
-				
+
 			}
 		}*/
 	}
 
-	ngAfterViewInit(){
+	ngAfterViewInit() {
 		TweenMax.set('.project-hero', { y: this.winHeight, visibility: 'visible'})
-		TweenMax.set('#project' + this.activeProject, { y:0, visibility: 'visible'})
-		TweenMax.set('#projTitle' + this.activeProject, {y:0, visibility: 'visible'})
+		TweenMax.set('#project' + this.activeProject, { y: 0, visibility: 'visible'})
+		TweenMax.set('#projTitle' + this.activeProject, {y: 0, visibility: 'visible'})
 	}
 
-	//Mousewheel navigation using Mousewheel directive
-	mouseWheelUpFunc(){
-		if (!this.isMoving){
+	// Mousewheel navigation using Mousewheel directive
+	mouseWheelUpFunc() {
+		if (!this.isMoving) {
 			this.navigate('next', false)
 		}
 	}
-	
-	mouseWheelDownFunc(){
-		if (!this.isMoving){
+
+	mouseWheelDownFunc() {
+		if (!this.isMoving) {
 			this.navigate('prev', false)
 		}
 	}
 
-	//Navigates to next or previous project using keyboard arrow keys
+	// Navigates to next or previous project using keyboard arrow keys
 	private onKeydown(event: KeyboardEvent) {
-        let prevent = [38, 40]
+        const prevent = [38, 40]
             .find(no => no === event.keyCode)
         if (prevent) {
             event.preventDefault()
@@ -115,16 +115,16 @@ export class SliderComponent implements OnInit {
                 break
         }
     }
-	
-	//Navigates to next or previous project
+
+	// Navigates to next or previous project
 	public navigate(direction: string, swipe?: any) {
-		let currProject = '#project'+(this.activeProject)
-		let currTitle = '#title'+(this.activeProject)
-		let currSubtitle = '#subtitle'+(this.activeProject)
-		
+		const currProject = '#project' + (this.activeProject)
+		const currTitle = '#title' + (this.activeProject)
+		const currSubtitle = '#subtitle' + (this.activeProject)
+
 		if ((direction === 'next' && this.activeProject < this.slides.length - 1) ||
-			(direction === 'prev' && this.activeProject >0)) {
-				if (direction == 'prev') {
+			(direction === 'prev' && this.activeProject > 0)) {
+				if (direction === 'prev') {
 					this.slide(currProject, currTitle, currSubtitle, (this.activeProject - 1), -300, 300)
 				}
 				else {
@@ -135,7 +135,7 @@ export class SliderComponent implements OnInit {
 			else {
 				if (this.activeProject === 0) {
 					this.slide(currProject, currTitle, currSubtitle, (this.slide.length - 1), -300, 300)
-					
+
 				}
 				else {
 					this.slide(currProject, currTitle, currSubtitle, 0, 300, -300)
@@ -144,15 +144,15 @@ export class SliderComponent implements OnInit {
 			}
 	}
 
-	//Navigates to specific project designated by indicators
+	// Navigates to specific project designated by indicators
 	private navigateToProj(indicatorIndex: number) {
-		let currProject = '#project'+(this.activeProject)
-		let currTitle = '#title'+(this.activeProject)
-		let currSubtitle = '#subtitle'+(this.activeProject)
-		if (indicatorIndex != this.activeProject) {
+		const currProject = '#project' + (this.activeProject)
+		const currTitle = '#title' + (this.activeProject)
+		const currSubtitle = '#subtitle' + (this.activeProject)
+		if (indicatorIndex !== this.activeProject) {
 			if (indicatorIndex > this.activeProject) {
 				this.slide(currProject, currTitle, currSubtitle, indicatorIndex, 300, -300)
-			} 
+			}
 			else {
 				this.slide(currProject, currTitle, currSubtitle, indicatorIndex, -300, 300)
 			}
@@ -160,37 +160,37 @@ export class SliderComponent implements OnInit {
 		}
 	}
 
-	//Slide current project out and new project in
+	// Slide current project out and new project in
 	slide(currProject: any, currTitle: any, currSubtitle: any, id: number, slideFrom: number, slideTo: number){
-		let newProject = '#project' + id
-		let newTitle = '#title' + id
-		let newSubtitle = '#subtitle' + id
+		const newProject = '#project' + id
+		const newTitle = '#title' + id
+		const newSubtitle = '#subtitle' + id
 		console.log(2 * slideFrom)
 		this.tl
-			.set(newProject, {y:(2 * slideFrom), autoAlpha: 0})
-			.set(newTitle, {y:slideFrom, autoAlpha: 1} )
-			.set(newSubtitle, {y:slideFrom, autoAlpha: 1} )
-		if (slideFrom > 0 ){
+			.set(newProject, {y: (2 * slideFrom), autoAlpha: 0})
+			.set(newTitle, {y: slideFrom, autoAlpha: 1} )
+			.set(newSubtitle, {y: slideFrom, autoAlpha: 1} )
+		if (slideFrom > 0 ) {
 			this.tl
-				.to(currTitle, .5, {y: slideTo, autoAlpha: 1, ease:'Power2.easeIn', onStart: this.animStart() })
-				.to(currSubtitle, .5, {y: slideTo, autoAlpha: 1, ease:'Power2.easeIn'}, '-=.35')
-				.to(currProject, .5, {y: (2 * slideTo), autoAlpha: 0, ease:'Power2.easeIn' })
-				.to(newProject, .5, {y: 0 , autoAlpha: 1, ease:'Power2.easeOut'},'-=.25')
-				.to(newTitle, .5, {y: 0 , autoAlpha: 1, ease:'Power2.easeOut'},'-=.15')
-				.to(newSubtitle, .5, {y: 0 , autoAlpha: 1, ease:'Power2.easeOut', onComplete: this.animDone() },'-=.35')
+				.to(currTitle, .5, {y: slideTo, autoAlpha: 1, ease: 'Power2.easeIn', onStart: this.animStart() })
+				.to(currSubtitle, .5, {y: slideTo, autoAlpha: 1, ease: 'Power2.easeIn'}, '-=.35')
+				.to(currProject, .5, {y: (2 * slideTo), autoAlpha: 0, ease: 'Power2.easeIn' })
+				.to(newProject, .5, {y: 0 , autoAlpha: 1, ease: 'Power2.easeOut'}, '-=.25')
+				.to(newTitle, .5, {y: 0 , autoAlpha: 1, ease: 'Power2.easeOut'}, '-=.15')
+				.to(newSubtitle, .5, {y: 0 , autoAlpha: 1, ease: 'Power2.easeOut', onComplete: this.animDone() }, '-=.35')
 		} else {
 			this.tl
-				.to(currSubtitle, .5, {y: slideTo, autoAlpha: 0, ease:'Power2.easeIn', onStart: this.animStart() })
-				.to(currTitle, .5, {y: slideTo, autoAlpha: 0, ease:'Power2.easeIn'}, '-=.35')
-				.to(currProject, .5, {y: (2 * slideTo), autoAlpha: 0, ease:'Power2.easeIn' })
-				.to(newProject, .5, {y: 0 , autoAlpha: 1, ease:'Power2.easeOut'},'-=.25')
-				.to(newSubtitle, .5, {y: 0 , autoAlpha: 1, ease:'Power2.easeOut'},'-=.15')
-				.to(newTitle, .5, {y: 0 , autoAlpha: 1, ease:'Power2.easeOut', onComplete: this.animDone() },'-=.35')
+				.to(currSubtitle, .5, {y: slideTo, autoAlpha: 0, ease: 'Power2.easeIn', onStart: this.animStart() })
+				.to(currTitle, .5, {y: slideTo, autoAlpha: 0, ease: 'Power2.easeIn'}, '-=.35')
+				.to(currProject, .5, {y: (2 * slideTo), autoAlpha: 0, ease: 'Power2.easeIn' })
+				.to(newProject, .5, {y: 0 , autoAlpha: 1, ease: 'Power2.easeOut'}, '-=.25')
+				.to(newSubtitle, .5, {y: 0 , autoAlpha: 1, ease: 'Power2.easeOut'}, '-=.15')
+				.to(newTitle, .5, {y: 0 , autoAlpha: 1, ease: 'Power2.easeOut', onComplete: this.animDone() }, '-=.35')
 		}
 		this.activeProject = id
 	}
 
-	//Update image on screen resize
+	// Update image on screen resize
 	public onResize() {
 			this.slides.forEach((slide) => {
 				slide['active'] = false
@@ -198,47 +198,47 @@ export class SliderComponent implements OnInit {
 			this.updateImage()
 	}
 
-	//Updates active project
+	// Updates active project
 	private updateImage() {
-		//Wait for animation to end
+		// Wait for animation to end
 		setTimeout(() => {
 			this.slides[this.activeProject]['active'] = true
 			this.slides.forEach((slide) => {
-				if (slide != this.slides[this.activeProject]) {
+				if (slide !== this.slides[this.activeProject]) {
 					slide['active'] = false
 				}
 			})
-			
+
 		}, 900)
 	}
 
-	//Gets and assigns image dimensions and position
+	// Gets and assigns image dimensions and position
 	/*getSliderImgDim(id:number) {
 		let imgHeight = this.slides[id].thumbUrl.height
 		let imgWidth = this.slides[id].thumbUrl.width
 		let screenRatio = this.winHeight / this.winWidth
 		let imgRatio = imgHeight / imgWidth
-		
+
 		if (screenRatio > imgRatio) {
 			imgHeight = this.winHeight
-			imgWidth = this.winHeight / imgRatio 
+			imgWidth = this.winHeight / imgRatio
 		} else {
 			imgHeight = this.winWidth * imgRatio
 			imgWidth = this.winWidth
 		}
 		let imgPosLeft = (this.winWidth - imgWidth) / 2
 		let imgPosTop = (this.winHeight - imgHeight) / 2
-		//console.log('width:' + imgWidth+'px', 'height:'+ imgHeight+'px', 'top:'+ imgPosTop+'px', 'left:'+ imgPosLeft+'px')		
+		//console.log('width:' + imgWidth+'px', 'height:'+ imgHeight+'px', 'top:'+ imgPosTop+'px', 'left:'+ imgPosLeft+'px')
 		return {width: imgWidth+'px', height: imgHeight+'px', top: imgPosTop+'px', left: imgPosLeft+'px'}
 	}*/
-	
-	//Adds delay to stop MacOSX inertia from triggering navigation
+
+	// Adds delay to stop MacOSX inertia from triggering navigation
 	animStart(){
 		this.isMoving = true
 	}
 
 	animDone(){
-		setTimeout(()=>{
+		setTimeout(() => {
 			this.isMoving = false
 		}, 900)
 	}
