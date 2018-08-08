@@ -7,37 +7,79 @@ export class ProjectData implements InMemoryDbService, InMemoryBackendConfig {
         const projects: IProject[] = [
             {
                 'id': 1,
-                'name': 'Ascend Magazine',
+                'name': 'Delta Blood Bank',
                 'thumbUrl':
                     {
-                        'url': 'assets/img/dbb-ltr-bc.jpg',
-                        'width': 3872,
-                        'height': 2592,
-                        'caption': 'This is the thumbnail of this project.'
+                        'url': 'assets/img/dbb-macbook.jpg',
+                        'width': 4096,
+                        'height': 3068,
+                        'caption': ''
                     },
                 'projectPics': [
                     {
-                        'url': 'assets/img/proj1-2.jpg',
+                        'url': 'assets/img/dbb-brand.jpg',
                         'width': 3872,
                         'height': 2592,
-                        'caption': 'This is the first picture in this project.'
+                        'caption': 'Brand Identity Style Guide'
                     },
                     {
-                        'url': 'assets/img/proj1-3.jpg',
+                        'url': 'assets/img/dbb-typeface.png',
                         'width': 3872,
                         'height': 2592,
-                        'caption': 'This is the second picture in this project.'
+                        'caption': 'Typeface'
                     },
                     {
-                        'url': 'assets/img/proj1-4.jpg',
+                        'url': 'assets/img/dbb-colors.png',
                         'width': 3872,
                         'height': 2592,
-                        'caption': 'This is the third picture in this project.'
+                        'caption': 'Colors'
+                    },
+                    {
+                        'url': 'assets/img/dbb-stationary.jpg',
+                        'width': 3872,
+                        'height': 2592,
+                        'caption': ''
+                    },
+                    {
+                        'url': 'assets/img/dbb-brochure.jpg',
+                        'width': 3872,
+                        'height': 2592,
+                        'caption': ''
+                    },
+                    {
+                        'url': 'assets/img/dbb-brochure-back.jpg',
+                        'width': 3872,
+                        'height': 2592,
+                        'caption': ''
+                    },
+                    {
+                        'url': 'assets/img/dbb-shirt.jpg',
+                        'width': 3872,
+                        'height': 2592,
+                        'caption': ''
+                    },
+                    {
+                        'url': 'assets/img/dbb-ui-section.jpg',
+                        'width': 3872,
+                        'height': 2592,
+                        'caption': 'User Interface'
+                    },
+                    {
+                        'url': 'assets/img/dbb-web-full.jpg',
+                        'width': 3872,
+                        'height': 2592,
+                        'caption': ''
+                    },
+                    {
+                        'url': 'assets/img/dbb-mobile-ui.jpg',
+                        'width': 3872,
+                        'height': 2592,
+                        'caption': 'Mobile User Interface'
                     }
                 ],
-                'category': 'Editorial',
+                'category': 'Brand Identity, UI Design and Development',
                 'description': 'Magazine depicting life of local creatives.',
-                'tags': ['Editorial', 'yard', 'home']
+                'tags': ['Brand', 'UI', 'Design', 'Develop']
             },
             {
                 'id': 2,

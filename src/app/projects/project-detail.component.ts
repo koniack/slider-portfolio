@@ -116,9 +116,9 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     // this.animateThumb();
     console.log('nextProject afterviewinit: ' + this.nextProject)
 
-
+    
     this.controller = new this._scrollMagic.Controller();
-
+    /* SCROLLMAGIC PIM UNPIN
     this.pinHeader = new this._scrollMagic.Scene({
       triggerElement: '.transition-overlay',
       triggerHook: 0,
@@ -134,6 +134,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     })
     .setPin('.thumb-container', {pushFollowers: false})
     .addTo(this.controller)
+    */
 
 
     this.pictures.forEach((picture) => {
