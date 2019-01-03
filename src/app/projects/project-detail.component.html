@@ -12,7 +12,7 @@
                         <h1 class="title is-2 has-text-weight-semibold" >{{project.name}}</h1>
                         <h2 class="subtitle is-5">{{project.category}}</h2>
                         <span class="line"></span>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus omnis assumenda voluptas praesentium sit earum, vero sequi explicabo rerum quos cupiditate temporibus dolore debitis iure!</p>
+                        <p>{{project.description}}</p>
                     </div>
                 </div>
                 <div class="picture " 
@@ -28,6 +28,8 @@
                         </figure>
                     </div>
                             
+                </div>
+                <div class="video" *ngIf="project.video" [innerHtml]="embed">
                 </div>
             </div>
         </div>

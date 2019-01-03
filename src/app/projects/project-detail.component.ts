@@ -9,8 +9,8 @@ import {
   ViewChildren,
   ElementRef,
   QueryList} from '@angular/core';
-import { ActivatedRoute, Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError, } from '@angular/router';
-import { DOCUMENT } from '@angular/platform-browser';
+import { ActivatedRoute, Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 
 
@@ -45,6 +45,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
   // @ViewChild('projectThumb') projectThumbEl: ElementRef;
 
   project: IProject;
+  video: boolean = false;
   nextProject: IProject;
   prevProject: IProject;
   title = 'Project Details';
@@ -59,8 +60,10 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
   fadeScene: any;
   loading: boolean;
   easing: any = 'Power2.easeOut';
+  embed: any;
 
   constructor(private _route: ActivatedRoute,
+              private _sanitizer: DomSanitizer,
               private _router: Router,
               private _authService: AuthService,
               // @Inject(DOCUMENT) private _document: Document,
@@ -88,7 +91,13 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     this.getPrevProject(+this.id);
     console.log(this._route.snapshot.params['id']);
     console.log('nextProject: ' + this.nextProject);
-
+    this.embed = this._sanitizer.bypassSecurityTrustHtml('<iframe src="https://player.vimeo.com/video/' + this.project.video + '" width="640" height="358" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; width: 100%; height: 100%; top: 0; left: 0"></iframe>');
+    /*if (this._route.snapshot.params['id'] == 3){
+      this.video = true;
+      console.log('this video:' + this.video);
+    }
+    console.log('this video:' + this._route.snapshot.params['id']);
+    */
     /*this._route.params.subscribe(
       params => {
         let id = +params['id'] + 1;
@@ -112,6 +121,9 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
 
   }
 
+  getEmbedUrl(project){
+    return this._sanitizer.bypassSecurityTrustHtml('https://player.vimeo.com/video/' + project.video);
+  }
   ngAfterViewInit(){
     // this.animateThumb();
     console.log('nextProject afterviewinit: ' + this.nextProject)
@@ -195,7 +207,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     if (this._route.snapshot.params['id'] > 1){
       prevPage = (+this._route.snapshot.params['id']) - 1;
     } else {
-      prevPage = 6
+      prevPage = 5
     }
     this._router.navigate([`/slider`], { queryParamsHandling: 'preserve' });
     this.getPrevProject(prevPage)
@@ -213,7 +225,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     // window.scrollTo(0, 0);
 
     let nextPage: number
-    if (this._route.snapshot.params['id'] < 6 ){
+    if (this._route.snapshot.params['id'] < 5 ){
       nextPage = (+this._route.snapshot.params['id']) + 1
     } else {
       nextPage = 1
@@ -239,7 +251,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     if (i > 1){
       const id = i - 1
     } else {
-      const id = 6
+      const id = 5
     }
     this._projectService.getProject(+i).subscribe(
         project => this.prevProject = project,
@@ -249,7 +261,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
 
   getNextProject(i: number): void{
     let id = 0;
-    if (i < 6){
+    if (i < 5){
        id = i + 1
     } else {
       id = 1

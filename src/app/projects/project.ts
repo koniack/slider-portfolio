@@ -13,6 +13,7 @@ export interface IProject {
 		}
 	;
 	projectPics: IProjectPicture[];
+	video?: string;
 	category: string;
 	description: string;
 	tags?: string[];

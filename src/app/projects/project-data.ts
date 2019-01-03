@@ -78,124 +78,199 @@ export class ProjectData implements InMemoryDbService, InMemoryBackendConfig {
                     }
                 ],
                 'category': 'Brand Identity, UI Design and Development',
-                'description': 'Magazine depicting life of local creatives.',
+                'description': 'When I first began working with Delta Blood Bank they had several versions of their logo that used different typefaces and colors. Although it was not financially feasible to rebrand the entire organization I was able to narrow their logo down to one logo that was already being utilized on a majority of their products and built a consistent and imactful branding system around it which utilized a consistent typeface and color palette. Overall this increased Delta Blood Bank’s Identity brand presence both physically with printed material as well as digitally with their online presence. I also redesigned their entire website and integrated Wordpress for an easier Content Management System. Simplified their website and only displayed relevant materials. Integrated Social Media and made it much easier for donors to schedule an appointment to donate.',
                 'tags': ['Brand', 'UI', 'Design', 'Develop']
             },
             {
                 'id': 2,
-                'name': 'Tarantino Film Festival',
+                'name': 'Teaching Institute',
                 'thumbUrl':
                    {
-                        'url': 'assets/img/proj2-1.jpg',
-                        'width': 3872,
-                        'height': 2592,
+                        'url': 'assets/img/ti-thumb.jpg',
+                        'width': 4096,
+                        'height': 2788,
                         'caption': 'This is the thumbnail of this project.'
                     },
                 'projectPics': [
                     {
-                        'url': 'assets/img/proj2-1.jpg',
+                        'url': 'assets/img/ti-logo.png',
                         'width': 3872,
                         'height': 2592,
-                        'caption': 'This is the first picture in this project.'
-                    }
+                        'caption': 'Logo Design'
+                    },
+                    {
+                        'url': 'assets/img/ti-type.png',
+                        'width': 3872,
+                        'height': 2592,
+                        'caption': 'Typeface'
+                    },
+                    {
+                        'url': 'assets/img/ti-color-section.png',
+                        'width': 3872,
+                        'height': 2592,
+                        'caption': 'Colors'
+                    },
+                    {
+                        'url': 'assets/img/ti-process.jpg',
+                        'width': 3872,
+                        'height': 2592,
+                        'caption': ''
+                    },
+                    {
+                        'url': 'assets/img/ti-stationary.jpg',
+                        'width': 3872,
+                        'height': 2592,
+                        'caption': ''
+                    },
+                    {
+                        'url': 'assets/img/ti-mug.jpg',
+                        'width': 3872,
+                        'height': 2592,
+                        'caption': ''
+                    },
+                    {
+                        'url': 'assets/img/ti-shirt.jpg',
+                        'width': 3872,
+                        'height': 2592,
+                        'caption': ''
+                    },
+                    {
+                        'url': 'assets/img/ti-imac.jpg',
+                        'width': 3872,
+                        'height': 2592,
+                        'caption': ''
+                    },
+                    {
+                        'url': 'assets/img/ti-mobile.jpg',
+                        'width': 3872,
+                        'height': 2592,
+                        'caption': ''
+                    },
                 ],
-                'category': 'Branding',
-                'description': 'Film festival featuring Quentin Tarantino movies.',
-                'tags': ['leaf', 'Branding', 'home']
+                'category': 'Logo Design, Brand Identity, User Interface',
+                'description': 'The buying of large-screen TVs has absolutely skyrocketed lately. It seems that everyone wants one – and with good reason. The large-screen TV has come a long way from those faded-out behemoths of old that took up half your living room and never really produced a picture of decent quality. Now, however, especially in combination with HDTV, you can get not only a nice, large picture, but a crisp, clean one too.',
+                'tags': ['Logo', 'Branding', 'User Interface']
             },
             {
                 'id': 3,
-                'name': 'Dune',
+                'name': 'The Godfather Title Sequence',
                 'thumbUrl':
                     {
-                        'url': 'assets/img/proj3-1.jpg',
+                        'url': 'assets/img/gf-thumb.jpg',
                         'width': 3872,
                         'height': 2592,
                         'caption': 'This is the thumbnail of this project.'
                     },
                 'projectPics': [
                     {
-                        'url': 'assets/img/proj3-1.jpg',
+                        'url': 'assets/img/gf-storyboard.jpg',
                         'width': 3872,
                         'height': 2592,
-                        'caption': 'This is the first picture in this project.'
+                        'caption': 'Original Storyboard'
                     },
                     {
-                        'url': 'assets/img/proj3-2.jpg',
+                        'url': 'assets/img/kone_storyboard01.gif',
                         'width': 3872,
                         'height': 2592,
-                        'caption': 'This is the second picture in this project.'
-                    }
+                        'caption': null
+                    },
                 ],
-                'category': 'Book Cover Design',
-                'description': 'Leaf rake with 48-inch wooden handle.',
+                'video':    '307916497',
+                'category': 'Motion Design',
+                'description': 'Problem: Develop a new and engaging animated title sequence for The Godfather movie without using any images, music or typefaces from the original film. Solution: I chose to use the metaphor of ink staining an old parchment paper to symbolize how a persons associates and environment can corrupt and distort reality. The abstract imagery i chose also hints at significant developments of the movie.',
                 'tags': ['Book', 'Cover', 'home']
             },
             {
                 'id': 4,
-                'name': 'Intelligent Design',
+                'name': 'Ascend Magazine',
                 'thumbUrl':
                     {
-                        'url': 'assets/img/proj4-1.jpg',
+                        'url': 'assets/img/am-cover.jpg',
                         'width': 3872,
                         'height': 2592,
-                        'caption': 'This is the thumbnail of this project.'
+                        'caption': ''
                     },
                 'projectPics': [
                     {
-                        'url': 'assets/img/proj4-1.jpg',
+                        'url': 'assets/img/am-cover.jpg',
                         'width': 3872,
                         'height': 2592,
-                        'caption': 'This is the first picture in this project.'
-                    }
+                        'caption': ''
+                    },
+                    {
+                        'url': 'assets/img/am-toc.jpg',
+                        'width': 3872,
+                        'height': 2592,
+                        'caption': ''
+                    },
+                    {
+                        'url': 'assets/img/am-rhad.jpg',
+                        'width': 3872,
+                        'height': 2592,
+                        'caption': ''
+                    },
+                    {
+                        'url': 'assets/img/am-fbad.jpg',
+                        'width': 3872,
+                        'height': 2592,
+                        'caption': ''
+                    },
+                    {
+                        'url': 'assets/img/am-dim.jpg',
+                        'width': 3872,
+                        'height': 2592,
+                        'caption': ''
+                    },
                 ],
-                'category': 'Poster Design',
+                'category': 'Editorial Design',
                 'description': 'Sacramento State annual spring show.',
                 'tags': ['leaf', 'poster', 'home']
             },
             {
                 'id': 5,
-                'name': 'Teaching Institute',
+                'name': 'Dune',
                 'thumbUrl':
                     {
-                        'url': 'assets/img/proj5-1.jpg',
-                        'width': 612,
-                        'height': 792,
-                        'caption': 'This is the thumbnail of this project.'
+                        'url': 'assets/img/dune-cover.jpg',
+                        'width': 3872,
+                        'height': 2592,
+                        'caption': ''
                     },
                 'projectPics': [
                     {
-                        'url': 'assets/img/proj5-1.jpg',
+                        'url': 'assets/img/dune-cover.jpg',
                         'width': 3872,
                         'height': 2592,
-                        'caption': 'This is the first picture in this project.'
-                    }
+                        'caption': ''
+                    },
+                    {
+                        'url': 'assets/img/dune-2.jpg',
+                        'width': 3872,
+                        'height': 2592,
+                        'caption': ''
+                    },
+                    {
+                        'url': 'assets/img/am-rhad.jpg',
+                        'width': 3872,
+                        'height': 2592,
+                        'caption': ''
+                    },
+                    {
+                        'url': 'assets/img/am-fbad.jpg',
+                        'width': 3872,
+                        'height': 2592,
+                        'caption': ''
+                    },
+                    {
+                        'url': 'assets/img/am-dim.jpg',
+                        'width': 3872,
+                        'height': 2592,
+                        'caption': ''
+                    },
                 ],
-                'category': 'Branding, Logo Design',
-                'description': 'Teaching Institute 10th anniversary design.',
+                'category': 'Book Design',
+                'description': 'Sacramento State annual spring show.',
                 'tags': ['leaf', 'poster', 'home']
-            },
-            {
-                'id': 6,
-                'name': 'Project 6',
-                'thumbUrl':
-                    {
-                        'url': 'assets/img/proj6-thumb.png',
-                        'width': 300,
-                        'height': 300,
-                        'caption': 'This is the thumbnail of this project.'
-                    },
-                'projectPics': [
-                    {
-                        'url': 'assets/img/proj6-thumb.png',
-                        'width': 3872,
-                        'height': 2592,
-                        'caption': 'This is the first picture in this project.'
-                    }
-                ],
-                'category': 'Branding, Web Design, Logo Design',
-                'description': 'Leaf rake with 48-inch wooden handle.',
-                'tags': ['leaf', 'yard', 'home']
             }
         ];
         return { projects };
