@@ -156,7 +156,7 @@ export class ProjectData implements InMemoryDbService, InMemoryBackendConfig {
                 'name': 'The Godfather Title Sequence',
                 'thumbUrl':
                     {
-                        'url': 'assets/img/gf-thumb.jpg',
+                        'url': 'assets/img/gf-thumb-crop.jpg',
                         'width': 3872,
                         'height': 2592,
                         'caption': 'This is the thumbnail of this project.'
@@ -185,7 +185,7 @@ export class ProjectData implements InMemoryDbService, InMemoryBackendConfig {
                 'name': 'Ascend Magazine',
                 'thumbUrl':
                     {
-                        'url': 'assets/img/am-cover.jpg',
+                        'url': 'assets/img/am-cover-crop.jpg',
                         'width': 3872,
                         'height': 2592,
                         'caption': ''
@@ -228,7 +228,7 @@ export class ProjectData implements InMemoryDbService, InMemoryBackendConfig {
             },
             {
                 'id': 5,
-                'name': 'Dune',
+                'name': 'Dune Special Edition',
                 'thumbUrl':
                     {
                         'url': 'assets/img/dune-cover.jpg',
@@ -250,25 +250,53 @@ export class ProjectData implements InMemoryDbService, InMemoryBackendConfig {
                         'caption': ''
                     },
                     {
-                        'url': 'assets/img/am-rhad.jpg',
+                        'url': 'assets/img/dune-type.png',
                         'width': 3872,
                         'height': 2592,
                         'caption': ''
                     },
                     {
-                        'url': 'assets/img/am-fbad.jpg',
+                        'url': 'assets/img/dune-inner.png',
                         'width': 3872,
                         'height': 2592,
                         'caption': ''
-                    },
-                    {
-                        'url': 'assets/img/am-dim.jpg',
-                        'width': 3872,
-                        'height': 2592,
-                        'caption': ''
-                    },
+                    }
                 ],
                 'category': 'Book Design',
+                'description': 'Sacramento State annual spring show.',
+                'tags': ['leaf', 'poster', 'home']
+            },
+            {
+                'id': 6,
+                'name': 'Miscellaneous Posters',
+                'thumbUrl':
+                    {
+                        'url': 'assets/img/id-mock-crop.jpg',
+                        'width': 3872,
+                        'height': 2592,
+                        'caption': ''
+                    },
+                'projectPics': [
+                    {
+                        'url': 'assets/img/id-mock.jpg',
+                        'width': 3872,
+                        'height': 2592,
+                        'caption': 'CSU Sacramento Annual Spring Show'
+                    },
+                    {
+                        'url': 'assets/img/qt-mock.jpg',
+                        'width': 3872,
+                        'height': 2592,
+                        'caption': 'Quentin Tarantino Film Festival'
+                    },
+                    {
+                        'url': 'assets/img/env-mock.jpg',
+                        'width': 3872,
+                        'height': 2592,
+                        'caption': 'Envision Design Conference'
+                    }
+                ],
+                'category': 'Poster Design',
                 'description': 'Sacramento State annual spring show.',
                 'tags': ['leaf', 'poster', 'home']
             }

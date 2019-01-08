@@ -207,7 +207,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     if (this._route.snapshot.params['id'] > 1){
       prevPage = (+this._route.snapshot.params['id']) - 1;
     } else {
-      prevPage = 5
+      prevPage = 6
     }
     this._router.navigate([`/slider`], { queryParamsHandling: 'preserve' });
     this.getPrevProject(prevPage)
@@ -225,7 +225,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     // window.scrollTo(0, 0);
 
     let nextPage: number
-    if (this._route.snapshot.params['id'] < 5 ){
+    if (this._route.snapshot.params['id'] < 6 ){
       nextPage = (+this._route.snapshot.params['id']) + 1
     } else {
       nextPage = 1
@@ -251,7 +251,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     if (i > 1){
       const id = i - 1
     } else {
-      const id = 5
+      const id = 6
     }
     this._projectService.getProject(+i).subscribe(
         project => this.prevProject = project,
@@ -261,7 +261,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
 
   getNextProject(i: number): void{
     let id = 0;
-    if (i < 5){
+    if (i < 6){
        id = i + 1
     } else {
       id = 1
