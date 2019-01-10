@@ -1,4 +1,4 @@
-<div class="icon-scroll-container">
+<div class="icon-scroll-container" #iconScrollContainer>
         <div class='mouse'></div>
         <p>scroll</p>
         <p>down</p>
@@ -12,7 +12,7 @@
         </div>
         <div class="project-detail-wrapper">
             <div class="project-detail-content" ><!--[style.margin-top]="'-' + winHeight/3 + 'px'"-->
-                <div class="thumbnail ">
+                <div class="thumbnail " #thumbnail>
                     <div class="thumbnail-text ">
                         <h1 class="title is-2 has-text-weight-semibold" >{{project.name}}</h1>
                         <h2 class="subtitle is-5">{{project.category}}</h2>
@@ -20,7 +20,7 @@
                         <p>{{project.description}}</p>
                     </div>
                 </div>
-                <div class="picture " 
+                <div class="picture" 
                     *ngFor="let p of project.projectPics"
                     [class.is-showing]="isShowing"
                     #picture>

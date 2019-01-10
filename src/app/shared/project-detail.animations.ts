@@ -54,6 +54,9 @@ export const projectDetailTransition =
             animate('500ms ease-out',
             style({transform: 'translateY(100px)', opacity: 0})),
           ])),*/
+          query('.icon-scroll-container', [
+            style({opacity: 0, visibility: 'hidden'})
+          ]),
           query('.project-detail-content', [
             useAnimation(fadeAnimation, {
               params: {

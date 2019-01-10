@@ -26,6 +26,7 @@ import { projectDetailTransition } from 'app/shared/project-detail.animations';
 
 import { SCROLLMAGIC_TOKEN } from '../shared/scrollMagic.service';
 import { LoadingService } from '../shared/loading.service';
+import { reverse } from 'dns';
 // import { JQ_TOKEN } from 'app/shared/jQuery.service';
 
 
@@ -41,6 +42,8 @@ import { LoadingService } from '../shared/loading.service';
 })
 export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChildren('picture') pictures: QueryList<any>;
+  @ViewChild('iconScrollContainer') iconScrollContEl: ElementRef;
+  @ViewChild('thumbnail') thumbnailEl: ElementRef;
   // @ViewChild("header") header: ElementRef;
   // @ViewChild('projectThumb') projectThumbEl: ElementRef;
 
@@ -58,6 +61,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
   controller: any;
   pinHeader: any;
   fadeScene: any;
+  fadeOutScroll: any;
   loading: boolean;
   easing: any = 'Power2.easeOut';
   embed: any;
@@ -92,6 +96,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     console.log(this._route.snapshot.params['id']);
     console.log('nextProject: ' + this.nextProject);
     this.embed = this._sanitizer.bypassSecurityTrustHtml('<iframe src="https://player.vimeo.com/video/' + this.project.video + '" width="640" height="358" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; width: 100%; height: 100%; top: 0; left: 0"></iframe>');
+    
     /*if (this._route.snapshot.params['id'] == 3){
       this.video = true;
       console.log('this video:' + this.video);
@@ -147,13 +152,26 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     .setPin('.thumb-container', {pushFollowers: false})
     .addTo(this.controller)
     */
-
+    console.log(this.iconScrollContEl);
+    this.fadeOutScroll = new this._scrollMagic.Scene({
+      triggerElement: this.thumbnailEl.nativeElement,
+      triggerHook: 0.9,
+      reverse: false
+    })
+    .setTween(TweenMax.to(this.iconScrollContEl.nativeElement, 1, {autoAlpha: 0, ease: Power2.easeOut}))
+    /*.addIndicators({
+      name: 'fade out scroll',
+      colorTrigger: 'black',
+      colorStart: '#75c695',
+      colorEnd: 'pink'
+    })*/
+    .addTo(this.controller);
 
     this.pictures.forEach((picture) => {
       // console.log('picture: ' + picture.nativeElement);
       this.fadeScene = new this._scrollMagic.Scene({
         triggerElement: picture.nativeElement,
-        triggerHook: 0.8
+        triggerHook: 0.7
       })
       .setTween(TweenMax.from(picture.nativeElement, 1, {autoAlpha: 0, ease: 'Power2.easeOut'}))
       /*.addIndicators({
