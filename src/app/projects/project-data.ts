@@ -153,7 +153,7 @@ export class ProjectData implements InMemoryDbService, InMemoryBackendConfig {
             },
             {
                 'id': 3,
-                'name': 'The Godfather Title Sequence',
+                'name': 'The Godfather',
                 'thumbUrl':
                     {
                         'url': 'assets/img/gf-thumb-crop.jpg',
@@ -268,7 +268,7 @@ export class ProjectData implements InMemoryDbService, InMemoryBackendConfig {
             },
             {
                 'id': 6,
-                'name': 'Miscellaneous Posters',
+                'name': 'Selected Posters',
                 'thumbUrl':
                     {
                         'url': 'assets/img/id-mock-crop.jpg',

@@ -31,7 +31,7 @@ import { fadeAnimation } from '../shared/animations';
 					opacityTo: 1,
 					translate3dFrom: 'translate3d(0,5%,0)',
 					translate3dTo: 'translate3d(0,0,0)',
-					time: '500ms'
+					time: '300ms'
 				  }
 				})
 			  ])
@@ -44,7 +44,7 @@ import { fadeAnimation } from '../shared/animations';
 					opacityTo: 0,
 					translate3dFrom: 'translate3d(0,0,0)',
 					translate3dTo: 'translate3d(0,5%,0)',
-					time: '500ms'
+					time: '300ms'
 				  }
 				})
 			  ])

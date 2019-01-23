@@ -32,7 +32,7 @@ import { WindowDimensionsService } from '../shared/window-dimensions.service'
 					opacityTo: 1,
 					translate3dFrom: 'translate3d(0,10%,0)',
 					translate3dTo: 'translate3d(0,0,0)',
-					time: '500ms'
+					time: '300ms'
 				  }
 				})
 			  ])
@@ -45,7 +45,7 @@ import { WindowDimensionsService } from '../shared/window-dimensions.service'
 					opacityTo: 0,
 					translate3dFrom: 'translate3d(0,0,0)',
 					translate3dTo: 'translate3d(0,10%,0)',
-					time: '500ms'
+					time: '300ms'
 				  }
 				})
 			  ])

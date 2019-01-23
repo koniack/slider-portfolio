@@ -26,10 +26,15 @@ export const projectDetailTransition =
               opacityTo: 1,
               translate3dFrom: 'translate3d(0,2.5%,0)',
               translate3dTo: 'translate3d(0,0,0)',
-              time: '500ms'
+              time: '00ms'
               }
             })
-            ]),
+          ]),
+          query('.icon-scroll-container', [
+            style('*'),
+            animate('500ms ease-out',
+            style({opacity: 1})),
+          ])
          /* query('h1, h2', stagger(150, [
             style({ transform: 'translateY(100px)', opacity: 0 }),
             animate('500ms ease-out',
@@ -55,7 +60,7 @@ export const projectDetailTransition =
             style({transform: 'translateY(100px)', opacity: 0})),
           ])),*/
           query('.icon-scroll-container', [
-            style({opacity: 0, visibility: 'hidden'})
+            style({opacity: 0})
           ]),
           query('.project-detail-content', [
             useAnimation(fadeAnimation, {
@@ -64,7 +69,7 @@ export const projectDetailTransition =
               opacityTo: 0,
               translate3dFrom: 'translate3d(0,0,0)',
               translate3dTo: 'translate3d(0,2.5%,0)',
-              time: '500ms'
+              time: '300ms'
               }
             })
             ])

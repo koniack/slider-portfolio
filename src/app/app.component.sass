@@ -11,24 +11,35 @@ header
 
 
   .navbar
+    +media('>1023px')
+      margin: 0 2rem
     background-color: $transparent
     text-align: left
     margin: 0 1rem
-    min-height: 4.5rem
+    //min-height: 4.5rem
     //position: absolute
 
-    h1
+    .main-title
       +media('<426px')
-        display: none
-      letter-spacing: 1px
-      color: $white
-      font-weight: 400
+          display: none
+      margin-left: 8px
+      margin-top: .25rem
+      //width: 350px
+      text-transform: uppercase
+      letter-spacing: 2px
+      display: block
+      float: left
+      padding-left: 0
+      h1
+        
+        letter-spacing: 1px
+        color: $white
+        font-weight: 400
+        margin-bottom: 1.4rem
 
-    p
-      +media('<426px')
-        display: none
-      letter-spacing: 1.8px
-      font-weight: 400
+      p
+        letter-spacing: 1.8px
+        font-weight: 400
   
     .navbar-brand
       .navbar-item
@@ -38,20 +49,11 @@ header
         img
           display: inline-block
           float: left
-          +media('<426px')
-            width: 48px
+          width: 48px
 
         &:hover
           //background-color: transparent 
-    
-    .navbar-menu
-      .navbar-start
-        .navbar-item
-          padding-top: .75rem
-
-        .main-title
-          margin-left: 5px
-
+          
 .navbar-burger 
   &:hover
     background-color: transparent 
@@ -92,20 +94,6 @@ header
       
       &::after  
         width: 100%
-
-
-        
-        
-
-.main-title
-  text-transform: uppercase
-  letter-spacing: 2px
-  display: block
-  float: left
-  padding-left: 0
-
-  h1
-    margin-bottom: 1.4rem
 
 #main-area
   box-sizing: border-box

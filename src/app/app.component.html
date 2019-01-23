@@ -5,6 +5,10 @@
             <a class="navbar-item " [routerLink]="['/slider']" queryParamsHandling="preserve"> 
                 <img src="assets/img/k-logo.svg" alt="Kone Lathipanya Logo">
             </a>
+            <div class="main-title  navbar-item">
+                <h1 class="title is-4" [style.color]='color'>{{name}}</h1>
+                <p class="subtitle is-6" >{{title}}</p>
+            </div>
             <div class="navbar-burger">
                 <div class="navbar-item">
                     <nav-component></nav-component>
@@ -13,10 +17,6 @@
         </div>
         <div class="navbar-menu">
             <div class="navbar-start">
-                <div class="main-title  navbar-item">
-                    <h1 class="title is-4" [style.color]='color'>{{name}}</h1>
-                    <p class="subtitle is-6" >{{title}}</p>
-                </div>
             </div>
             <div class="navbar-end">
                 <a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="navbar-item" [routerLink]="['/projects']" >Work</a>

@@ -60,9 +60,8 @@ img
         font-size: 2.5rem
 
       width: 90%
-      font-weight: $weight-normal
-      color: $white
-      
+    h2 
+      letter-spacing: 1px
     
     h5 
       +media ('<=450px')
@@ -72,21 +71,21 @@ img
       +media ('<=tablet', '>450px')
         font-size: 1.5rem
 
-      color: $black
-
   .active
     visibility: visible
     
-    .proj-title
+    .proj-title-container
       overflow: hidden
       //width: 90%
 
-.proj-title
+.proj-title-container
   +media ('>desktop')
     width: 35%
   +media('<450px')
     width: 100%
     //padding-left: 1rem
+  +media('>1023px')
+      padding-left: 2rem
   
   background-image: linear-gradient(0deg, rgba(0,255,255,0.70) 0%, rgba(245,166,35,0.70) 93%)
   //background-color: rgba(255,143,0, .85)
@@ -99,7 +98,7 @@ img
   overflow: hidden
   top: 0
   left: 0
-  padding-left: 1.5rem
+  padding-left: 1rem
 
   .projTitle
     height: auto
@@ -109,55 +108,63 @@ img
     .subtitle
       height: auto
       overflow: hidden
+    
+      
 
 .next-button,
 .prev-button
-  width: 30px
-  height: 30px
+  width: 36px
+  height: 36px
   position: absolute
-  right: 2rem
+  right: 1rem
   z-index: 100
   cursor: pointer
   border: 1px solid $black
   opacity: 1
   transition: background-color 300ms, border 300ms cubic-bezier(.77, 0, .175, 1)
+  @media(hover)
+    &:hover
+      background-color: $orange
+      border: 1px solid $orange
 
-  &:hover
+    &:hover::after,
+    &:hover::after
+      border-top: 1px solid $white
+      border-right: 1px solid $white
+
+  &:active
     background-color: $orange
     border: 1px solid $orange
 
-  &:active
-    background-color: $black
-
-.next-button:hover::after,
-.prev-button:hover::after
-  border-top: 1px solid $white
-  border-right: 1px solid $white
+  &:active::after,
+  &:active::after
+    border-top: 1px solid $white
+    border-right: 1px solid $white  
 
 .next-button::after,
 .prev-button::after
   content: ''
-  height: 12px
-  width: 12px
+  height: 16px
+  width: 16px
   border-top: 1px solid $black
   border-right: 1px solid $black
   display: block
   position: absolute
 
 .next-button
-  bottom: 2rem
+  bottom: 1rem
 
   &::after
-    bottom: 12px
-    left: 8px
+    bottom: 14px
+    left: 9px
     transform: rotate(135deg)
 
 .prev-button
-  bottom: 4.5rem
+  bottom: calc(2rem + 36px) 
 
   &::after
-    top: 12px
-    left: 8px
+    top: 14px
+    left: 9px
     transform: rotate(-45deg)
 
 // Carousel Styles
@@ -166,14 +173,16 @@ img
     //transform: scale(.75)
     //left: 1rem
     //top: 5.5rem
+  +media('>1023px')
+      left: 2rem
   //background-color: orange
-  width: 50px
+  width: 48px
   height: 100px
   display: block
   position: absolute
   z-index: 99
-  top: 6.5rem
-  left: 1.5rem
+  top: 13%
+  left: 1rem
 
   .dots
     margin: 0
@@ -202,9 +211,9 @@ img
         z-index: -1 */
         
     a
-      width: 50px
+      width: 48px
       height: 1px
-      padding: 8px 0
+      padding: 7px 0
       cursor: pointer
       display: block
 
@@ -218,7 +227,7 @@ img
 
       &::before
         content: ''
-        width: 50px
+        width: 48px
         height: 1px
         background-color: $white
         display: block
@@ -235,4 +244,4 @@ img
 
       &.current-dot
         background-color: $black
-        width: 50px
+        width: 48px

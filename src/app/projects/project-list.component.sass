@@ -1,6 +1,6 @@
 @import './src/assets/sass/base'
 
-.project
+/*.project
   animation-duration: .5s
   animation-fill-mode: forwards
   //animation-name: fadeUp
@@ -19,44 +19,92 @@
     animation-delay: .4s
 
   &:nth-child(6)
-    animation-delay: .5s
+    animation-delay: .5s*/
 
 .filter
   margin-bottom: 30px
 
 .project-list-container
-  //margin: 2.5%
-  padding: 0 2.5%
-  background-color: $grey
+  //padding: 100% 2.5%
+  background-color: rgba(0,0,0,0.0)
   //border: .75rem solid $white
   //transform: scale(0.95)
+  height: 0
 
   .projects
-    padding: 8.5rem 1.5rem 1.5rem
-    //margin: .25rem
-
-//html
-  height: 100%
-  body 
-    height: 100%
-    #main-area
-      height: 100%
-      .project-list-container
-        height: 100%
-        .columns
-          height: 100%
-          .column 
-            height: 100%
+    padding: 0
+    margin: 0
+    //width: 100%
+    height: 0
                 
+    .column
+      +media ('>tablet')
+        width: 30%
+        
+      //height: 100%
+      display: block
+      padding: 0
+      transition: all 0.5s ease-in-out
+      position: absolute
+      width: 46.25%
+      //height: 25.16%
+      overflow: hidden
 
-.column
-  //height: 100%
+    .column0
+      +media ('>tablet')
+        top: 15%
+        left: 2.5%
+      top: 17%
+      left: 2.5%
+    .column1
+      +media ('>tablet')
+        top: 15%
+        left: 35%
+      top: 17%
+      left: 51.25%
+    .column2
+      +media ('>tablet')
+        top: 15%
+        left: 67.5%
+      top: 44.66%
+      left: 2.5%
+    .column3
+      +media ('>tablet')
+        top: 47.5%
+        left: 2.5%
+      top: 44.66%
+      left: 51.25%
+    .column4
+      +media ('>tablet')
+        top: 47.5%
+        left: 35%
+      top: 72.33%
+      left: 2.5%
+    .column5
+      +media ('>tablet')
+        top: 47.5%
+        left: 67.5%
+      top: 72.33%
+      left: 51.25%
+
+
+
 
 .card
-  height: 100%
 
+  height: 100%
+  background-color: rgba(0,0,0,0.0)
   &:focus
     outline: none
+  @media(hover)
+    &:hover
+      .card-content
+        opacity: 1
+      .image
+        background-blend-mode: overlay 
+        background-color: $orange
+        &:before
+          opacity: .5
   
   .card-image
     //border: 1px solid $white    
@@ -64,6 +112,7 @@
 .project
   cursor: pointer
   //padding: .75rem
+  
 
   .image-container
     //border: 1px solid #dbdbdb
@@ -73,11 +122,15 @@
     overflow: hidden
     background-size: cover
     background-repeat: no-repeat 
-    background-position: center center
+    background-position: left center
+    background-color: rgba(0,0,0,0.0)
     transform: translateZ(0)
-    transition: transform 1500ms ease-in-out
+    transition: transform 0.5s ease-in-out, background 0.5s ease-in-out
     width: 100%
     height: 100%
+    padding-top: 75%
+    background-blend-mode: overlay 
+    background-color: $orange
 
     &::before
       content: ''
@@ -86,24 +139,47 @@
       top: 0
       display: block
       position: absolute
-      background-color: rgba(70, 70, 70, .1)
-      z-index: 998
-      opacity: 1
+      background-color: $orange
+      z-index: -1
+      opacity: .5
       transition: opacity 1s ease
-      box-shadow: inset 0 0 7rem -3rem $black
-      
-  h2
-    font-weight: 500
-    color: $dark-grey
-    text-transform: uppercase
-    transition: color 1500ms ease-in-out
+      //box-shadow: inset 0 0 7rem -3rem $black
 
   .card-content
-    height: 150px
+    height: 100%
     padding: 1rem
+    overflow: hidden
+    position: absolute
+    top: 0
+    left: 0
+    z-index: 1
+    opacity: 1
+    transition: opacity 1s ease
+
+    .content
+      margin-bottom: .25rem
+      
+    h6,
+    h5,
+    p 
+      line-height: 1.2rem
+        
+    h6 
+      +media('>=tablet')
+        font-size: 32px
+        line-height: 36px
+      
+    h5  
+      +media('>=tablet')
+        font-size: 40px
+        line-height: 44px
 
     p 
-      margin-bottom: .75rem
+      +media('>=tablet')
+        font-size: 21px
+        line-height: 24px
+      +media('<=phone-large')
+        display: none
 
     span
       height: 1px
@@ -123,7 +199,7 @@
 
 
   
-.project:hover
+/*.project:hover
   .image
     transform: scale(1.04)
 
@@ -139,4 +215,4 @@
 
   .image
     &::before
-      opacity: 0
+      opacity: 0 */

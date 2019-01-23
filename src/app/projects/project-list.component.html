@@ -1,31 +1,29 @@
-<div (window:resize)="onResize()"  class="project-list-container" [style.min-height]="_windowDimensionsService.winHeight + 'px'">
+<div (window:resize)="onResize()"  class="project-list-container" [style.min-height]="[winHeight + 'px']">
     <!--<select [(ngModel)]="listFilter" class="filter" >
         <option [selected]="all == 'two'" [ngValue]="null" >All</option>
         <option *ngFor="let f of filterCategory" [ngValue]="f">{{f}}</option>
     </select>-->
 
     <div class="projects columns is-multiline">
-        <div class="column is-one-quarter-widescreen is-one-third-desktop is-half-tablet image{{projectIndex}}" 
+        <div #column ngClass="expand" class="column{{projectIndex}} column is-one-third-widescreen is-one-third-desktop is-half-tablet image{{projectIndex}}" 
             *ngFor="let project of projects | projectFilter: listFilter; let projectIndex = index"
         >
             <div
-                [routerLink]= "[project.id]" 
-                [queryParams]= "{filterBy: listFilter, project: project.id}" 
-                [queryParamsHandling]="preserve" 
                 class="card project"
+                (click)="onNext(projectIndex)" 
             >
-                <div class="card-image">
+                <div class="card-image card-image{{projectIndex}}">
+                    <div class="card-content">
+                        <h6 class="content dark-type has-text-weight-semibold">{{project.id | number:'2.0'}}.</h6>
+                        <h5 class="content light-type has-text-weight-semibold has-shadow" [innerText]='project.name' ></h5>
+                        <p class="content dark-type">{{project.category}}</p>
+                    </div>
                     <div class="image-container">
-                        <div  class="image  is-4by3" #image [style.background-image]="'url(' + project.thumbUrl.url + ')'" >
+                        <div  class="image{{projectIndex}} image is-4by3" #image [style.background-image]="'url(' + project.thumbUrl.url + ')'" >
                         </div>
                     </div>
                 </div>
-                <div class="card-content">
-                    <p class="content subtitle is-5">{{project.id | number:'2.0'}}.</p>
-                    <span></span>
-                    <h2 class="content title is-4" [innerText]='project.name' ></h2>
-                    <h5 class="content subtitle is-5">{{project.category}}</h5>
-                </div>
+                
             </div>
         </div>
     </div>

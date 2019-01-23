@@ -26,7 +26,7 @@ import { projectDetailTransition } from 'app/shared/project-detail.animations';
 
 import { SCROLLMAGIC_TOKEN } from '../shared/scrollMagic.service';
 import { LoadingService } from '../shared/loading.service';
-import { reverse } from 'dns';
+//import { reverse } from 'dns';
 // import { JQ_TOKEN } from 'app/shared/jQuery.service';
 
 
@@ -155,10 +155,10 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     console.log(this.iconScrollContEl);
     this.fadeOutScroll = new this._scrollMagic.Scene({
       triggerElement: this.thumbnailEl.nativeElement,
-      triggerHook: 0.9,
+      triggerHook: .95,
       reverse: false
     })
-    .setTween(TweenMax.to(this.iconScrollContEl.nativeElement, 1, {autoAlpha: 0, ease: Power2.easeOut}))
+    .setTween(TweenMax.to(this.iconScrollContEl.nativeElement, 1, {opacity: 0, ease: this.easing}))
     /*.addIndicators({
       name: 'fade out scroll',
       colorTrigger: 'black',
@@ -173,7 +173,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
         triggerElement: picture.nativeElement,
         triggerHook: 0.7
       })
-      .setTween(TweenMax.from(picture.nativeElement, 1, {autoAlpha: 0, ease: 'Power2.easeOut'}))
+      .setTween(TweenMax.from(picture.nativeElement, 1, {autoAlpha: 0, ease: this.easing}))
       /*.addIndicators({
         name: 'fade scene',
         colorTrigger: 'black',

@@ -14,8 +14,8 @@
             <div class="project-detail-content" ><!--[style.margin-top]="'-' + winHeight/3 + 'px'"-->
                 <div class="thumbnail " #thumbnail>
                     <div class="thumbnail-text ">
-                        <h1 class="title is-2 has-text-weight-semibold" >{{project.name}}</h1>
-                        <h2 class="subtitle is-5">{{project.category}}</h2>
+                        <h1 class="title" >{{project.name}}</h1>
+                        <h5 class="subtitle">{{project.category}}</h5>
                         <span class="line"></span>
                         <p>{{project.description}}</p>
                     </div>
@@ -24,8 +24,8 @@
                     *ngFor="let p of project.projectPics"
                     [class.is-showing]="isShowing"
                     #picture>
-                    <div class="caption">
-                        <h2>{{p.caption}}</h2>
+                    <div *ngIf="p.caption" class="caption">
+                        <h5>{{p.caption}}</h5>
                     </div>
                     <div class="">
                         <figure>
@@ -46,8 +46,8 @@
         </div>-->
         <div class="column is-12 button-container" (click)="onNext()" *ngIf="nextProject">
             <div class="text-wrap">
-                <h5 class="subtitle is-3 is-uppercase">Next Project:</h5>
-                <h5 class="title is-1 is-uppercase has-text-weight-bold">{{nextProject.name}}</h5>
+                <h5 class="dark-type">Next Project:</h5>
+                <h1 class="light-type has-shadow">{{nextProject.name}}</h1>
             </div>
             <button class="level-item button" [class.is-animating]="loading" [style.background-image]="'url(' + nextProject.thumbUrl.url + ')'"  ></button>
         </div>

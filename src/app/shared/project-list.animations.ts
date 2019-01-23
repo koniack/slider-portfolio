@@ -16,29 +16,29 @@ import { fadeAnimation } from './animations';
 export const projectListTransition =
   trigger('projectListTransition', [
       transition(':enter', [
-        query('.column', [
+        query('.column', stagger( 200, [
           useAnimation(fadeAnimation, {
             params: {
               opacityFrom: 0,
               opacityTo: 1,
-              translate3dFrom: 'translate3d(0,5%,0)',
+              translate3dFrom: 'translate3d(0,0,0)',
               translate3dTo: 'translate3d(0,0,0)',
-              time: '500ms'
+              time: '300ms'
             }
           })
-        ])
+        ]))
       ]),
       transition(':leave', [
-        query('.column', [
+        query('.column', stagger( -200, [
           useAnimation(fadeAnimation, {
             params: {
               opacityFrom: 1,
               opacityTo: 0,
               translate3dFrom: 'translate3d(0,0,0)',
-              translate3dTo: 'translate3d(0,5%,0)',
-              time: '500ms'
+              translate3dTo: 'translate3d(0,0,0)',
+              time: '300ms'
             }
           })
-        ])
+        ]))
       ])
   ]);

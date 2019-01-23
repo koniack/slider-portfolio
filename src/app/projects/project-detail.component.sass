@@ -16,18 +16,19 @@
   .project-detail-wrapper
     //padding: 0 1.5rem
     max-width: 1280px
+    padding: 2.5%
     margin: 0 auto
     //box-shadow: 0 2px 40px 0 rgba(0,0,0,0.50)
 
     .project-detail-content
       +media ('<=tablet')
-        margin: 1rem
-        padding: 1rem
-      background-color: $white
+        //margin: 1rem
+        //padding: 1rem
+      //background-color: $white
       //z-index: 999
       //display: flex
       //margin: 70% 2.5% 0 
-      padding: 3rem
+      //margin: 1rem
       position: relative
 
     .thumbnail-text  
@@ -53,10 +54,6 @@
   +media ('<=tablet')
     //margin: 25px
 
-  h1
-    color: $black
-    font-weight: $weight-normal
-    
 h1,
 h2,
 p
@@ -107,7 +104,7 @@ img
   font-size: 24pt
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif
   color: $black
-  padding-bottom: 50px
+  padding-bottom: 1rem
 
 .detail-footer
   margin: 0
@@ -129,9 +126,8 @@ img
           transform: scale(1)
         
     .text-wrap
-      +media('<=450px')
-        font-size: 1rem
-        min-width: 80%
+      +media('<=phone-large')
+        min-width: 90%
 
       margin: 0 auto
       position: absolute
@@ -141,9 +137,6 @@ img
       z-index: 2
       transform: translate(-50%, -50%)
       cursor: pointer
-
-      h5
-        color: $white
 
     .button
       height: 100px
@@ -212,40 +205,6 @@ img
     animation-fill-mode: forwards
     animation-name: fadeUp
 
-
-  //icon scroll
-.icon-scroll,
-.icon-scroll:before
-  position: absolute
-  left: 50%
-
-.icon-scroll
-  width: 40px
-  height: 70px
-  margin-left: -20px
-  top: 50%
-  margin-top: -35px
-  box-shadow: inset 0 0 0 1px #fff
-  border-radius: 25px
-
-.icon-scroll:before
-  content: ''
-  width: 8px
-  height: 8px
-  background: #fff
-  margin-left: -4px
-  top: 8px
-  border-radius: 4px
-  animation-duration: 1.5s
-  animation-iteration-count: infinite
-  animation-name: scroll
-
-@keyframes scroll
-  0%
-    opacity: 1
-  100%
-    opacity: 0
-    transform: translateY(46px)
 
 //mouse scroll
 

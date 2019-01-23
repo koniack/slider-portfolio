@@ -19,7 +19,7 @@ export const sliderTransition =
                 style({transform: 'scale(0)'}))
               ]))
             ]),
-            query('.proj-title', [
+            query('.proj-title-container', [
               style('*'),
               animate('500ms cubic-bezier(0.95, 0.05, 0.795, 0.035)',
               style({transform: 'translate3d(-100%,0,0)'}))
@@ -38,7 +38,7 @@ export const sliderTransition =
               animate('500ms ease-out',
               style('*')),
             ]),*/
-            query('.proj-title', [
+            query('.proj-title-container', [
               style({transform: 'translate3d(-100%,0,0)'}),
               animate('500ms ease-out',
               style('*'))

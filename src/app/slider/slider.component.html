@@ -32,25 +32,24 @@
             id="project{{projectIndex}}"
             [class.active]="slide['active']"
             [style.background-image]="'url(' + slide.thumbUrl.url + ')'">
-            <a  [routerLink]= "['/projects', slide.id]" 
-            [queryParams]= "{project: slide.id}" 
-            queryParamsHandling="merge" >
-                <!--<img  
-                    [src]='slide.thumbUrl.url' 
-                    [ngStyle] = "getSliderImgDim(projectIndex)"
-                />-->
-                <div class="proj-title">
-                    <div id="projTitle{{projectIndex}}" class="projTitle">
-                        <h5 id="projectId{{slide.id}}" class="subtitle is-2 has-text-weight-semibold" >{{slide.id | number:'2.0'}}.</h5>
-                        <h1 id="title{{projectIndex}}" class="title is-1 has-text-weight-semibold" [innerText]='slide.name' ></h1>
-                        <h5 id="subtitle{{projectIndex}}" class="subtitle is-4" >{{slide.category}}</h5>
-                        <button class="see-more button is-dark is-uppercase"
-                        [routerLink]= "['/projects', slide.id]"
-                        [queryParams]= "{project: slide.id}" 
-                        queryParamsHandling="merge" >see more</button>
-                    </div>
+            <!--<img  
+                [src]='slide.thumbUrl.url' 
+                [ngStyle] = "getSliderImgDim(projectIndex)"
+            />-->
+            <div class="proj-title-container">
+                <div id="projTitle{{projectIndex}}" class="projTitle">
+                    <h2 id="projectId{{slide.id}}" class="dark-type" >{{slide.id | number:'2.0'}}.</h2>
+                    <h1 id="title{{projectIndex}}" class="light-type has-shadow" [innerText]='slide.name' ></h1>
+                    <h5 id="subtitle{{projectIndex}}" class="dark-type" >{{slide.category}}</h5>
+                    <button [routerLink]= "['/projects', slide.id]" 
+                    [queryParams]= "{project: slide.id}" 
+                    queryParamsHandling="merge" 
+                    class="button dark-button"
+                    [routerLink]= "['/projects', slide.id]"
+                    [queryParams]= "{project: slide.id}" 
+                    queryParamsHandling="merge" >see more</button>
                 </div>
-            </a>
+            </div>
         </div>
     </div>
     
