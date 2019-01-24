@@ -25,29 +25,21 @@
   margin-bottom: 30px
 
 .project-list-container
-  //padding: 100% 2.5%
-  background-color: rgba(0,0,0,0.0)
-  //border: .75rem solid $white
-  //transform: scale(0.95)
   height: 0
 
   .projects
     padding: 0
     margin: 0
-    //width: 100%
     height: 0
                 
     .column
       +media ('>tablet')
         width: 30%
-        
-      //height: 100%
       display: block
       padding: 0
       transition: all 0.5s ease-in-out
       position: absolute
       width: 46.25%
-      //height: 25.16%
       overflow: hidden
 
     .column0
@@ -87,35 +79,26 @@
       top: 72.33%
       left: 51.25%
 
-
-
-
 .card
-
   height: 100%
-  background-color: rgba(0,0,0,0.0)
+  box-shadow: none
   &:focus
     outline: none
   @media(hover)
     &:hover
       .card-content
         opacity: 1
+        &::after
+          opacity: .5
       .image
         background-blend-mode: overlay 
         background-color: $orange
-        &:before
-          opacity: .5
-  
-  .card-image
-    //border: 1px solid $white    
+        
 
 .project
-  cursor: pointer
-  //padding: .75rem
-  
+  cursor: pointer  
 
   .image-container
-    //border: 1px solid #dbdbdb
     overflow: hidden
 
   .image
@@ -129,32 +112,34 @@
     width: 100%
     height: 100%
     padding-top: 75%
-    background-blend-mode: overlay 
-    background-color: $orange
 
-    &::before
-      content: ''
-      width: 100%
-      height: 100%
-      top: 0
-      display: block
-      position: absolute
-      background-color: $orange
-      z-index: -1
-      opacity: .5
-      transition: opacity 1s ease
-      //box-shadow: inset 0 0 7rem -3rem $black
+    
 
   .card-content
+    +media('>=desktop-large')
+      padding: 2rem
     height: 100%
+    width: 100%
     padding: 1rem
     overflow: hidden
     position: absolute
     top: 0
     left: 0
     z-index: 1
-    opacity: 1
+    opacity: 0
     transition: opacity 1s ease
+    &::after
+      content: ''
+      width: 100%
+      height: 100%
+      top: 0
+      left: 0
+      display: block
+      position: absolute
+      background-color: $orange
+      z-index: -1
+      opacity: 0
+      transition: opacity .5s ease
 
     .content
       margin-bottom: .25rem
@@ -180,39 +165,3 @@
         line-height: 24px
       +media('<=phone-large')
         display: none
-
-    span
-      height: 1px
-      background-color: $med-grey
-      width: 100%
-      display: block
-      margin: .75rem 0
-
-      &::before
-        transition: width 1500ms ease-in-out 
-        content: ' '
-        background-color: $orange
-        width: 0
-        height: 1px
-        display: block
-
-
-
-  
-/*.project:hover
-  .image
-    transform: scale(1.04)
-
-  h2
-    color: $black
-
-  .caption
-    opacity: 1
-  .card-content  
-    span
-      &::before
-        width: 100%
-
-  .image
-    &::before
-      opacity: 0 */

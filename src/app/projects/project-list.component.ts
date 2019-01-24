@@ -103,12 +103,13 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
 		)*/
 	
 		// TweenMax.set('scrollmagic-pin-spacer', {visibilty: 'hidden', height: 0 });
-		tl.to([ '.card-content'], .4, {opacity:0, ease: this.easing })
+		tl.to([ '.card-content', '.image::before'], .4, {opacity:0, ease: this.easing })
+		.to([ '.image'], .1, {'background-blend-mode': 'normal', 'background-color': 'transparent', ease: this.easing },'+=.2')
 		//.to(['.column' + projectId], .8, { position: 'absolute',  ease: this.easing}, '-=.0')
 
 
 		.to(['.column' + projectId], .5, {width: window.innerWidth + 'px', height: this.winHeight + 'px',  ease: this.easing}, '-=.0')
-		.to(['.image' + projectId], .5, {width: window.innerWidth + 'px', height: this.winHeight + 'px',  ease: this.easing}, '+=.1')
+		.to(['.image' + projectId], .5, {width: window.innerWidth + 'px', height: this.winHeight + 'px',  ease: this.easing}, '-=.0')
 		.to(['.column' + projectId], .5, { top: '0', left: '0',  ease: this.easing}, '-=1.2')
 
 		//.to(['.column'], .5, {height: 0, width: 0, padding: 0, margin:0, ease: this.easing }, '-=.8')
