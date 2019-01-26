@@ -11,7 +11,7 @@ header
 
 
   .navbar
-    +media('>1023px')
+    +media('>=desktop')
       margin: 0 2rem
     background-color: $transparent
     text-align: left
@@ -20,7 +20,7 @@ header
     //position: absolute
 
     .main-title
-      +media('<426px')
+      +media('<=phone-large')
           display: none
       margin-left: 8px
       margin-top: .25rem

@@ -63,11 +63,18 @@
                 }
                   
                 .page-trans-overlay{
-                    background-color: #ff8800;
+                    background-color: #fff;
                     z-index: 998;
-                    margin: 0 .75rem;
-                    border-top: .75rem solid #fff;
-                    border-bottom: .75rem solid #fff;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    position: fixed;
+                }
+                .page-trans-overlay::before{
+                    content: ' ';
+                    background-color: #ff8f00;
+                    transform: scale(0.95);
                     top: 0;
                     bottom: 0;
                     left: 0;
@@ -75,22 +82,36 @@
                     position: fixed;
                 }
                 #loadingDotsGroup circle{
-                    animation-name: upDown;
-                    animation-duration: 1000ms;
-                    animation-iteration-count: infinite;
+                    -moz-animation: upDown 1s linear -.4s infinite forwards;
+                    -webkit-animation: upDown 1s linear -.4s infinite forwards;
+                    -o-animation: upDown 1s linear -.4s infinite forwards;
+                    animation: upDown 1s linear -.4s infinite forwards;
+                
                 }
                 #loadingDotsGroup circle:nth-child(2){
-                    animation-delay: 100ms;
+                    -moz-animation-delay: -.3s;
+                    -webkit-animation-delay: -.3s;
+                    -o-animation-delay: -.3s;
+                    animation-delay: -.3s;
                 }
                 #loadingDotsGroup circle:nth-child(3){
-                    animation-delay: 200ms;
+                    -moz-animation-delay: -.2s;
+                    -webkit-animation-delay: -.2s;
+                    -o-animation-delay: -.2s;
+                    animation-delay: -.2s;
                 }
                 #loadingDotsGroup circle:nth-child(4){
-                    animation-delay: 300ms;
+                    -moz-animation-delay: -.1s;
+                    -webkit-animation-delay: -.1s;
+                    -o-animation-delay: -.1s;
+                    animation-delay: -.1s;
                 }
 
                 #pre-bootstrap.loaded #loadingDotsGroup circle{
-                    animation-iteration-count: 2;
+                    -webkit-animation-iteration-count: infinite;
+                    -webkit-animation-iteration-count: infinite;
+                    -o-animation-iteration-count: infinite;
+                    animation-iteration-count: infinite;
                 }
                 /*upDown Animation*/
                 @keyframes upDown{

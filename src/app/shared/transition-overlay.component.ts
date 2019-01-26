@@ -87,7 +87,7 @@ export class TransitionOverlayComponent implements OnInit {
 			this.loadingPage.emit()
 			this.loading = true;
 			this.state = 'true';
-			TweenMax.set('.kLoader', {visibility: 'visible'});
+			TweenMax.set('.kLoader svg', {visibility: 'hidden'});
 			console.log(`loading: ` + this.loading);
 		}
 
@@ -95,18 +95,18 @@ export class TransitionOverlayComponent implements OnInit {
 			routerEvent instanceof NavigationCancel ||
 			routerEvent instanceof NavigationError) && this.initialLoad){
 				this._domEvents.triggerOnDocument('appready')
-
+				TweenMax.set('.kLoader svg', {visibility: 'visible'});
 				setTimeout(() => {
 					this.state = 'false';
 					this.stopLoadingPage.emit()
-					TweenMax.set('.kLoader', {visibility: 'hidden'});
+					TweenMax.set('.kLoader', {visibility: 'hidden', display: 'none'});
 					console.log(`loading: ` + this.loading);
 					this.initialLoad = false
-				}, 6000);
+				}, 4000);
 
 				setTimeout(() => {
 					this.loading = false;
-				}, 8500);
+				}, 4500);
 
 			}
 	}

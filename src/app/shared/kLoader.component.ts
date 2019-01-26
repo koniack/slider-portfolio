@@ -105,14 +105,12 @@ export class  KLoaderComponent implements OnInit, AfterViewInit{
 					TweenMax.set('#kCircle', {visibility: 'hidden', opacity: 0});
 					TweenMax.set('#dotsEnd path', {visibility: 'hidden', opacity: 0});
 					TweenMax.set('#kLinesStart', {visibility: 'hidden', opacity: 0});
-				}, 6000)
+				}, 4000)
 
 			}
 	}
 
     dotAnimation(){
-
-
 		this.dotAnim.staggerTo('#dotsGroup path', .35, {y: -20, opacity: .2}, .1)
 			.staggerTo('#dotsGroup path', .35, {y: 0, opacity: 1}, .1, .35);
 	};
@@ -138,9 +136,9 @@ export class  KLoaderComponent implements OnInit, AfterViewInit{
 		TweenMax.to('#bottomStart', .75, {morphSVG: '#bottomStart'})
 
 		const kAnim = new TimelineMax();
-		kAnim
+		kAnim.timeScale(1.35)
 		  // .set('#dotsGroup path', {visibility: 'visible', opacity: 1, x: 0, y: 0})
-		  .to('#dot4', .75 , {bezier: {values: path4, type: 'cubic'}}, '+=1.25')
+		  kAnim.to('#dot4', .75 , {bezier: {values: path4, type: 'cubic'}}, '+=1.25')
 		  .to('#dot3', .75 , {bezier: {values: path3, type: 'cubic'}}, '-=.5')
 		  .to('#dot2', .75 , {bezier: {values: path2, type: 'cubic'}}, '-=.55')
 		  .to('#dot1', .75 , {bezier: {values: path1, type: 'cubic'}}, '-=.6')
