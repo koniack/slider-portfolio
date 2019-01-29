@@ -61,13 +61,13 @@ trigger('routeAnimation', [
           group([
             query(':leave', [
               style({ opacity: 1 }),
-              animate('1s ease-in-out',
+              animate('.3s ease-in-out',
                 style({ opacity: 0 })
             )], { optional: true }),
             //query(':leave, :enter', style({position: 'fixed', width: '100%'}), { optional: true }),
             query(':enter', [
               style({ opacity: 0 }),
-              animate('1s ease-in-out',
+              animate('.3s ease-in-out',
                 style({ opacity: 1 })
             )], { optional: true }),
           ]),

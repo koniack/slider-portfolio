@@ -102,11 +102,11 @@ export class TransitionOverlayComponent implements OnInit {
 					TweenMax.set('.kLoader', {visibility: 'hidden', display: 'none'});
 					console.log(`loading: ` + this.loading);
 					this.initialLoad = false
-				}, 4000);
+				}, 4500);
 
 				setTimeout(() => {
 					this.loading = false;
-				}, 4500);
+				}, 5000);
 
 			}
 	}

@@ -32,7 +32,7 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
 	filterCategory: string[] = ['Branding', 'Web Design', 'Logo Design'];
 	imgHeight = 100
 	imgWidth: number
-	winHeight: number = window.innerHeight;
+	winHeight: number;
 	easing: any = 'Power2.easeOut';
 
 	constructor(private _projectService: ProjectService,
@@ -41,7 +41,7 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
 				public _windowDimensionsService: WindowDimensionsService){}
 
 	ngOnInit(): void {
-
+		this.winHeight  = window.innerHeight;
 		if (this._route.snapshot.queryParams['filterBy'] === 'null'){
 			this.listFilter = '';
 		} else {
@@ -103,7 +103,7 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
 		)*/
 	
 		// TweenMax.set('scrollmagic-pin-spacer', {visibilty: 'hidden', height: 0 });
-		tl.to([ '.card-content'], .3, {opacity:0, ease: this.easing })
+		tl.to([ '.card-content'], .3, {opacity:0, height: 0, ease: this.easing })
 		.to([ '.image'], .1, {'background-blend-mode': 'normal', 'background-color': 'transparent', ease: this.easing },'+=.0')
 		//.to(['.column' + projectId], .8, { position: 'absolute',  ease: this.easing}, '-=.0')
 

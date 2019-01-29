@@ -19,6 +19,7 @@ export const projectDetailTransition =
       transition(':enter', [
         // query('h1, h2', style({ opacity: 0, transform: 'translateY(-100%)' })),
         sequence([
+          query('.icon-scroll-container', style({opacity: 1})),
           query('.project-detail-content', [
             useAnimation(fadeAnimation, {
               params: {
@@ -26,15 +27,11 @@ export const projectDetailTransition =
               opacityTo: 1,
               translate3dFrom: 'translate3d(0,2.5%,0)',
               translate3dTo: 'translate3d(0,0,0)',
-              time: '00ms'
+              time: '100ms'
               }
             })
-          ]),
-          query('.icon-scroll-container', [
-            style('*'),
-            animate('500ms ease-out',
-            style({opacity: 1})),
           ])
+          
          /* query('h1, h2', stagger(150, [
             style({ transform: 'translateY(100px)', opacity: 0 }),
             animate('500ms ease-out',
@@ -59,9 +56,9 @@ export const projectDetailTransition =
             animate('500ms ease-out',
             style({transform: 'translateY(100px)', opacity: 0})),
           ])),*/
-          query('.icon-scroll-container', [
+          query('.icon-scroll-container',
             style({opacity: 0})
-          ]),
+          ),
           query('.project-detail-content', [
             useAnimation(fadeAnimation, {
               params: {

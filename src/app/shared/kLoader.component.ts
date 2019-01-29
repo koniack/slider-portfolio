@@ -105,7 +105,7 @@ export class  KLoaderComponent implements OnInit, AfterViewInit{
 					TweenMax.set('#kCircle', {visibility: 'hidden', opacity: 0});
 					TweenMax.set('#dotsEnd path', {visibility: 'hidden', opacity: 0});
 					TweenMax.set('#kLinesStart', {visibility: 'hidden', opacity: 0});
-				}, 4000)
+				}, 4500)
 
 			}
 	}
@@ -127,34 +127,34 @@ export class  KLoaderComponent implements OnInit, AfterViewInit{
 		TweenMax.set('#dotsGroup path', {visibility: 'visible', opacity: 1, x: 0, y: 0});
 		TweenMax.set('#dotsEnd path', {visibility: 'visible', opacity: 0, x: 0, y: 0});
 		TweenMax.set('#kCircle', {visibility: 'visible', rotation: 0, opacity: 1, drawSVG: '0% 0%'});
-		TweenMax.to('#dot4End', .75, {morphSVG: '#dot4End'});
-		TweenMax.to('#dot3End', .75, {morphSVG: '#dot3End'});
-		TweenMax.to('#dot2End', .75, {morphSVG: '#dot2End'});
+		TweenMax.to('#dot4End', 1, {morphSVG: '#dot4End'});
+		TweenMax.to('#dot3End', 1, {morphSVG: '#dot3End'});
+		TweenMax.to('#dot2End', 1, {morphSVG: '#dot2End'});
 		TweenMax.set('#kLinesStart', {visibility: 'visible', opacity: 0});
-		TweenMax.to('#leftStart', .75, {morphSVG: '#leftStart'})
-		TweenMax.to('#topStart', .75, {morphSVG: '#topStart'})
-		TweenMax.to('#bottomStart', .75, {morphSVG: '#bottomStart'})
+		TweenMax.to('#leftStart', 1, {morphSVG: '#leftStart'})
+		TweenMax.to('#topStart', 1, {morphSVG: '#topStart'})
+		TweenMax.to('#bottomStart', 1, {morphSVG: '#bottomStart'})
 
 		const kAnim = new TimelineMax();
-		kAnim.timeScale(1.35)
+		kAnim.timeScale(1.5)
 		  // .set('#dotsGroup path', {visibility: 'visible', opacity: 1, x: 0, y: 0})
-		  kAnim.to('#dot4', .75 , {bezier: {values: path4, type: 'cubic'}}, '+=1.25')
-		  .to('#dot3', .75 , {bezier: {values: path3, type: 'cubic'}}, '-=.5')
-		  .to('#dot2', .75 , {bezier: {values: path2, type: 'cubic'}}, '-=.55')
-		  .to('#dot1', .75 , {bezier: {values: path1, type: 'cubic'}}, '-=.6')
+		  kAnim.to('#dot4', 1 , {bezier: {values: path4, type: 'cubic'}}, '+=1.25')
+		  .to('#dot3', 1 , {bezier: {values: path3, type: 'cubic'}}, '-=.75')
+		  .to('#dot2', 1 , {bezier: {values: path2, type: 'cubic'}}, '-=.75')
+		  .to('#dot1', 1 , {bezier: {values: path1, type: 'cubic'}}, '-=.75')
 		  .set('#dotsGroup path', {opacity: 0})
 		  .set('#dotsEnd path', {opacity: 1})
 		  .set('#dot1End', {opacity: 0})
-		  .to('#dot4End', .75, {morphSVG: '#kRight'})
-		  .to('#dot3End', .75, {morphSVG: '#kBottom'}, '-=.65')
-		  .to('#dot2End', .75, {morphSVG: '#kTop'}, '-=.65')
-		  .to('#kCircle', .25, {drawSVG: '0% 25%', ease: 'Linear.easeNone'}, '-=1 ')
-		  .to('#kCircle', .5, {rotation: 360, transformOrigin: '50% 50%', ease: 'Linear.easeNone'}, '-=.75')
+		  .to('#dot4End', 1, {morphSVG: '#kRight'})
+		  .to('#dot3End', 1, {morphSVG: '#kBottom'}, '-=.9')
+		  .to('#dot2End', 1, {morphSVG: '#kTop'}, '-=.9')
+		  .to('#kCircle', .25, {drawSVG: '0% 25%', ease: 'Linear.easeNone'}, '-=1.2 ')
+		  .to('#kCircle', .75, {rotation: 360, transformOrigin: '50% 50%', ease: 'Linear.easeNone'}, '-=1')
 		  .set('#kLinesStart', {opacity: 1})
-		  .to('#leftStart', .25, {morphSVG: '#kLineLeft'})
-		  .to('#topStart', .25, {morphSVG: '#kLineTop'}, '-=.15')
-		  .to('#bottomStart', .25, {morphSVG: '#kLineBottom'}, '-=.15')
-		  .to('#kCircle', .5, {drawSVG: '0% 100%'}, '-=.75')
+		  .to('#leftStart', .5, {morphSVG: '#kLineLeft'})
+		  .to('#topStart', .5, {morphSVG: '#kLineTop'}, '-=.25')
+		  .to('#bottomStart', .5, {morphSVG: '#kLineBottom'}, '-=.25')
+		  .to('#kCircle', 1.1, {drawSVG: '0% 100%'}, '-=1.5')
 	}
 }
 
