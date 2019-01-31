@@ -27,9 +27,9 @@
     <div class="slide-container">
         <div  
             *ngFor="let slide of slides; let projectIndex = index" 
-            [attr.data-index]="projectIndex" 
+            [attr.project-index]="projectIndex" 
             class="project-hero"
-            id="project{{projectIndex}}"
+            id="project-{{projectIndex + 1}}"
             [class.active]="slide['active']"
             [style.background-image]="'url(' + slide.thumbUrl.url + ')'">
             <!--<img  
@@ -37,16 +37,16 @@
                 [ngStyle] = "getSliderImgDim(projectIndex)"
             />-->
             <div class="proj-title-container">
-                <div id="projTitle{{projectIndex}}" class="projTitle">
-                    <h2 id="projectId{{slide.id}}" class="dark-type" >{{slide.id | number:'2.0'}}.</h2>
-                    <h1 id="title{{projectIndex}}" class="light-type has-shadow" [innerText]='slide.name' ></h1>
-                    <h5 id="subtitle{{projectIndex}}" class="dark-type" >{{slide.category}}</h5>
-                    <button [routerLink]= "['/projects', slide.id]" 
-                    [queryParams]= "{project: slide.id}" 
+                <div id="projTitle-{{projectIndex + 1}}" class="projTitle">
+                    <h2 id="projectId-{{projectIndex + 1}}" class="dark-type" >{{slide.id | number:'2.0'}}.</h2>
+                    <h1 id="title-{{projectIndex + 1}}" class="light-type has-shadow" [innerText]='slide.name' ></h1>
+                    <h5 id="subtitle-{{projectIndex + 1}}" class="dark-type" >{{slide.category}}</h5>
+                    <button [routerLink]= "['/projects', projectIndex + 1]" 
+                    [queryParams]= "{project: projectIndex + 1}" 
                     queryParamsHandling="merge" 
                     class="button dark-button"
-                    [routerLink]= "['/projects', slide.id]"
-                    [queryParams]= "{project: slide.id}" 
+                    [routerLink]= "['/projects', projectIndex + 1]"
+                    [queryParams]= "{project: projectIndex + 1}" 
                     queryParamsHandling="merge" >see more</button>
                 </div>
             </div>

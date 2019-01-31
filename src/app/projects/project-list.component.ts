@@ -121,7 +121,7 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
 		setTimeout(() => {
 		  // tslint:disable-next-line:max-line-length
 		  this._router.navigate([`/projects/${projectId + 1}`], { queryParams: {'project': projectId + 1}, queryParamsHandling: 'merge', fragment: 'top'});
-		}, 3000)
+		}, 2500)
 	  }
 
 	/*getProjHeight(){

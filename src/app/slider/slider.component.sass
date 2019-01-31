@@ -104,12 +104,17 @@ img
     height: auto
     overflow: hidden
 
+    h1
+      font-kerning: none
+      -webkit-text-rendering: optimizeSpeed
+      text-rendering: optimizeSpeed
+      -webkit-transform: translateZ(0)
+      transform: translateZ(0)
+
     .title,
     .subtitle
       height: auto
       overflow: hidden
-    
-      
 
 .next-button,
 .prev-button
@@ -169,11 +174,11 @@ img
 
 // Carousel Styles
 .indicators
-  +media ('<450px')
+  +media ('<=phone-large')
     //transform: scale(.75)
     //left: 1rem
     //top: 5.5rem
-  +media('>1023px')
+  +media('>=desktop')
       left: 2rem
   //background-color: orange
   width: 48px

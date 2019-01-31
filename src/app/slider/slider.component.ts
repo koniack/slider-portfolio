@@ -9,6 +9,8 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { TimelineMax, TweenMax } from 'gsap';
+import * as SplitText from 'gsap/SplitText';
+
 // import { DOMEvents } from '../shared/DOMEvents.service'
 import { sliderTransition } from '../shared/slider-transition.animations';
 
@@ -38,14 +40,15 @@ export class SliderComponent implements OnInit, AfterViewInit {
 
 	slides: IProject[]
 	errorMessage: string
-	activeProject = 0
+	activeProject: number
 	isMoving = false
 	winHeight: number = window.innerHeight
 	winWidth: number = window.innerWidth
-	tl = new TimelineMax
+	
 	images= new Array
 	initialLoad = false
-
+	easeIn = 'Power2.easeIn'
+	easeOut = 'Power2.easeOut'
 
 
 	constructor(// private _projectService: ProjectService,
@@ -64,8 +67,9 @@ export class SliderComponent implements OnInit, AfterViewInit {
 						  data => this.slides = data['slides'])*/
 
 		this.slides = this._route.snapshot.data['projects']
-		this.activeProject = (+this._route.snapshot.queryParams['project'] - 1) || 0;
-		this.slides[this.activeProject]['active'] = true
+		this.activeProject = +this._route.snapshot.queryParams['project'] || 1
+		this.slides[this.activeProject - 1]['active'] = true
+		console.log('this.activeProject = ' + this.activeProject)
 		/*if (this.slides){
 			if (this.initialLoad === false){
 				setTimeout(()=>{
@@ -79,8 +83,8 @@ export class SliderComponent implements OnInit, AfterViewInit {
 
 	ngAfterViewInit() {
 		TweenMax.set('.project-hero', { y: this.winHeight, visibility: 'visible'})
-		TweenMax.set('#project' + this.activeProject, { y: 0, visibility: 'visible'})
-		TweenMax.set('#projTitle' + this.activeProject, {y: 0, visibility: 'visible'})
+		TweenMax.set('#project-' + this.activeProject, { y: 0, visibility: 'visible'})
+		TweenMax.set('#projTitle-' + this.activeProject, {y: 0, visibility: 'visible'})
 	}
 
 	// Mousewheel navigation using Mousewheel directive
@@ -118,77 +122,101 @@ export class SliderComponent implements OnInit, AfterViewInit {
 
 	// Navigates to next or previous project
 	public navigate(direction: string, swipe?: any) {
-		const currProject = '#project' + (this.activeProject)
-		const currTitle = '#title' + (this.activeProject)
-		const currSubtitle = '#subtitle' + (this.activeProject)
+		if (!this.isMoving) {
+			const currProject = '#project-' + (this.activeProject)
+			const currTitle = '#title-' + (this.activeProject)
+			const currSubtitle = '#subtitle-' + (this.activeProject)
+			console.log('this.activeProject = ' + this.activeProject)
+			console.log('this.slide.lentgh = ' + this.slide.length)
+			console.log('this.slides.lentgh = ' + this.slides.length)
 
-		if ((direction === 'next' && this.activeProject < this.slides.length - 1) ||
-			(direction === 'prev' && this.activeProject > 0)) {
-				if (direction === 'prev') {
-					this.slide(currProject, currTitle, currSubtitle, (this.activeProject - 1), -300, 300)
+			if ((direction === 'next' && this.activeProject < this.slides.length) ||
+				(direction === 'prev' && this.activeProject > 1)) {
+					if (direction === 'prev') {
+						this.slide(currProject, currTitle, currSubtitle, (this.activeProject - 1), -300, 300)
+					}
+					else {
+						this.slide(currProject, currTitle, currSubtitle, (this.activeProject + 1), 300, -300)
+					}
+					this.updateImage()
 				}
 				else {
-					this.slide(currProject, currTitle, currSubtitle, (this.activeProject + 1), 300, -300)
-				}
-				this.updateImage()
-			}
-			else {
-				if (this.activeProject === 0) {
-					this.slide(currProject, currTitle, currSubtitle, (this.slide.length - 1), -300, 300)
+					if (this.activeProject === 1) {
+						this.slide(currProject, currTitle, currSubtitle, (this.slides.length), -300, 300)
 
+					}
+					else {
+						this.slide(currProject, currTitle, currSubtitle, 1, 300, -300)
+					}
+					this.updateImage()
 				}
-				else {
-					this.slide(currProject, currTitle, currSubtitle, 0, 300, -300)
-				}
-				this.updateImage()
-			}
+		}
 	}
 
 	// Navigates to specific project designated by indicators
 	private navigateToProj(indicatorIndex: number) {
-		const currProject = '#project' + (this.activeProject)
-		const currTitle = '#title' + (this.activeProject)
-		const currSubtitle = '#subtitle' + (this.activeProject)
-		if (indicatorIndex !== this.activeProject) {
-			if (indicatorIndex > this.activeProject) {
-				this.slide(currProject, currTitle, currSubtitle, indicatorIndex, 300, -300)
+		if (!this.isMoving) {
+			const nextProject = (indicatorIndex + 1)
+			const currProject = '#project-' + (this.activeProject)
+			const currTitle = '#title-' + (this.activeProject)
+			const currSubtitle = '#subtitle-' + (this.activeProject)
+			if (nextProject !== this.activeProject) {
+				if (nextProject > this.activeProject) {
+					this.slide(currProject, currTitle, currSubtitle, nextProject, 300, -300)
+				}
+				else {
+					this.slide(currProject, currTitle, currSubtitle, nextProject, -300, 300)
+				}
+				this.updateImage()
 			}
-			else {
-				this.slide(currProject, currTitle, currSubtitle, indicatorIndex, -300, 300)
-			}
-			this.updateImage()
 		}
 	}
 
 	// Slide current project out and new project in
 	slide(currProject: any, currTitle: any, currSubtitle: any, id: number, slideFrom: number, slideTo: number){
-		const newProject = '#project' + id
-		const newTitle = '#title' + id
-		const newSubtitle = '#subtitle' + id
-		console.log(2 * slideFrom)
-		this.tl
+		const newProject = '#project-' + id
+		const newTitle = '#title-' + id
+		const newSubtitle = '#subtitle-' + id
+		var newSplitTitle = new SplitText(newTitle, {type: 'chars, lines', linesClass: 'line-container'})
+		var currSplitTitle = new SplitText(currTitle, {type: 'chars, lines', linesClass: 'line-container'})
+		var tl = new TimelineMax({onComplete:this.animDone()})
+		
+		tl
 			.set(newProject, {y: (2 * slideFrom), autoAlpha: 0})
-			.set(newTitle, {y: slideFrom, autoAlpha: 1} )
+			.set(newTitle, {y: 0, autoAlpha: 1} )
+			.set(newSplitTitle.chars, {y: slideFrom, autoAlpha: 0} )
 			.set(newSubtitle, {y: slideFrom, autoAlpha: 1} )
+			.set('.line-container', {overflow: 'hidden'})
+		
+		console.log(currTitle)
+		console.log(newTitle)
 		if (slideFrom > 0 ) {
-			this.tl
-				.to(currTitle, .5, {y: slideTo, autoAlpha: 1, ease: 'Power2.easeIn', onStart: this.animStart() })
-				.to(currSubtitle, .5, {y: slideTo, autoAlpha: 1, ease: 'Power2.easeIn'}, '-=.35')
-				.to(currProject, .5, {y: (2 * slideTo), autoAlpha: 0, ease: 'Power2.easeIn' })
-				.to(newProject, .5, {y: 0 , autoAlpha: 1, ease: 'Power2.easeOut'}, '-=.25')
-				.to(newTitle, .5, {y: 0 , autoAlpha: 1, ease: 'Power2.easeOut'}, '-=.15')
-				.to(newSubtitle, .5, {y: 0 , autoAlpha: 1, ease: 'Power2.easeOut', onComplete: this.animDone() }, '-=.35')
+			tl
+				.staggerTo(currSplitTitle.chars, .5, {y: slideTo, autoAlpha: 0, ease: this.easeIn, onStart: this.animStart() }, .03)
+				.to(currSubtitle, .5, {y: slideTo, autoAlpha: 1, ease: this.easeIn}, '-=.35')
+				.to(currProject, .5, {y: (2 * slideTo), autoAlpha: 0, ease: this.easeIn })
+				.to(newProject, .5, {y: 0 , autoAlpha: 1, ease: this.easeOut}, '-=.25')
+				.staggerTo(newSplitTitle.chars, .5, {y: 0 , autoAlpha: 1, ease: this.easeOut }, .03, '-=.15', splitDone)
+				.to(newSubtitle, .5, {y: 0 , autoAlpha: 1, ease: this.easeOut }, '-=.35')
+			
 		} else {
-			this.tl
-				.to(currSubtitle, .5, {y: slideTo, autoAlpha: 0, ease: 'Power2.easeIn', onStart: this.animStart() })
-				.to(currTitle, .5, {y: slideTo, autoAlpha: 0, ease: 'Power2.easeIn'}, '-=.35')
-				.to(currProject, .5, {y: (2 * slideTo), autoAlpha: 0, ease: 'Power2.easeIn' })
-				.to(newProject, .5, {y: 0 , autoAlpha: 1, ease: 'Power2.easeOut'}, '-=.25')
-				.to(newSubtitle, .5, {y: 0 , autoAlpha: 1, ease: 'Power2.easeOut'}, '-=.15')
-				.to(newTitle, .5, {y: 0 , autoAlpha: 1, ease: 'Power2.easeOut', onComplete: this.animDone() }, '-=.35')
+			tl
+				.to(currSubtitle, .5, {y: slideTo, autoAlpha: 0, ease: this.easeIn, onStart: this.animStart() })
+				.staggerTo(currSplitTitle.chars, .5, {y: slideTo, autoAlpha: 0, ease: this.easeIn}, .03,  '-=.0')
+				.to(currProject, .5, {y: (2 * slideTo), autoAlpha: 0, ease: this.easeIn })
+				.to(newProject, .5, {y: 0 , autoAlpha: 1, ease: this.easeOut}, '-=.25')
+				.to(newSubtitle, .5, {y: 0 , autoAlpha: 1, ease: this.easeOut}, '-=.15')
+				.staggerTo(newSplitTitle.chars, .5, {y: 0 , autoAlpha: 1, ease: this.easeOut }, .03, '-=.35', splitDone)
 		}
 		this.activeProject = id
+		function splitDone(){
+			newSplitTitle.revert();
+			currSplitTitle.revert();
+		}
+		
+		
 	}
+	
 
 	// Update image on screen resize
 	public onResize() {
@@ -202,9 +230,9 @@ export class SliderComponent implements OnInit, AfterViewInit {
 	private updateImage() {
 		// Wait for animation to end
 		setTimeout(() => {
-			this.slides[this.activeProject]['active'] = true
+			this.slides[this.activeProject - 1]['active'] = true
 			this.slides.forEach((slide) => {
-				if (slide !== this.slides[this.activeProject]) {
+				if (slide !== this.slides[this.activeProject - 1]) {
 					slide['active'] = false
 				}
 			})
@@ -235,11 +263,15 @@ export class SliderComponent implements OnInit, AfterViewInit {
 	// Adds delay to stop MacOSX inertia from triggering navigation
 	animStart(){
 		this.isMoving = true
+		console.log('this.moving: ' + this.isMoving)
 	}
 
 	animDone(){
+		
 		setTimeout(() => {
 			this.isMoving = false
-		}, 900)
+			console.log('this.moving: ' + this.isMoving)
+		}, 3500)
 	}
+	
 }
