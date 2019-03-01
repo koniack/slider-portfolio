@@ -93,7 +93,8 @@ export class ProjectService {
             category: null,
             thumbUrl: null,
             projectPics: [],
-            description: null,
+            problem: null,
+            solution: null,
             tags: []
 
         };

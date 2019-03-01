@@ -1,9 +1,8 @@
 <div class="icon-scroll-container" #iconScrollContainer>
         <div class='mouse'></div>
         <p>scroll</p>
-        <p>down</p>
 </div>
-<div #top id="top" class="project-detail-container">
+<div class="project-detail-container">
     <div class="project-detail" *ngIf="project">
         <div class="thumb-container" 
         [style.background-image]="'url(' + project.thumbUrl.url + ')'"
@@ -17,7 +16,23 @@
                         <h1 class="title" >{{project.name}}</h1>
                         <h5 class="subtitle">{{project.category}}</h5>
                         <span class="line"></span>
-                        <p>{{project.description}}</p>
+                        <div class="columns">
+                            <div class="column" *ngIf="project.problem">
+                                <h6 class="dark-type">Problem</h6>
+                                <p style="white-space:pre-wrap">{{project.problem}}</p>
+                            </div>
+                            <div class="column" *ngIf="project.solution">
+                                <h6 class="dark-type">Solution</h6>
+                                <p style="white-space:pre-wrap">{{project.solution}}</p>
+                            </div>
+                            <div class="column" *ngIf="project.tags">
+                                <h6 class="dark-type">Skills</h6>
+                                <ul *ngFor="let tag of project.tags" >
+                                    <li>{{tag}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
                 <div class="picture" 

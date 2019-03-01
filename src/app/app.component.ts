@@ -103,10 +103,7 @@ export class AppComponent implements OnInit  {
 	}
 
 	stopLoadingPage() {
-		setTimeout(() => {
-			this.loading = false
-	}, 5500)
-
+		this.loading = false
 	}
 
 	getState(outlet) {

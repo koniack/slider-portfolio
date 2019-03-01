@@ -22,13 +22,13 @@
 
     .project-detail-content
       +media ('<=tablet')
-        //margin: 1rem
+        margin: .5rem
         //padding: 1rem
       //background-color: $white
       //z-index: 999
       //display: flex
       //margin: 70% 2.5% 0 
-      //margin: 1rem
+      margin: 1rem
       position: relative
 
     .thumbnail-text  
@@ -83,7 +83,13 @@ img
   h2
     //animation-delay: 250ms
     margin-bottom: 1rem
-
+  
+  h6
+    +media ('<=tablet')
+      padding-bottom: 20px
+    padding-bottom: 50px 
+  p 
+    padding-bottom: 50 px
   .line
     +media ('<=tablet')
       margin-left: 0
@@ -96,6 +102,8 @@ img
     //animation-fill-mode: forwards
     //animation-duration: 2s
     //animation-delay: 500ms
+
+  
 
 .caption
   +media ('<=tablet')
@@ -121,9 +129,9 @@ img
     &:hover
 
       .button
-        transform: scale(1.1)
+        //transform: scale(1.1)
         &.is-animating
-          transform: scale(1)
+          //transform: scale(1)
         
     .text-wrap
       +media('<=phone-large')
@@ -212,14 +220,14 @@ $colorBg: #c0c0c0
 $colorOutline: white
 $colorOutlineFade: #4e5559
 
-$widthMouse: 52px
+$widthMouse: 4px
 $heightMouse: 88px
-$borderMouse: 6px
+$borderMouse: 2px
 
 $posMouse: 8px
 $posText: 2px
 
-$sizeTrackball: 10px
+$sizeTrackball: 4px
 $posTrackball: 20px
 $shrinkTrackball: 0.4
 
@@ -231,14 +239,14 @@ $animDuration: 5s
 .icon-scroll-container
   position: fixed
   left: 50%
-  top: 40%
+  bottom: 5%
   //opacity: 0
 
   p
     margin-top: 0px
     font-family: "Work Sans", sans-serif
-    letter-spacing: 12px
-    text-indent: 12px
+    letter-spacing: 6px
+    text-indent: 6px
     color: $colorOutline
     text-transform: uppercase
     text-align: center
@@ -249,12 +257,12 @@ $animDuration: 5s
 .mouse
   +bgGradient
   position: relative
-  margin: 0 auto 50px
+  margin: 0 auto 20px
   width: $widthMouse
   height: $heightMouse
   left: -50%
   top: -50%
-  border-radius: 100px
+  border-radius: 10px
   background-size: 100% 200%
   animation: colorSlide $animDuration linear infinite, nudgeMouse $animDuration ease-out infinite
   &:before,
@@ -269,14 +277,9 @@ $animDuration: 5s
   &:before
     width: $widthMouse - $borderMouse
     height: $heightMouse - $borderMouse
-    background-color: $colorBg
-    border-radius: 100px
-  &:after
-    background-color: $colorOutline
-    width: $sizeTrackball
-    height: $sizeTrackball
-    border-radius: 100%
-    animation: trackBallSlide $animDuration linear infinite
+    //background-color: $colorBg
+    border-radius: 10px
+  
 
 @keyframes colorSlide
   0%
@@ -307,54 +310,6 @@ $animDuration: 5s
     background-color: $colorOutlineFade
   90%, 100%
     background-color: $colorOutline
-
-
-@keyframes trackBallSlide
-  0%
-    opacity: 1
-    transform: scale(1) translateY(-$posTrackball)
-  6%
-    opacity: 1
-    transform: scale(0.9) translateY($posTrackball / 4)
-  14%
-    opacity: 0
-    transform: scale($shrinkTrackball) translateY($posTrackball * 2)
-  15%, 19%
-    opacity: 0
-    transform: scale($shrinkTrackball) translateY(-$posTrackball)
-  28%, 29.99%
-    opacity: 1
-    transform: scale(1) translateY(-$posTrackball)
-  30%
-    opacity: 1
-    transform: scale(1) translateY(-$posTrackball)
-  36%
-    opacity: 1
-    transform: scale(0.9) translateY($posTrackball / 4)
-  44%
-    opacity: 0
-    transform: scale($shrinkTrackball) translateY($posTrackball * 2)
-  45%, 49%
-    opacity: 0
-    transform: scale($shrinkTrackball) translateY(-$posTrackball)
-  58%, 59.99%
-    opacity: 1
-    transform: scale(1) translateY(-$posTrackball)
-  60%
-    opacity: 1
-    transform: scale(1) translateY(-$posTrackball)
-  66%
-    opacity: 1
-    transform: scale(0.9) translateY($posTrackball / 4)
-  74%
-    opacity: 0
-    transform: scale($shrinkTrackball) translateY($posTrackball * 2)
-  75%, 79%
-    opacity: 0
-    transform: scale($shrinkTrackball) translateY(-$posTrackball)
-  88%, 100%
-    opacity: 1
-    transform: scale(1) translateY(-$posTrackball)
 
 
 @keyframes nudgeMouse

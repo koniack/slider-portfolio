@@ -26,6 +26,14 @@
 
 .project-list-container
   height: 0
+  &::before
+    content: ''
+    //background-color: #8DFFFF
+    //transform: scale(0.95)
+    display: block
+    //position: absolute
+    height: 100%
+    //width: 100%
 
   .projects
     padding: 0
@@ -33,7 +41,7 @@
     height: 0
                 
     .column
-      +media ('>=tablet')
+      +media ('landscape')
         width: 30%
       display: block
       padding: 0
@@ -43,56 +51,69 @@
       overflow: hidden
 
     .column0
+      +media ('landscape')
+        top: 23%
+        left: 2.5%
       +media ('>=tablet')
         top: 15%
-        left: 2.5%
       top: 17%
       left: 2.5%
     .column1
-      +media ('>=tablet')
+      +media ('landscape')
         top: 15%
         left: 35%
+      +media ('>=tablet')
+        top: 15%
       top: 17%
       left: 51.25%
     .column2
-      +media ('>=tablet')
+      +media ('landscape')
         top: 15%
         left: 67.5%
-      top: 44.66%
+      +media ('>=tablet')
+        top: 43%
+      top: 38%
       left: 2.5%
     .column3
-      +media ('>=tablet')
-        top: 47.5%
+      +media ('landscape')
+        top: 85%
         left: 2.5%
-      top: 44.66%
+      +media ('>=tablet')
+        top: 43%
+      top: 38%
       left: 51.25%
     .column4
-      +media ('>=tablet')
+      +media ('landscape')
         top: 47.5%
         left: 35%
-      top: 72.33%
+      +media ('>=tablet')
+        top: 71%
+      top: 59%
       left: 2.5%
     .column5
-      +media ('>=tablet')
+      +media ('landscape')
         top: 47.5%
         left: 67.5%
-      top: 72.33%
+      +media ('>=tablet')
+        top: 71%
+      top: 120%
       left: 51.25%
 
-.card
-  height: 100%
-  box-shadow: none
-  &:focus
-    outline: none
-  @media(hover)
-    &:hover
-      .card-content
-        opacity: 1
-        &::after
-          opacity: .5
-      .image
-        background-blend-mode: overlay 
-        background-color: $orange
+    .card
+      height: 100%
+      box-shadow: none
+      background-color: transparent
+      &:focus
+        outline: none
+      @media(hover)
+        &:hover
+          .card-content
+            opacity: 1
+            &::after
+              opacity: .5
+          .image
+            background-blend-mode: overlay 
+            background-color: $orange
         
 
 .project

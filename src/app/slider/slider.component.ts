@@ -177,44 +177,71 @@ export class SliderComponent implements OnInit, AfterViewInit {
 		const newProject = '#project-' + id
 		const newTitle = '#title-' + id
 		const newSubtitle = '#subtitle-' + id
-		var newSplitTitle = new SplitText(newTitle, {type: 'chars, lines', linesClass: 'line-container'})
+		const newProjectId = '#projectId-' + id
+		const currProjectId = '#projectId-' + this.activeProject
+		const newButton = '#button-' + id
+		const currButton = '#button-' + this.activeProject
+		var newSplitTitle = new SplitText(newTitle, {type: 'chars, words', linesClass: 'line-container'})
 		var currSplitTitle = new SplitText(currTitle, {type: 'chars, lines', linesClass: 'line-container'})
-		var tl = new TimelineMax({onComplete:this.animDone()})
+		var newSplitSub = new SplitText(newSubtitle, {type: 'words, lines', linesClass: 'line-container'})
+		var currSplitSub = new SplitText(currSubtitle, {type: 'words, lines', linesClass: 'line-container'})
+		var newSplitId = new SplitText(newProjectId, {type: 'words, lines', linesClass: 'line-container'})
+		var currSplitId = new SplitText(currProjectId, {type: 'words, lines', linesClass: 'line-container'})
+		var tl = new TimelineMax({onComplete:this.animDone(), onStart: this.animStart()})
 		
 		tl
+			.set(['.line-container'], {overflow: 'hidden'})
 			.set(newProject, {y: (2 * slideFrom), autoAlpha: 0})
-			.set(newTitle, {y: 0, autoAlpha: 1} )
-			.set(newSplitTitle.chars, {y: slideFrom, autoAlpha: 0} )
-			.set(newSubtitle, {y: slideFrom, autoAlpha: 1} )
-			.set('.line-container', {overflow: 'hidden'})
+			.set(newButton, {autoAlpha: 0})
+			//.set([newTitle,newSplitTitle.chars, newProjectId, newSubtitle], {y: 0, autoAlpha: 1} )
+			///.set(newSplitTitle.chars, {y: (slideFrom / 4), autoAlpha: 1} )
+			//.set(newSplitSub.words, {y: (slideFrom / 4), autoAlpha: 0})
+			//.set(newSplitId.words, {y: (slideFrom / 4), autoAlpha: 0})
+			
 		
-		console.log(currTitle)
-		console.log(newTitle)
+		console.log('curr: ' + currProjectId)
+		console.log('new: ' + newProjectId)
 		if (slideFrom > 0 ) {
-			tl
-				.staggerTo(currSplitTitle.chars, .5, {y: slideTo, autoAlpha: 0, ease: this.easeIn, onStart: this.animStart() }, .03)
-				.to(currSubtitle, .5, {y: slideTo, autoAlpha: 1, ease: this.easeIn}, '-=.35')
+			tl.timeScale(1.5)	
+				tl.staggerTo(currSplitId.words, .5, {y: (slideTo / 4),  ease: this.easeIn}, .03)
+				.staggerTo(currSplitTitle.chars, .5, {'transform-origin': 'left top', transform: 'scaleY(0)', ease: this.easeIn }, .03, '-=.35')
+				.staggerTo(currSplitSub.words, .5, {y: slideTo, autoAlpha: 1, ease: this.easeIn}, .03, '-=.35')
+				.to(currButton, .5, {autoAlpha: 0})
 				.to(currProject, .5, {y: (2 * slideTo), autoAlpha: 0, ease: this.easeIn })
 				.to(newProject, .5, {y: 0 , autoAlpha: 1, ease: this.easeOut}, '-=.25')
-				.staggerTo(newSplitTitle.chars, .5, {y: 0 , autoAlpha: 1, ease: this.easeOut }, .03, '-=.15', splitDone)
-				.to(newSubtitle, .5, {y: 0 , autoAlpha: 1, ease: this.easeOut }, '-=.35')
+				.staggerFrom(newSplitId.words, .5, {y: (slideFrom / 4), autoAlpha: 0, ease: this.easeOut}, .03)
+				.staggerFrom(newSplitTitle.chars, .5, {'transform-origin': 'left bottom', transform: 'scaleY(0)',  ease: this.easeOut }, .03, '-=.15')
+				.staggerFrom(newSplitSub.words, .5, {y: (slideFrom / 4) , autoAlpha: 0, ease: this.easeOut }, .03, '-=.25')
+				.to(newButton, .5, {autoAlpha: 1 })
+				.call(splitDone)
 			
 		} else {
-			tl
-				.to(currSubtitle, .5, {y: slideTo, autoAlpha: 0, ease: this.easeIn, onStart: this.animStart() })
-				.staggerTo(currSplitTitle.chars, .5, {y: slideTo, autoAlpha: 0, ease: this.easeIn}, .03,  '-=.0')
+			tl.timeScale(1.5 )	
+				tl.to(currButton, .5, {autoAlpha: 0})
+				.staggerTo(currSplitSub.words, .5, {y: slideTo, autoAlpha: 0, ease: this.easeIn}, .03)
+				.staggerTo(currSplitTitle.chars.reverse(), .5, {'transform-origin': 'left bottom', transform: 'scaleY(0)',  ease: this.easeIn}, .03,  '-=.35')
+				.staggerTo(currSplitId.words, .5, {y: (slideTo / 4),  ease: this.easeIn}, .03, '-=.35')
 				.to(currProject, .5, {y: (2 * slideTo), autoAlpha: 0, ease: this.easeIn })
 				.to(newProject, .5, {y: 0 , autoAlpha: 1, ease: this.easeOut}, '-=.25')
-				.to(newSubtitle, .5, {y: 0 , autoAlpha: 1, ease: this.easeOut}, '-=.15')
-				.staggerTo(newSplitTitle.chars, .5, {y: 0 , autoAlpha: 1, ease: this.easeOut }, .03, '-=.35', splitDone)
+				.to(newButton, .5, {autoAlpha: 1 })
+				.staggerFrom(newSplitSub.words, .5, {y: (slideFrom / 4) , autoAlpha: 0, ease: this.easeOut}, .03)
+				.staggerFrom(newSplitTitle.chars, .5, {'transform-origin': 'left top',transform: 'scaleY(0)',  ease: this.easeOut }, .03, '-=.25')
+				.staggerFrom(newSplitId.words, .5, {y: (slideFrom / 4), autoAlpha: 0, ease: this.easeOut}, .03, '-=.35')
+				.call(splitDone)
 		}
 		this.activeProject = id
 		function splitDone(){
-			newSplitTitle.revert();
-			currSplitTitle.revert();
+			if (this.isMoving === 'true'){
+					setTimeout(splitDone, 100)
+			} else {
+				newSplitTitle.revert();
+				currSplitTitle.revert();
+				newSplitId.revert();
+				currSplitId.revert();
+				newSplitSub.revert();
+				currSplitSub.revert();
+			}	
 		}
-		
-		
 	}
 	
 
@@ -237,7 +264,7 @@ export class SliderComponent implements OnInit, AfterViewInit {
 				}
 			})
 
-		}, 900)
+		}, 1400)
 	}
 
 	// Gets and assigns image dimensions and position
@@ -271,7 +298,7 @@ export class SliderComponent implements OnInit, AfterViewInit {
 		setTimeout(() => {
 			this.isMoving = false
 			console.log('this.moving: ' + this.isMoving)
-		}, 3500)
+		}, 3000)
 	}
 	
 }

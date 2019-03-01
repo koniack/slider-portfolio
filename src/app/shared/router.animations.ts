@@ -55,7 +55,7 @@ trigger('routeAnimation', [
     ]),
     transition('projects => *', [
         query(':enter', style({opacity: 0}), { optional: true }),
-        //query(':leave, :enter', style({ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, 'background-color': '#000' }), { optional: true }),
+        //query(':leave, :enter', style({ position: 'fixed'}), { optional: true }),
         sequence([
           query(':leave', animateChild(), { optional: true }),
           group([
@@ -64,7 +64,7 @@ trigger('routeAnimation', [
               animate('.3s ease-in-out',
                 style({ opacity: 0 })
             )], { optional: true }),
-            //query(':leave, :enter', style({position: 'fixed', width: '100%'}), { optional: true }),
+            //query(':enter', style({position: 'fixed'}), { optional: true }),
             query(':enter', [
               style({ opacity: 0 }),
               animate('.3s ease-in-out',
@@ -74,13 +74,13 @@ trigger('routeAnimation', [
           query(':enter', animateChild(), { optional: true })
         ])
       ]),
-    transition('* <=> *', [
-        query(':enter, :leave', style({ position: 'fixed', width: '100%'}), { optional: true }),
+    transition('about => *', [
+        //query(':enter, :leave', style({ position: 'fixed', width: '100%'}), { optional: true }),
         query(':enter', style({opacity: 0}), { optional: true }),
         sequence([
           query(':leave', animateChild(), { optional: true }),
           group([
-            query(':leave', [
+            query(':leave, .about-container', [
               style({ opacity: 1 }),
               animate('1s ease-in-out',
                 style({ opacity: 0 })
@@ -93,7 +93,27 @@ trigger('routeAnimation', [
           ]),
           query(':enter', animateChild(), { optional: true })
         ])
-      ])
+      ]),
+      transition('* <=> *', [
+          query(':enter, :leave', style({ position: 'fixed', width: '100%'}), { optional: true }),
+          query(':enter', style({opacity: 0}), { optional: true }),
+          sequence([
+            query(':leave', animateChild(), { optional: true }),
+            group([
+              query(':leave', [
+                style({ opacity: 1 }),
+                animate('1s ease-in-out',
+                  style({ opacity: 0 })
+              )], { optional: true }),
+              query(':enter', [
+                style({ opacity: 0 }),
+                animate('1s ease-in-out',
+                  style({ opacity: 1 })
+              )], { optional: true }),
+            ]),
+            query(':enter', animateChild(), { optional: true })
+          ])
+        ])
   ]);
 
 /*

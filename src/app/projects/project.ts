@@ -15,6 +15,7 @@ export interface IProject {
 	projectPics: IProjectPicture[];
 	video?: string;
 	category: string;
-	description: string;
+	problem: string;
+	solution: string;
 	tags?: string[];
 }

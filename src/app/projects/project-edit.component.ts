@@ -143,7 +143,8 @@ export class ProjectEditComponent implements OnInit {
 	        thumbUrl: null,
             projectPics: [],
 	        category: null,
-            description: null,
+            problem: null,
+            solution: null,
             tags: []
 
         };

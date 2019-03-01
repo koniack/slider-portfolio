@@ -1,23 +1,36 @@
 @import './src/assets/sass/base'
 
 .about-container
-  margin: 2.5%
-  padding: 8rem 2rem
+  // bnspadding: 8rem 2rem
   //background-color: $grey
   //border: .75rem solid $white
   //transform: scale(0.95)
+  //transform: scale(.95)
+  //overflow: hidden
+  width: 100%
+  //height: 100%
+  background-color: #8DFFFF
+
+  .columns
+    margin: 0
 
   .hero
-    padding: .75rem
-    margin: 0
-    background-color: $dark-grey
-    box-shadow: 0 2px 3px rgba($black, 0.1), 0 0 0 1px rgba($black, 0.1)
-    height: 100%
-  
+    +media('>desktop')
+      margin: 15% 0 10%
+    margin: 30% 0 10%
+    padding: 0 1rem
+    //box-shadow: 0 2px 3px rgba($black, 0.1), 0 0 0 1px rgba($black, 0.1)
+    height: 80%
+    //opacity: .5
+    //overflow-x: hidden
+    //overflow-y: scroll
+    .column
+      padding: 0
+
     .title
 
     p
-      color: $white
+      color: $black
 
   .about-img-container
     //margin: 1rem

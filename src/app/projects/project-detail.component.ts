@@ -26,6 +26,8 @@ import { projectDetailTransition } from 'app/shared/project-detail.animations';
 
 import { SCROLLMAGIC_TOKEN } from '../shared/scrollMagic.service';
 import { LoadingService } from '../shared/loading.service';
+import { WindowDimensionsService } from '../shared/window-dimensions.service';
+
 //import { reverse } from 'dns';
 // import { JQ_TOKEN } from 'app/shared/jQuery.service';
 
@@ -57,7 +59,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
   isShowing = false;
   url: string;
   id: number;
-  winHeight: number = window.innerHeight;
+  winHeight: number;
   controller: any;
   pinHeader: any;
   fadeScene: any;
@@ -74,7 +76,8 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
               private _projectService: ProjectService,
               private _projectDetailIdService: ProjectDetailIdService,
               @Inject(SCROLLMAGIC_TOKEN) public _scrollMagic: any,
-              private _loadingService: LoadingService
+              private _loadingService: LoadingService,
+              public _windowDimensionsService: WindowDimensionsService
               // @Inject(JQ_TOKEN) public $: any
               ) {
   }
@@ -96,7 +99,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     console.log(this._route.snapshot.params['id']);
     console.log('nextProject: ' + this.nextProject);
     this.embed = this._sanitizer.bypassSecurityTrustHtml('<iframe src="https://player.vimeo.com/video/' + this.project.video + '" width="640" height="358" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; width: 100%; height: 100%; top: 0; left: 0"></iframe>');
-    
+    this.winHeight = this._windowDimensionsService.winHeight
     /*if (this._route.snapshot.params['id'] == 3){
       this.video = true;
       console.log('this video:' + this.video);
@@ -173,7 +176,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
         triggerElement: picture.nativeElement,
         triggerHook: 0.7
       })
-      .setTween(TweenMax.from(picture.nativeElement, 1, {autoAlpha: 0, ease: this.easing}))
+      .setTween(TweenMax.from(picture.nativeElement, .5, {autoAlpha: 0, ease: this.easing}))
       /*.addIndicators({
         name: 'fade scene',
         colorTrigger: 'black',
@@ -238,8 +241,9 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     const tl = new TimelineMax;
 
     // TweenMax.set('scrollmagic-pin-spacer', {visibilty: 'hidden', height: 0 });
-    tl.to('.project-detail', .4, {autoAlpha: 0, height: 0, transform: 'scale(0.8)', ease: this.easing })
-    .to(['.detail-footer', '.button'], .4, {height: this.winHeight + 'px',  ease: this.easing}, '-=.4');
+    tl.to('.project-detail', .4, {opacity: 0, transform: 'scale(0.8)', ease: this.easing })
+    .to('.project-detail', .4, {height: 0, ease: this.easing }, '-=.2')
+    .to(['.detail-footer','.button-container', '.button'], .5, {height: this.winHeight + 'px',  ease: this.easing}, '-=.4');
     // window.scrollTo(0, 0);
 
     let nextPage: number
@@ -251,7 +255,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     console.log('nextpage: ' + nextPage);
     setTimeout(() => {
       // tslint:disable-next-line:max-line-length
-      this._router.navigate([`/projects/${nextPage}`], { queryParams: {'project': nextPage}, queryParamsHandling: 'merge', fragment: 'top'});
+      this._router.navigate([`/projects/${nextPage}`], { queryParams: {'project': nextPage}, queryParamsHandling: 'merge'});
     }, 1000)
 
     if ((this._router.events instanceof NavigationEnd ||

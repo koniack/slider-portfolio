@@ -33,6 +33,7 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
 	imgHeight = 100
 	imgWidth: number
 	winHeight: number;
+	winWidth: number;
 	easing: any = 'Power2.easeOut';
 
 	constructor(private _projectService: ProjectService,
@@ -41,7 +42,8 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
 				public _windowDimensionsService: WindowDimensionsService){}
 
 	ngOnInit(): void {
-		this.winHeight  = window.innerHeight;
+		this.winHeight = this._windowDimensionsService.winHeight
+		this.winWidth = this._windowDimensionsService.winWidth
 		if (this._route.snapshot.queryParams['filterBy'] === 'null'){
 			this.listFilter = '';
 		} else {
@@ -58,7 +60,7 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
 	}
 
 	ngAfterViewInit(){
-		this.onResize()
+		//this.onResize()
 	}
 	resizeProjectListContainer(){
 
@@ -68,7 +70,7 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
 		const screenRatio = this._windowDimensionsService.winHeight / this._windowDimensionsService.winWidth;
 		this.imgHeight = this.imgWidth * screenRatio;
 		console.log('image height: ' + this.imgHeight);
-		this.winHeight = window.innerHeight;
+		this.winHeight = this._windowDimensionsService.winHeight;
 		console.log('window height: ' + this.winHeight);
 	}
 
@@ -101,16 +103,15 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
 				
 
 		)*/
-	
+		//window.scrollTo(0,0)
 		// TweenMax.set('scrollmagic-pin-spacer', {visibilty: 'hidden', height: 0 });
-		tl.to([ '.card-content'], .3, {opacity:0, height: 0, ease: this.easing })
-		.to([ '.image'], .1, {'background-blend-mode': 'normal', 'background-color': 'transparent', ease: this.easing },'+=.0')
+		tl.to('.card-content', .2, {opacity:0, ease: this.easing })
+		.to('.image', .1, {'background-blend-mode': 'normal', 'background-color': 'transparent', ease: this.easing },'+=.0')
 		//.to(['.column' + projectId], .8, { position: 'absolute',  ease: this.easing}, '-=.0')
 
-
-		.to(['.column' + projectId], .5, {width: window.innerWidth + 'px', height: this.winHeight + 'px',  ease: this.easing}, '-=.1')
-		.to(['.image' + projectId], .5, {width: window.innerWidth + 'px', height: this.winHeight + 'px',  ease: this.easing}, '-=.1')
-		.to(['.column' + projectId], .5, { top: '0', left: '0',  ease: this.easing}, '-=1.3')
+		
+		.to(['.image' + projectId], .5, {width: this.winWidth + 'px', height: this.winHeight + 'px', "padding-top": 0,  ease: this.easing})
+		.to(['.column' + projectId], .5, { top: '0', left: '0', height: this.winHeight + 'px', ease: this.easing}, '-=1')
 
 		//.to(['.column'], .5, {height: 0, width: 0, padding: 0, margin:0, ease: this.easing }, '-=.8')
 		
