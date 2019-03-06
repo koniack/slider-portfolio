@@ -4,14 +4,12 @@ import {
 	AfterViewInit,
 	Output,
 	EventEmitter
-	// ElementRef
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { TimelineMax, TweenMax } from 'gsap';
 import * as SplitText from 'gsap/SplitText';
 
-// import { DOMEvents } from '../shared/DOMEvents.service'
 import { sliderTransition } from '../shared/slider-transition.animations';
 
 import { ProjectService } from '../projects/project.service';
@@ -36,8 +34,6 @@ import { IProject } from '../projects/project';
 })
 export class SliderComponent implements OnInit, AfterViewInit {
 
-	// @Output() appReadyEvent = new EventEmitter()
-
 	slides: IProject[]
 	errorMessage: string
 	activeProject: number
@@ -51,34 +47,16 @@ export class SliderComponent implements OnInit, AfterViewInit {
 	easeOut = 'Power2.easeOut'
 
 
-	constructor(// private _projectService: ProjectService,
+	constructor(
 				private _route: ActivatedRoute,
 				private _router: Router,
-				// public _domEvents: DOMEvents
 			) {}
 
 	ngOnInit(): void {
-		/*this._projectService.getProjects()
-							.subscribe(
-								slides => this.slides = slides,
-								error => this.errorMessage = <any>error
-							);*/
-		/*this._route.data.subscribe (
-						  data => this.slides = data['slides'])*/
-
 		this.slides = this._route.snapshot.data['projects']
 		this.activeProject = +this._route.snapshot.queryParams['project'] || 1
 		this.slides[this.activeProject - 1]['active'] = true
 		console.log('this.activeProject = ' + this.activeProject)
-		/*if (this.slides){
-			if (this.initialLoad === false){
-				setTimeout(()=>{
-					//this._domEvents.triggerOnDocument("appready")
-					console.log('Initial load..')
-				}, 4500)
-
-			}
-		}*/
 	}
 
 	ngAfterViewInit() {
@@ -193,11 +171,6 @@ export class SliderComponent implements OnInit, AfterViewInit {
 			.set(['.line-container'], {overflow: 'hidden'})
 			.set(newProject, {y: (2 * slideFrom), autoAlpha: 0})
 			.set(newButton, {autoAlpha: 0})
-			//.set([newTitle,newSplitTitle.chars, newProjectId, newSubtitle], {y: 0, autoAlpha: 1} )
-			///.set(newSplitTitle.chars, {y: (slideFrom / 4), autoAlpha: 1} )
-			//.set(newSplitSub.words, {y: (slideFrom / 4), autoAlpha: 0})
-			//.set(newSplitId.words, {y: (slideFrom / 4), autoAlpha: 0})
-			
 		
 		console.log('curr: ' + currProjectId)
 		console.log('new: ' + newProjectId)
@@ -267,26 +240,6 @@ export class SliderComponent implements OnInit, AfterViewInit {
 		}, 1400)
 	}
 
-	// Gets and assigns image dimensions and position
-	/*getSliderImgDim(id:number) {
-		let imgHeight = this.slides[id].thumbUrl.height
-		let imgWidth = this.slides[id].thumbUrl.width
-		let screenRatio = this.winHeight / this.winWidth
-		let imgRatio = imgHeight / imgWidth
-
-		if (screenRatio > imgRatio) {
-			imgHeight = this.winHeight
-			imgWidth = this.winHeight / imgRatio
-		} else {
-			imgHeight = this.winWidth * imgRatio
-			imgWidth = this.winWidth
-		}
-		let imgPosLeft = (this.winWidth - imgWidth) / 2
-		let imgPosTop = (this.winHeight - imgHeight) / 2
-		//console.log('width:' + imgWidth+'px', 'height:'+ imgHeight+'px', 'top:'+ imgPosTop+'px', 'left:'+ imgPosLeft+'px')
-		return {width: imgWidth+'px', height: imgHeight+'px', top: imgPosTop+'px', left: imgPosLeft+'px'}
-	}*/
-
 	// Adds delay to stop MacOSX inertia from triggering navigation
 	animStart(){
 		this.isMoving = true
@@ -294,7 +247,6 @@ export class SliderComponent implements OnInit, AfterViewInit {
 	}
 
 	animDone(){
-		
 		setTimeout(() => {
 			this.isMoving = false
 			console.log('this.moving: ' + this.isMoving)

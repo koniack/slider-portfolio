@@ -28,10 +28,6 @@ import { SCROLLMAGIC_TOKEN } from '../shared/scrollMagic.service';
 import { LoadingService } from '../shared/loading.service';
 import { WindowDimensionsService } from '../shared/window-dimensions.service';
 
-//import { reverse } from 'dns';
-// import { JQ_TOKEN } from 'app/shared/jQuery.service';
-
-
 @Component({
   moduleId: module.id,
   selector: 'project-detail',
@@ -46,8 +42,6 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
   @ViewChildren('picture') pictures: QueryList<any>;
   @ViewChild('iconScrollContainer') iconScrollContEl: ElementRef;
   @ViewChild('thumbnail') thumbnailEl: ElementRef;
-  // @ViewChild("header") header: ElementRef;
-  // @ViewChild('projectThumb') projectThumbEl: ElementRef;
 
   project: IProject;
   video: boolean = false;
@@ -72,13 +66,11 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
               private _sanitizer: DomSanitizer,
               private _router: Router,
               private _authService: AuthService,
-              // @Inject(DOCUMENT) private _document: Document,
               private _projectService: ProjectService,
               private _projectDetailIdService: ProjectDetailIdService,
               @Inject(SCROLLMAGIC_TOKEN) public _scrollMagic: any,
               private _loadingService: LoadingService,
               public _windowDimensionsService: WindowDimensionsService
-              // @Inject(JQ_TOKEN) public $: any
               ) {
   }
 
@@ -91,7 +83,6 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     this._route.data.subscribe(
       data => this.project = data['project']
     );
-    // console.log('project thumbUrl: ' + this.project.thumbUrl.url)
     this.id = this._route.snapshot.params['id'];
     this.updateId(this.id);
     this.getNextProject(+this.id);
@@ -100,32 +91,6 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     console.log('nextProject: ' + this.nextProject);
     this.embed = this._sanitizer.bypassSecurityTrustHtml('<iframe src="https://player.vimeo.com/video/' + this.project.video + '" width="640" height="358" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; width: 100%; height: 100%; top: 0; left: 0"></iframe>');
     this.winHeight = this._windowDimensionsService.winHeight
-    /*if (this._route.snapshot.params['id'] == 3){
-      this.video = true;
-      console.log('this video:' + this.video);
-    }
-    console.log('this video:' + this._route.snapshot.params['id']);
-    */
-    /*this._route.params.subscribe(
-      params => {
-        let id = +params['id'] + 1;
-        //this.getProject(id);
-        //let url =
-        console.log(this.url);
-      }
-    )*/
-
-    // Snapshot Method for ProjectResolver
-    // this.project = this._route.snapshot.data['project'];
-    // Snapshot Method
-    // let id = +this._route.snapshot.params['id'];
-    // Observable Method
-   // this._route.params.subscribe(
-     // params => {
-   //     let id = +params['id'];
-     //   this.getProject(id);
-     // }
-   // )
 
   }
 
@@ -133,28 +98,10 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     return this._sanitizer.bypassSecurityTrustHtml('https://player.vimeo.com/video/' + project.video);
   }
   ngAfterViewInit(){
-    // this.animateThumb();
     console.log('nextProject afterviewinit: ' + this.nextProject)
 
     
     this.controller = new this._scrollMagic.Controller();
-    /* SCROLLMAGIC PIM UNPIN
-    this.pinHeader = new this._scrollMagic.Scene({
-      triggerElement: '.transition-overlay',
-      triggerHook: 0,
-      duration: '50%'
-    })
-    .setPin('.navbar', {pushFollowers: false})
-    .addTo(this.controller);
-
-    const pinIntro = new this._scrollMagic.Scene({
-      triggerElement: '.thumbnail-container',
-      triggerHook: 0,
-      duration: '50%'
-    })
-    .setPin('.thumb-container', {pushFollowers: false})
-    .addTo(this.controller)
-    */
     console.log(this.iconScrollContEl);
     this.fadeOutScroll = new this._scrollMagic.Scene({
       triggerElement: this.thumbnailEl.nativeElement,
@@ -162,65 +109,23 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
       reverse: false
     })
     .setTween(TweenMax.to(this.iconScrollContEl.nativeElement, 1, {opacity: 0, ease: this.easing}))
-    /*.addIndicators({
-      name: 'fade out scroll',
-      colorTrigger: 'black',
-      colorStart: '#75c695',
-      colorEnd: 'pink'
-    })*/
+    
     .addTo(this.controller);
 
     this.pictures.forEach((picture) => {
-      // console.log('picture: ' + picture.nativeElement);
       this.fadeScene = new this._scrollMagic.Scene({
         triggerElement: picture.nativeElement,
         triggerHook: 0.7
       })
       .setTween(TweenMax.from(picture.nativeElement, .5, {autoAlpha: 0, ease: this.easing}))
-      /*.addIndicators({
-        name: 'fade scene',
-        colorTrigger: 'black',
-        colorStart: '#75c695',
-        colorEnd: 'pink'
-      })*/
+
       .addTo(this.controller);
     });
   }
-
-  /*ngOnChanges(){
-    console.log('OnChanges triggered!')
-    this.controller = new this._scrollMagic.Controller();
-    this.pictures.forEach((picture) => {
-      console.log('picture: ' + picture.nativeElement);
-      this.fadeScene = new this._scrollMagic.Scene({
-        triggerElement: picture.nativeElement,
-        triggerHook: 0.8
-      })
-      .setTween(TweenMax.from(picture.nativeElement, 1, {autoAlpha: 0, ease:'Power2.easeOut'}))
-      .addIndicators({
-        name: 'fade scene',
-        colorTrigger: 'black',
-        colorStart: '#75c695',
-        colorEnd: 'pink'
-      })
-      .addTo(this.controller);
-    });
-  }*/
 
   ngOnDestroy(){
-    // console.log('OnDestroy triggered!')
     this.controller.destroy('reset');
-    // this.controller = null;
-    // this.pinHeader = this.pinHeader.destroy(true);
   }
-
-  /*@HostListener("window:scroll", [])
-  onWindowScroll(){
-    let number = this._document.body.scrollTop;
-    if (number > 180) {
-      this.isShowing = true;
-    }
-  }*/
 
   onPrev(): void {
     let prevPage: number
@@ -240,11 +145,9 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     this._loadingService.updateData(true);
     const tl = new TimelineMax;
 
-    // TweenMax.set('scrollmagic-pin-spacer', {visibilty: 'hidden', height: 0 });
     tl.to('.project-detail', .4, {opacity: 0, transform: 'scale(0.8)', ease: this.easing })
     .to('.project-detail', .4, {height: 0, ease: this.easing }, '-=.2')
     .to(['.detail-footer','.button-container', '.button'], .5, {height: this.winHeight + 'px',  ease: this.easing}, '-=.4');
-    // window.scrollTo(0, 0);
 
     let nextPage: number
     if (this._route.snapshot.params['id'] < 6 ){
@@ -254,7 +157,6 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     }
     console.log('nextpage: ' + nextPage);
     setTimeout(() => {
-      // tslint:disable-next-line:max-line-length
       this._router.navigate([`/projects/${nextPage}`], { queryParams: {'project': nextPage}, queryParamsHandling: 'merge'});
     }, 1000)
 
@@ -277,7 +179,6 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     }
     this._projectService.getProject(+i).subscribe(
         project => this.prevProject = project,
-        // error => this.errorMessage = <any>error
     );
   }
 
@@ -290,22 +191,11 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     }
     this._projectService.getProject(id).subscribe(
         project => this.nextProject = project,
-        // error => this.errorMessage = <any>error
     );
   }
 
   updateId(id: number){
     this._projectDetailIdService.updateId(id);
   }
-  /*getProject(id: number) {
-    this._projectService.getProject(id).subscribe(
-        project => this.project = project,
-        error => this.errorMessage = <any>error
-    );
-  }
-  /*animateThumb(){
-    console.log(`projectThumb: ` + this.projectThumbEl.nativeElement);
-    TweenMax.from(this.projectThumbEl.nativeElement, 5, {scale: 3, top: -254.983, left: 0});
-  }*/
 
 }

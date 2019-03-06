@@ -6,7 +6,6 @@ img
 
 #slider-area
   background-color: $grey
-  //border: .75rem solid $white
   transform: scale(0.95)
   overflow: hidden
   top: 0
@@ -50,14 +49,15 @@ img
 
     h1, h5
       +media ('<=450px')
-        //font-size: 1.25rem
         width: 100%
 
       +media ('<=650px', '>450px')
         font-size: 1.75rem
+        line-height: 1.75rem
 
       +media ('<=tablet', '>650px')
         font-size: 2.5rem
+        line-height: 2.5rem
 
       width: 90%
     h2 
@@ -65,31 +65,27 @@ img
     
     h5 
       +media ('<=450px')
-        //font-size: .75rem
         width: 90%
 
       +media ('<=tablet', '>450px')
-        font-size: 1.5rem
+        font-size: 1rem
+        line-height: 1rem
 
   .active
     visibility: visible
     
     .proj-title-container
       overflow: hidden
-      //width: 90%
 
 .proj-title-container
   +media ('>desktop-large')
     width: 35%
   +media('<450px')
     width: 100%
-    //padding-left: 1rem
   +media('>1023px')
       padding-left: 2rem
   
   background-image: linear-gradient(0deg, rgba(0,255,255,0.70) 0%, rgba(245,166,35,0.70) 93%)
-  //background-color: rgba(255,143,0, .85)
-  //background-blend-mode: overlay 
   display: flex
   position: absolute
   align-items: center
@@ -101,6 +97,8 @@ img
   padding-left: 1rem
 
   .projTitle
+    +media ('<desktop', 'landscape')
+      padding-top: 3rem
     height: auto
     overflow: hidden
     width: 100%
@@ -175,13 +173,10 @@ img
 
 // Carousel Styles
 .indicators
-  +media ('<=phone-large')
-    //transform: scale(.75)
-    //left: 1rem
-    //top: 5.5rem
+  +media ('<desktop', 'landscape')
+    display: none
   +media('>=desktop')
       left: 2rem
-  //background-color: orange
   width: 48px
   height: 100px
   display: block
@@ -193,9 +188,7 @@ img
   .dots
     margin: 0
     padding: 0
-    //margin-top: -9px
     list-style: none
-    
     position: absolute
     top: 0
     white-space: nowrap
@@ -204,17 +197,6 @@ img
 
     li
       margin-bottom: 0px
-      //background-repeat: no-repeat
-      //background-position: -9999px -9999px
-
-      /*.preload
-        width: 1px
-        height: 1px
-        background-color: $white
-        position: absolute
-        top: 5px
-        left: 0
-        z-index: -1 */
         
     a
       width: 48px

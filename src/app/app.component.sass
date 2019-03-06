@@ -2,7 +2,6 @@
 
 header
   position: absolute
-  //width: 95%
   margin: 0 2.5%
   z-index: 9
   top: 4.5%
@@ -16,15 +15,14 @@ header
     background-color: $transparent
     text-align: left
     margin: 0 1rem
-    //min-height: 4.5rem
-    //position: absolute
 
     .main-title
-      +media('<=phone-large')
+      +media('<phone-large')
+          display: none
+      +media('<=823px','landscape')
           display: none
       margin-left: 8px
       margin-top: .25rem
-      //width: 350px
       text-transform: uppercase
       letter-spacing: 2px
       display: block
@@ -50,9 +48,6 @@ header
           display: inline-block
           float: left
           width: 48px
-
-        &:hover
-          //background-color: transparent 
           
 .navbar-burger 
   &:hover
@@ -88,9 +83,6 @@ header
     &:hover
       color: $black
 
-      &::after  
-        //width: 100%
-
     &.active
       color: $black
       
@@ -101,4 +93,3 @@ header
   box-sizing: border-box
   width: 100%
   height: 100%
-  //background-color: $white

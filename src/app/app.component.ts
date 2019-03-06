@@ -8,8 +8,6 @@ import { ProjectDetailIdService } from './shared/project-detail-id.service';
 import { routerAnimation } from './shared/router.animations';
 import { LoadingService } from './shared/loading.service';
 
-// import { setTimeout } from 'timers';
-
 @Component({
 	moduleId: module.id,
 	selector: 'app-root',
@@ -63,25 +61,6 @@ export class AppComponent implements OnInit  {
 		})
 	}
 
-	/*ngOnChanges(){
-		this._router.events.subscribe((routerEvent : Event) =>{
-			this.checkRouterEvent(routerEvent);
-		});
-	}
-
-	checkRouterEvent(routerEvent: Event): void {
-
-		if (routerEvent instanceof NavigationStart) {
-			this._loadingService.updateData(true);
-		}
-
-		if ((routerEvent instanceof NavigationEnd ||
-			routerEvent instanceof NavigationCancel ||
-			routerEvent instanceof NavigationError)){
-				this._loadingService.updateData(false);
-		}
-	}*/
-
 	displayMessages(): void {
 		this._router.navigate([{ outlets: { popup: ['messages'] }}]);
 		this._messageService.isDisplayed = true;
@@ -109,10 +88,8 @@ export class AppComponent implements OnInit  {
 	getState(outlet) {
 		if (outlet.activatedRouteData.state === 'projectDetail') {
 			const id: number = this._projectDetailIdService.getId();
-			// console.log('projDetail state: ' + outlet.activatedRouteData['state'] + id)
 			return outlet.activatedRouteData['state'] + id;
 		} else {
-			// console.log('state: ' + outlet.activatedRouteData['state'])
 			return outlet.activatedRouteData['state'];
 		}
 	}

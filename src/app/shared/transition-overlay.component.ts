@@ -39,23 +39,19 @@ import { TimelineMax, TweenMax } from 'gsap';
 	animations: [
 		trigger('pageTransitionTrigger', [
 			state('false', style({
-				// transform: 'translateX(-200%)',
 				opacity: 0
 
 			})),
 			state('true', style({
-				// transform: 'translateX(0)',
 				opacity: 1
 			})),
 			transition('* => true', [
 				style({
-					// transform: 'translateX(-200%)',
 					opacity: 1
 				}), animate('500ms ease-out')
 			]),
 			transition('* => false', [
 				style({
-					// transform: 'translateX(0)',
 					opacity: 1
 				}), animate('500ms ease-out')
 			])
