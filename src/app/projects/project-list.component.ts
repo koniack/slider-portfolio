@@ -111,7 +111,7 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
 
 		
 		.to(['.image' + projectId], .5, {width: this.winWidth + 'px', height: this.winHeight + 'px', "padding-top": 0,  ease: this.easing})
-		.to(['.column' + projectId], .5, { top: '0', left: '0', height: this.winHeight + 'px', ease: this.easing}, '-=1')
+		.to(['.column' + projectId], .5, { top: '0', left: '0', width: this.winWidth + 'px', height: this.winHeight + 'px', ease: this.easing}, '-=1')
 
 		//.to(['.column'], .5, {height: 0, width: 0, padding: 0, margin:0, ease: this.easing }, '-=.8')
 		
