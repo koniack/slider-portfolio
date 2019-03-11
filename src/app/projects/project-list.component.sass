@@ -68,7 +68,7 @@
       +media ('>=tablet', 'portrait')
         top: 43%
         left: 2.5%
-      top: 38%
+      top: 42%
       left: 2.5%
     .column3
       +media ('landscape')
@@ -83,7 +83,7 @@
       +media ('>=tablet', 'portrait')
         top: 43%
         left: 51.25%
-      top: 38%
+      top: 42%
       left: 51.25%
     .column4
       +media ('landscape')
@@ -98,7 +98,7 @@
       +media ('>=tablet', 'portrait')
         top: 71%
         left: 2.5%
-      top: 59%
+      top: 67%
       left: 2.5%
     .column5
       +media ('landscape')
@@ -113,15 +113,15 @@
       +media ('>=tablet', 'portrait')
         top: 71%
         left: 51.25%
-      top: 59%
+      top: 67%
       left: 51.25%
 
     .card
       height: 100%
-      box-shadow: none
+      //box-shadow: none
       background-color: transparent
       &:focus
-        outline: none
+        //outline: none
       @media(hover)
         &:hover
           .card-content
@@ -163,6 +163,8 @@
     position: absolute
     top: 0
     left: 0
+    bottom: 0
+    right: 0
     z-index: 1
     opacity: 0
     transition: opacity 1s ease

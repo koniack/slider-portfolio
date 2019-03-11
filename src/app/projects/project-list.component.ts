@@ -35,6 +35,7 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
 	winHeight: number;
 	winWidth: number;
 	easing: any = 'Power2.easeOut';
+	col2Pos: number;
 
 	constructor(private _projectService: ProjectService,
 				private _route: ActivatedRoute,
@@ -51,6 +52,10 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
 		}
 		this.projects = this._route.snapshot.data['projects']
 
+		console.log('imgHeight: '  + this.imgHeight)
+		this.col2Pos = this.imgHeight + 5; 
+		console.log('col2Pos: ' + this.col2Pos);
+
 	}
 
 	ngAfterViewInit(){
@@ -65,6 +70,8 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
 		console.log('image height: ' + this.imgHeight);
 		this.winHeight = this._windowDimensionsService.winHeight;
 		console.log('window height: ' + this.winHeight);
+		
+		
 	}
 
 	onNext(projectId): void {

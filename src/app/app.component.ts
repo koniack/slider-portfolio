@@ -79,10 +79,12 @@ export class AppComponent implements OnInit  {
 
 	loadingPage() {
 		this.loading = true
+		console.log('app.component: loading ' + this.loading)
 	}
 
 	stopLoadingPage() {
 		this.loading = false
+		console.log('app.component: loading ' + this.loading)
 	}
 
 	getState(outlet) {
