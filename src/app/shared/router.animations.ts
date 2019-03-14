@@ -74,9 +74,9 @@ trigger('routeAnimation', [
           query(':enter', animateChild(), { optional: true })
         ])
       ]),
-    transition('about => *', [
+      /*transition('about => projects', [
         //query(':enter, :leave', style({ position: 'fixed', width: '100%'}), { optional: true }),
-        query(':enter', style({opacity: 0, position: 'absolute', top: 0, left: 0, right: 0}), { optional: true }),
+        query(':enter', style({opacity: 0, position: 'absolute', top: 0, left: 0, bottom: 0, right: 0}), { optional: true }),
         sequence([
           query(':leave', animateChild(), { optional: true }),
           group([
@@ -86,7 +86,7 @@ trigger('routeAnimation', [
                 style({ opacity: 0 })
             )], { optional: true }),
             query(':enter', [
-              style({ opacity: 0 }),
+                style('*'),
               animate('.3s ease-in-out',
                 style({ opacity: 1 })
             )], { optional: true }),
@@ -94,6 +94,26 @@ trigger('routeAnimation', [
           query(':enter', animateChild(), { optional: true })
         ])
       ]),
+    transition('about => *', [
+        query(':enter, :leave', style({ position: 'fixed', width: '100%'}), { optional: true }),
+        query(':enter', style({opacity: 0}), { optional: true }),
+        sequence([
+          query(':leave', animateChild(), { optional: true }),
+          group([
+            query(':leave, .about-container', [
+              style({ opacity: 1 }),
+              animate('.3s ease-in-out',
+                style({ opacity: 0 })
+            )], { optional: true }),
+            query(':enter', [
+                style({ opacity: 0 }),
+              animate('.3s ease-in-out',
+                style({ opacity: 1 })
+            )], { optional: true }),
+          ]),
+          query(':enter', animateChild(), { optional: true })
+        ])
+      ]),*/
       transition('* <=> *', [
           query(':enter, :leave', style({ position: 'fixed', width: '100%'}), { optional: true }),
           query(':enter', style({opacity: 0}), { optional: true }),
