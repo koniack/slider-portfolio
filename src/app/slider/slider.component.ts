@@ -56,7 +56,6 @@ export class SliderComponent implements OnInit, AfterViewInit {
 		this.slides = this._route.snapshot.data['projects']
 		this.activeProject = +this._route.snapshot.queryParams['project'] || 1
 		this.slides[this.activeProject - 1]['active'] = true
-		console.log('this.activeProject = ' + this.activeProject)
 	}
 
 	ngAfterViewInit() {
@@ -104,9 +103,6 @@ export class SliderComponent implements OnInit, AfterViewInit {
 			const currProject = '#project-' + (this.activeProject)
 			const currTitle = '#title-' + (this.activeProject)
 			const currSubtitle = '#subtitle-' + (this.activeProject)
-			console.log('this.activeProject = ' + this.activeProject)
-			console.log('this.slide.lentgh = ' + this.slide.length)
-			console.log('this.slides.lentgh = ' + this.slides.length)
 
 			if ((direction === 'next' && this.activeProject < this.slides.length) ||
 				(direction === 'prev' && this.activeProject > 1)) {
@@ -172,8 +168,6 @@ export class SliderComponent implements OnInit, AfterViewInit {
 			.set(newProject, {y: (2 * slideFrom), autoAlpha: 0})
 			.set(newButton, {autoAlpha: 0})
 		
-		console.log('curr: ' + currProjectId)
-		console.log('new: ' + newProjectId)
 		if (slideFrom > 0 ) {
 			tl.timeScale(1.5)	
 				tl.staggerTo(currSplitId.words, .5, {y: (slideTo / 4),  ease: this.easeIn}, .03)
@@ -243,13 +237,11 @@ export class SliderComponent implements OnInit, AfterViewInit {
 	// Adds delay to stop MacOSX inertia from triggering navigation
 	animStart(){
 		this.isMoving = true
-		console.log('this.moving: ' + this.isMoving)
 	}
 
 	animDone(){
 		setTimeout(() => {
 			this.isMoving = false
-			console.log('this.moving: ' + this.isMoving)
 		}, 3000)
 	}
 	

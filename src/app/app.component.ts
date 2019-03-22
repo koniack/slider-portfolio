@@ -57,7 +57,6 @@ export class AppComponent implements OnInit  {
 
 		this._loadingService.getData().subscribe(data => {
 			this.isAnimating = data;
-			console.log('loadservice: ' + this.isAnimating);
 		})
 	}
 
@@ -73,18 +72,15 @@ export class AppComponent implements OnInit  {
 
 	logOut(): void {
 		this._authService.logout();
-		console.log('Log Out');
 		this._router.navigateByUrl('./slider');
 	}
 
 	loadingPage() {
 		this.loading = true
-		console.log('app.component: loading ' + this.loading)
 	}
 
 	stopLoadingPage() {
 		this.loading = false
-		console.log('app.component: loading ' + this.loading)
 	}
 
 	getState(outlet) {
@@ -96,6 +92,5 @@ export class AppComponent implements OnInit  {
 		}
 	}
 	handleAppReady(event) {
-		console.log('handleAppReady Running')
 	}
 }

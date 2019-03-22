@@ -139,7 +139,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
 
     tl.to('.project-detail', .4, {opacity: 0, transform: 'scale(0.8)', ease: this.easing })
     .to('.project-detail', .4, {height: 0, ease: this.easing }, '-=.2')
-    .to(['.detail-footer','.button-container', '.button'], .5, {height: this.winHeight + 'px',  ease: this.easing}, '-=.4');
+    .to(['.button'], .5, {height: this._windowDimensionsService.winHeight,  ease: this.easing}, '-=.4');
 
     let nextPage: number
     if (this._route.snapshot.params['id'] < 6 ){

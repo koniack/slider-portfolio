@@ -84,7 +84,6 @@ export class TransitionOverlayComponent implements OnInit {
 			this.loading = true;
 			this.state = 'true';
 			TweenMax.set('.kLoader svg', {visibility: 'hidden'});
-			console.log(`loading: ` + this.loading);
 		}
 
 		if ((routerEvent instanceof NavigationEnd ||
@@ -96,7 +95,6 @@ export class TransitionOverlayComponent implements OnInit {
 					this.state = 'false';
 					this.stopLoadingPage.emit()
 					TweenMax.set('.kLoader', {visibility: 'hidden', display: 'none'});
-					console.log(`loading: ` + this.loading);
 					this.initialLoad = false
 				}, 4500);
 
