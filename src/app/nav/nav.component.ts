@@ -3,7 +3,6 @@ import { OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../user/auth.service';
-import { AnimatingService } from '../shared/animating.service';
 
 @Component({
 	moduleId: module.id,
@@ -20,8 +19,7 @@ export class NavComponent implements OnInit{
 	isLoggedIn: boolean;
 
 	constructor(private _authService: AuthService,
-				private _router: Router,
-				private _animatingService: AnimatingService) {}
+				private _router: Router) {}
 	logOut(): void{
 		this._authService.logout();
 		console.log('Log Out');

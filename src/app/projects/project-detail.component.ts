@@ -75,11 +75,9 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   ngOnInit() {
-
     this._loadingService.getData().subscribe(data => {
       this.loading = data;
     })
-
     this._route.data.subscribe(
       data => this.project = data['project']
     );
@@ -87,8 +85,6 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     this.updateId(this.id);
     this.getNextProject(+this.id);
     this.getPrevProject(+this.id);
-    console.log(this._route.snapshot.params['id']);
-    console.log('nextProject: ' + this.nextProject);
     this.embed = this._sanitizer.bypassSecurityTrustHtml('<iframe src="https://player.vimeo.com/video/' + this.project.video + '" width="640" height="358" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; width: 100%; height: 100%; top: 0; left: 0"></iframe>');
     this.winHeight = this._windowDimensionsService.winHeight
 
@@ -98,11 +94,7 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     return this._sanitizer.bypassSecurityTrustHtml('https://player.vimeo.com/video/' + project.video);
   }
   ngAfterViewInit(){
-    console.log('nextProject afterviewinit: ' + this.nextProject)
-
-    
     this.controller = new this._scrollMagic.Controller();
-    console.log(this.iconScrollContEl);
     this.fadeOutScroll = new this._scrollMagic.Scene({
       triggerElement: this.thumbnailEl.nativeElement,
       triggerHook: .95,
@@ -155,7 +147,6 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
     } else {
       nextPage = 1
     }
-    console.log('nextpage: ' + nextPage);
     setTimeout(() => {
       this._router.navigate([`/projects/${nextPage}`], { queryParams: {'project': nextPage}, queryParamsHandling: 'merge'});
     }, 1000)
@@ -167,7 +158,6 @@ export class ProjectDetailComponent implements OnInit, AfterViewInit, OnDestroy 
           this.getNextProject(nextPage)
           this.updateId(nextPage)
           this._loadingService.updateData(false);
-          console.log('nextpage: ' + nextPage);
 		}
   }
 

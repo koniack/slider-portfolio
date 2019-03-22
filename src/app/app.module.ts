@@ -31,7 +31,6 @@ import { SCROLLMAGIC_TOKEN } from './shared/scrollMagic.service';
 import { JQ_TOKEN } from './shared/jQuery.service';
 import { CustomReuseStrategy } from './shared/route.reuse';
 import { LoadingService } from './shared/loading.service';
-import { AnimatingService } from './shared/animating.service';
 
 declare module 'gsap' {
   export interface TweenConfig {
@@ -78,7 +77,6 @@ let jQuery = window['$'];
     provide: HAMMER_GESTURE_CONFIG,
     useClass: MyHammerConfig
   },
-    AnimatingService,
     ProjectService,
     ProjectListResolver,
     ProjectResolver,

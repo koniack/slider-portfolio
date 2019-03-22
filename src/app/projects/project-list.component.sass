@@ -33,11 +33,14 @@
         top: 25%
         left: 4.5% 
       +media ('>=desktop')
-        top: 20%
+        top: 15%
         left: 4.5% 
       +media ('>=tablet', 'portrait')
         top: 15%
         left: 2.5%
+      +media ('>desktop-large')
+        top: 12% 
+        left: 3.75%
       top: 17%
       left: 2.5%
     .column1
@@ -48,11 +51,13 @@
         top: 25%
         left: 35% 
       +media ('>=desktop')
-        top: 20%
+        top: 15%
         left: 35% 
       +media ('>=tablet', 'portrait')
         top: 15%
         left: 51.25%
+      +media ('>desktop-large')
+        top: 12%
       top: 17%
       left: 51.25%
     .column2
@@ -63,11 +68,14 @@
         top: 25%
         left: 65.5% 
       +media ('>=desktop')
-        top: 20%
+        top: 15%
         left: 65.5% 
       +media ('>=tablet', 'portrait')
         top: 43%
         left: 2.5%
+      +media ('>desktop-large')
+        top: 12%
+        left: 66.25%  
       top: 42%
       left: 2.5%
     .column3
@@ -83,6 +91,8 @@
       +media ('>=tablet', 'portrait')
         top: 43%
         left: 51.25%
+      +media ('>desktop-large')
+        left: 3.75%
       top: 42%
       left: 51.25%
     .column4
@@ -92,7 +102,7 @@
       +media ('>=812px','landscape')
         top: 74.5%
         left: 35% 
-      +media ('>=desktop', 'landscape')
+      +media ('>=desktop')
         top: 60%
         left: 35% 
       +media ('>=tablet', 'portrait')
@@ -113,6 +123,8 @@
       +media ('>=tablet', 'portrait')
         top: 71%
         left: 51.25%
+      +media ('>desktop-large')
+        left: 66.25%  
       top: 67%
       left: 51.25%
 

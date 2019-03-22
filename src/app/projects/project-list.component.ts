@@ -51,10 +51,7 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
 		this.listFilter = this._route.snapshot.queryParams['filterBy'] || '';
 		}
 		this.projects = this._route.snapshot.data['projects']
-
-		console.log('imgHeight: '  + this.imgHeight)
 		this.col2Pos = this.imgHeight + 5; 
-		console.log('col2Pos: ' + this.col2Pos);
 
 	}
 
@@ -67,22 +64,16 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
 		this.imgWidth = this.image.nativeElement.getBoundingClientRect().width;
 		const screenRatio = this._windowDimensionsService.winHeight / this._windowDimensionsService.winWidth;
 		this.imgHeight = this.imgWidth * screenRatio;
-		console.log('image height: ' + this.imgHeight);
-		this.winHeight = this._windowDimensionsService.winHeight;
-		console.log('window height: ' + this.winHeight);
-		
-		
+		this.winHeight = this._windowDimensionsService.winHeight;		
 	}
 
 	onNext(projectId): void {
-		
 		const tl = new TimelineMax;
 		let columnArray = this.columns.toArray();
 
 		for(let i = 0; i < columnArray.length; i++){
 			if (i != projectId){
 				tl.to(columnArray[i].nativeElement, .2, { autoAlpha: 0, ease: this.easing})
-				console.log('remove ' + columnArray[i] );
 			}
 		}
 		tl.to('.card-content', .2, {opacity:0, ease: this.easing })
@@ -92,7 +83,6 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
 		.to(['.image' + projectId], .5, {width: this.winWidth + 'px', height: this.winHeight + 'px', "padding-top": 0,  ease: this.easing})
 		.to(['.column' + projectId], .5, { top: '0', left: '0', width: this.winWidth + 'px', height: this.winHeight + 'px', ease: this.easing}, '-=1')	
 		
-		console.log('project id: ' + projectId);
 		setTimeout(() => {
 		  this._router.navigate([`/projects/${projectId + 1}`], { queryParams: {'project': projectId + 1}, queryParamsHandling: 'merge', fragment: 'top'});
 		}, 2500)
